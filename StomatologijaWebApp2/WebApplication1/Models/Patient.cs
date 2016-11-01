@@ -45,6 +45,9 @@ namespace WebApplication1.Models
 
 
         //The following are the relations to other classes (One patient can have one Dentist and many MedicalRecords)
+
+        public int? DentistId { get; set; }
+
         public virtual Dentist Dentist { get; set; }
 
         public virtual ICollection<MedicalRecord> MedicalRecords { get; set; }

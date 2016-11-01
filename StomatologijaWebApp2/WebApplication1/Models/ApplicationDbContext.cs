@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Data.Entity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WebApplication1.Models
 {
@@ -9,6 +10,9 @@ namespace WebApplication1.Models
         {
         }
 
+        public DbSet<Dentist> Dentists { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
