@@ -35,8 +35,10 @@ namespace WebApplication1.Models
         public EmploymentStatus? EmploymentStatus { get; set; } //Question mark means that this value is nullable
 
         [Required]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
 
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         public string Address { get; set; }
