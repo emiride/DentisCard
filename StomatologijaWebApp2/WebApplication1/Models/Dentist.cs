@@ -15,11 +15,10 @@ namespace WebApplication1.Models
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
         public DateTime DateCreated { get; set; }
-    }
 
-    //The following are the relations to other classes (One Dentist can have many Patients and one Schedule)
-    public virtual Schedule Schedules { get; set; }
-    public virtual ICollection<Patient> Patients { get; set; }
+        //The following are the relations to other classes (One Dentist can have many Patients and we are still not dealing with schedules)
+        public virtual ICollection<Patient> Patients { get; set; }
+    }
 
 }
 
