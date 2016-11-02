@@ -1,5 +1,8 @@
-﻿using System.Data.Entity;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
+using System.Data.Entity;
+using System.Linq;
+using WebApplication1.Interfaces;
 
 namespace WebApplication1.Models
 {
@@ -16,6 +19,29 @@ namespace WebApplication1.Models
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        public override int SaveChanges()
+        {
+            foreach (
+                var history in
+                    this.ChangeTracker.Entries()
+                        .Where(
+                            e =>
+                                e.Entity is IModificationHistory &&
+                                (e.State == EntityState.Added || e.State == EntityState.Modified))
+                        .Select(e => e.Entity as IModificationHistory))
+            {
+                history.DateModified = DateTime.Now;
+                if (history.DateCreated==DateTime.MinValue)
+                {
+                    history.DateCreated=DateTime.Now;
+                }
+            }
+
+            var result = base.SaveChanges();
+            
+            return result;
         }
     }
 }
