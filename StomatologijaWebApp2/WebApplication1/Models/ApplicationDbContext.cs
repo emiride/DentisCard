@@ -21,6 +21,7 @@ namespace WebApplication1.Models
             return new ApplicationDbContext();
         }
 
+        /*This override will allow for every instance that gets created and DateCreated will be saved to it*/
         public override int SaveChanges()
         {
             foreach (
@@ -42,6 +43,14 @@ namespace WebApplication1.Models
             var result = base.SaveChanges();
             
             return result;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<IdentityUser>().ToTable("Users");
+            modelBuilder.Entity<ApplicationUser>().ToTable("Users");
         }
     }
 }
