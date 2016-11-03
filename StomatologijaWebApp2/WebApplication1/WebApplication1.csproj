@@ -192,6 +192,10 @@
     <Compile Include="Migrations\201611021047527_InitialMigration.Designer.cs">
       <DependentUpon>201611021047527_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611030940311_ChangedDatesToNullables.cs" />
+    <Compile Include="Migrations\201611030940311_ChangedDatesToNullables.Designer.cs">
+      <DependentUpon>201611030940311_ChangedDatesToNullables.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
@@ -288,6 +292,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611021047527_InitialMigration.resx">
       <DependentUpon>201611021047527_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611030940311_ChangedDatesToNullables.resx">
+      <DependentUpon>201611030940311_ChangedDatesToNullables.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

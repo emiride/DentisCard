@@ -17,7 +17,7 @@ namespace WebApplication1.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime DateCreated { get; set; }
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
 
         [DataType(DataType.Currency)]//This Data Annotation is in case we decide to use Internationalization later on (http://bitly.com/2fDF7L9)
         [Display(Name = "Bill")]

@@ -55,7 +55,7 @@ namespace WebApplication1.Models
         public string Address { get; set; }
 
         public DateTime DateCreated { get; set; }
-        public DateTime DateModified { get; set; }
+        public DateTime? DateModified { get; set; }
 
         //The following are the relations to other classes (One patient can have one Dentist and many MedicalRecords)
 
