@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.AspNet.Identity;
+﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
-using Microsoft.Owin.Security.Google;
 using Owin;
+using System;
 using WebApplication1.Models;
 
 namespace WebApplication1
@@ -54,14 +53,14 @@ namespace WebApplication1
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseFacebookAuthentication(
+               appId: "1736874363303537",
+               appSecret: "086370e6903a7b86b0802f9e33cdec96");
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
-            //    ClientId = "",
-            //    ClientSecret = ""
+            //    ClientId = "596396389422-omu7ol9su78m9cgcohvlbdvhmvvtdo59.apps.googleusercontent.com",
+            //    ClientSecret = "iQw1M8fvcXeJWQ70dbcUDUjW"
             //});
         }
     }
