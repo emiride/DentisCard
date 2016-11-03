@@ -54,10 +54,10 @@ namespace WebApplication1.Migrations
                     Password = "trimarke",
                     DateOfBirth = new DateTime(1975, 8, 3),
                     //EmploymentStatus = (1),     seeding enum ...?
-                    PhoneNumber = "062/063-063",
+                    PhoneNumber = "062/063-063", 
                     Email = "treci@gmail.ocami",
                     Address = "Muvedina 8",
-                    DateCreated = DateTime.Now,
+                    DateCreated = DateTime.Now 
                     //DateModified = new DateTime(2015, 5, 17, 12, 45, 0),
                     //Patients          needs to be implemented...? 
                 }
@@ -73,7 +73,7 @@ namespace WebApplication1.Migrations
                    LastName = "Bolesni",
                    Password = "fening",
                    DateOfBirth = new DateTime(1987, 4, 3),
-                   Address = "Brcanska 2",
+                   Address = "Brcanska 2", 
                    DateCreated = DateTime.Now,
                    //DateModified = new DateTime(2015, 5, 19, 13, 45, 0),
                    Email = "cetvrti@gmail.ocami",
@@ -131,8 +131,8 @@ namespace WebApplication1.Migrations
                    Description = "ovo je neki deskripšn",
                    DateCreated = DateTime.Now,
                    //DateModified = new DateTime(2015, 5, 16, 13, 45, 0),
-                   Bill =  144.5
-                   // Dentist =                 needs to be implemented...? 
+                   Bill =  144.5,
+                   PatientId = 3 
                    // EmploymentStatus =        needs to be implemented...? 
                    // MedicalRecords =          needs to be implemented...? 
                 },
@@ -144,6 +144,7 @@ namespace WebApplication1.Migrations
                    DateCreated = DateTime.Now,
                    //DateModified = new DateTime(2015, 5, 16, 2, 45, 0),
                    Bill = 34.2, 
+                   PatientId = 2
                    // Dentist =                 needs to be implemented...? 
                    // EmploymentStatus =        needs to be implemented...? 
                    // MedicalRecords =          needs to be implemented...? 
@@ -155,7 +156,8 @@ namespace WebApplication1.Migrations
                    Description = "ovo je neki zadnji treci deskripšn",
                    DateCreated = DateTime.Now,
                    //DateModified = new DateTime(2015, 5, 17, 19, 45, 0),
-                   Bill = 554.5
+                   Bill = 554.5,
+                   PatientId = 2
                    // Dentist =                 needs to be implemented...? 
                    // EmploymentStatus =        needs to be implemented...? 
                    // MedicalRecords =          needs to be implemented...? 

@@ -14,7 +14,7 @@ namespace WebApplication1.Models
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
 
-            
+            //pusti, ima jednostavnije, ne moras nista gasiti
             return userIdentity;
         }
 
