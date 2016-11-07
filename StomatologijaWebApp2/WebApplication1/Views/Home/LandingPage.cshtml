@@ -10,29 +10,18 @@
     <title>@ViewBag.Title DentisCard</title>
     <meta name="description" content="DentisCard - Simple solution for dentists and those who need them">
     <meta name="author" content="emiraga92">
-
     <!-- Mobile Specific Meta -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
-    <!-- Bootstrap -->
-    <link href="~/Content/css/bootstrap.css" rel="stylesheet">
 
-    <!-- Font awesome -->
-    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css">
-
-    <!-- Animate.css -->
-    <link rel="stylesheet" href="~/Content/css/animate.css">
-
-    <!-- Owl-carousel style -->
-    <link rel="stylesheet" href="~/Content/css/owl.carousel.css">
-    <link rel="stylesheet" href="~/Content/css/owl.theme.css">
-
-    <!-- magnific style -->
-    <link rel="stylesheet" href="~/Content/css/magnific-popup.css">
-
-    <!-- Custom stylesheet-->
-    <link rel="stylesheet" href="~/Content/css/style.css">
-    <link rel="stylesheet" href="~/Content/css/responsive.css" media="screen">
+    @Styles.Render("~/Content/css/bootstrap.css")
+    @Styles.Render("~/Content/css/font-awesome.min.css")
+    @Styles.Render("~/ Content / css / animate.css")
+    @Styles.Render("~/Content/css/owl.carousel.css")
+    @Styles.Render("~/Content/css/owl.theme.css")
+    @Styles.Render("~/Content/css/magnific-popup.css")
+    @Styles.Render("~/Content/css/style.css")
+    @Styles.RenderFormat(@"<link rel=""stylesheet"" href=""{0}"" media=""screen"" />", "~/Content/css/responsive.css")
 
     <!-- Added google font -->
     <link href='http://fonts.googleapis.com/css?family=Dosis:400,600,700,800' rel='stylesheet' type='text/css'>
@@ -119,7 +108,7 @@
 
                         <div class="download-block text-center">
                             
-                            <a href="@Url.Action("Register","Account")" class="btn btn-download">I am a dentist</a><a href="@Url.Action("Register","Account")" class="btn btn-download">I need a dentist</a>
+                            <a href="@Url.Action("DentistRegister","Account")" class="btn btn-download">I am a dentist</a><a href="@Url.Action("Register","Account")" class="btn btn-download">I need a dentist</a>
                         </div>
                     </div>
                 </div>

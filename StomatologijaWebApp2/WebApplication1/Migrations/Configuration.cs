@@ -1,4 +1,8 @@
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
+using System.Linq;
+using WebApplication1.Models;
 
 namespace WebApplication1.Migrations
 {
@@ -13,6 +17,7 @@ namespace WebApplication1.Migrations
 
         protected override void Seed(WebApplication1.Models.ApplicationDbContext context)
         {
+            SeedRoles(context);
 
             //Seeding Dentist Class
             context.Dentists.AddOrUpdate( 
@@ -168,6 +173,34 @@ namespace WebApplication1.Migrations
             );
 
 
+        }
+
+        private void SeedDentists(ApplicationDbContext context)
+        {
+            
+        }
+
+        private void SeedRoles(ApplicationDbContext context)
+        {
+            if (!context.Roles.Any())
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+
+                var userRole = new IdentityRole {Name = Role.User};
+                roleManager.Create(userRole);
+
+                var adminRole = new IdentityRole { Name = Role.Admin };
+                roleManager.Create(adminRole);
+
+                var dentistRole = new IdentityRole { Name = Role.Dentist };
+                roleManager.Create(dentistRole);
+
+                var patientRole = new IdentityRole { Name = Role.Patient };
+                roleManager.Create(patientRole);
+
+                context.SaveChanges();
+            }
         }
     }
 }
