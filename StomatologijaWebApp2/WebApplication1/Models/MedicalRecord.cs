@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebApplication1.Interfaces;
 
@@ -24,9 +25,8 @@ namespace WebApplication1.Models
         public double Bill { get; set; }
         
         //Relations
-        public int PatientId { get; set; }//For some reason, when we are modelling relation where each of the Medical records can be assigned to just one Patient, we need PatientId and Patient itself
-        public Patient Patient { get; set; }
-
+        public MedicalHistory MedicalHistory { get; set; }
+        public ICollection<Tooth> Teeth { get; set; }
         
     }
 }

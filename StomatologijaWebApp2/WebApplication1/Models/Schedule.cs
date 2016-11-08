@@ -3,15 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
-
-    [Table("Patient")]
-    public class Patient : ApplicationUser
+    public class Schedule
     {
+        [ForeignKey("Dentist")]
+        public string Id { get; set; }
+
         //Relations
         public virtual Dentist Dentist { get; set; }
-
-        public virtual MedicalHistory MedicalHistory { get; set; }
-        public virtual ICollection<Appointment> Appointments { get; set; }
+        public ICollection<Appointment> Appointments { get; set; }
     }
-
 }

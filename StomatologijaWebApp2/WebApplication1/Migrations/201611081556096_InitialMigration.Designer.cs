@@ -7,13 +7,13 @@ namespace WebApplication1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class ChangedDatesToNullables : IMigrationMetadata
+    public sealed partial class InitialMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedDatesToNullables));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201611030940311_ChangedDatesToNullables"; }
+            get { return "201611081556096_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source
