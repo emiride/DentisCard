@@ -8,6 +8,8 @@ namespace WebApplication1.Models
     public class Dentist : ApplicationUser
     {
 
+        public string Place { get; set; }
+        
 
         //Relations
         public virtual ICollection<Patient> Patients { get; set; }

@@ -1,6 +1,8 @@
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Linq;
+using WebApplication1.Enumerations;
 using WebApplication1.Models;
 
 namespace WebApplication1.Migrations
@@ -14,27 +16,48 @@ namespace WebApplication1.Migrations
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(WebApplication1.Models.ApplicationDbContext context)
+        protected override void Seed(ApplicationDbContext context)
         {
-            //SeedRoles(context);
+            
 
-            ////Seeding Dentist Class
-            //context.Dentists.AddOrUpdate( 
-            //    d => d.Id,
-            //    new Models.Dentist {
-            //        Id = 1,
+            //var passwordHasher = new PasswordHasher();
+            //context.Users.AddOrUpdate(
+            //    new Dentist
+            //    {
             //        FirstName = "Prvi",
             //        LastName = "Doktor",
-            //        Password = "polamarke",
+            //        PasswordHash = passwordHasher.HashPassword("polamarke"),
             //        DateOfBirth = new DateTime(1977, 4, 3),
-            //        EmploymentStatus = Models.EmploymentStatus.Employed,
+            //        EmploymentStatus = EmploymentStatus.Employed,
+            //        PhoneNumber = "062/062-062",
+            //        Email = "prvi@gmail.com",
+            //        Address = "Kulovica 9",
+            //        DateCreated = DateTime.Now
+            //    }
+            //    );
+
+            #region commentedOut
+            ////Seeding Dentist Class
+
+            //var passwordHasher = new PasswordHasher();
+            //context.Users.AddOrUpdate(
+            //    new Dentist
+            //    {
+            //        FirstName = "Prvi",
+            //        LastName = "Doktor",
+            //        PasswordHash = passwordHasher.HashPassword("polamarke"),
+            //        DateOfBirth = new DateTime(1977, 4, 3),
+            //        EmploymentStatus = EmploymentStatus.Employed,
             //        PhoneNumber = "062/062-062",
             //        Email = "prvi@gmail.ocami",
             //        Address = "Kulovica 9",
-            //        DateCreated = DateTime.Now,
+            //        DateCreated = DateTime.Now
+
+
             //        //DateModified = new DateTime(2015, 5, 16, 13, 45, 0), This can be done later because I changed DateModified to be nullable, so it doesn't have to be populated now
             //        //Patients          needs to be implemented...? 
-            //    },
+            //    }
+            // );
 
             //    new Models.Dentist { 
             //        Id = 2,
@@ -66,7 +89,7 @@ namespace WebApplication1.Migrations
             //        //Patients          needs to be implemented...? 
             //    }
             //);
-            
+
             ////Seeding Patient Class
             //context.Patients.AddOrUpdate( 
             //   k => k.Id,
@@ -122,7 +145,7 @@ namespace WebApplication1.Migrations
             //       Email = "peti@gmail.ocami",
             //       PhoneNumber = "062/066-066",
             //       DentistId = 2,
-                   
+
             //       // Dentist =             needs to be implemented...? 
             //       // EmploymentStatus =    needs to be implemented...? 
             //       // MedicalRecords =      needs to be implemented...? 
@@ -143,7 +166,7 @@ namespace WebApplication1.Migrations
             //       // EmploymentStatus =        needs to be implemented...? 
             //       // MedicalRecords =          needs to be implemented...? 
             //    },
-               
+
             //   new Models.MedicalRecord
             //   {
             //       Id = 2,
@@ -169,13 +192,35 @@ namespace WebApplication1.Migrations
             //       // EmploymentStatus =        needs to be implemented...? 
             //       // MedicalRecords =          needs to be implemented...? 
             //   }
-            //);
+            //); 
+            #endregion
 
 
         }
 
         private void SeedDentists(ApplicationDbContext context)
         {
+            if (!context.Users.Any())
+            {
+                var userStore = new UserStore<ApplicationUser>(context);
+                var userManager = new UserManager<ApplicationUser>(userStore);
+                var user = new ApplicationUser()
+                {
+
+                    FirstName = "Prvi",
+                    LastName = "Doktor",
+                    DateOfBirth = new DateTime(1977, 4, 3),
+                    EmploymentStatus = EmploymentStatus.Employed,
+                    PhoneNumber = "062/062-062",
+                    Email = "prvi@gmail.ocami",
+                    Address = "Kulovica 9",
+                    DateCreated = DateTime.Now,
+                    EmailConfirmed = true,
+                    
+                };
+                userManager.Create(user, "P@ssw0rd");
+                context.SaveChanges();
+            }
             
         }
 
