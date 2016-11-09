@@ -235,9 +235,10 @@ namespace WebApplication1.Migrations
                 DateCreated = DateTime.Now,
                 UserName = "asddas",
                 Password = passwordHasher.HashPassword("polamarke"),
-                Patients = new List<Patient> { patient }
+                //Patients = new List<Patient> { patient }
             };
             context.Users.AddOrUpdate(dentist);
+            context.Users.AddOrUpdate(patient);
             context.SaveChanges();
             //context.Users.AddOrUpdate(patient)
         }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebApplication1.Enumerations;
 
 namespace WebApplication1.Models
 {
@@ -6,7 +7,9 @@ namespace WebApplication1.Models
     {
         public int Id { get; set; }
 
+        public ToothPosition ToothPosition { get; set; }
 
+        public ToothState ToothState { get; set; }
 
         //Relations
         public MedicalHistory MedicalHistory { get; set; }

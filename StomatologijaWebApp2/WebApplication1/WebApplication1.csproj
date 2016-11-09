@@ -185,6 +185,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Enumerations\EmploymentStatus.cs" />
+    <Compile Include="Enumerations\ToothPosition.cs" />
+    <Compile Include="Enumerations\ToothState.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
