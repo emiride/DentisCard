@@ -22,22 +22,6 @@ namespace WebApplication1.Models
             return new ApplicationDbContext();
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-//            modelBuilder.Entity<Dentist>().HasRequired(t => t.Schedule).WithRequiredPrincipal(t => t.Dentist);
-//            modelBuilder.Entity<Patient>().HasRequired(t => t.MedicalHistory).WithRequiredPrincipal(t => t.Patient);
-//            modelBuilder.Entity<Dentist>().HasRequired(t => t.Patients);
-//            modelBuilder.Entity<MedicalHistory>().HasRequired(t => t.MedicalRecords);
-//            modelBuilder.Entity<MedicalHistory>().HasRequired(t => t.Teeth);
-//            modelBuilder.Entity<Patient>().HasRequired(t => t.Appointments);
-//            modelBuilder.Entity<Schedule>().HasRequired(t => t.Appointments);
-            //modelBuilder.Entity<Patient>().HasRequired(t => t.Dentist);
-            //modelBuilder.Entity<Appointment>().HasRequired(t => t.Schedule);
-            //modelBuilder.Entity<Appointment>().HasRequired(t => t.Patient);
-
-            base.OnModelCreating(modelBuilder);
-        }
-
         /*This override will allow for every instance that gets created and DateCreated will be saved to it*/
         public override int SaveChanges()
         {

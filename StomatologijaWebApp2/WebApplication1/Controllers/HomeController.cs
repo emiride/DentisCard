@@ -31,7 +31,7 @@ namespace WebApplication1.Controllers
 
         public ActionResult LandingPage()
         {
-           
+
             return View();
         }
     }

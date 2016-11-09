@@ -195,6 +195,10 @@
     <Compile Include="Migrations\201611091405014_tryone.Designer.cs">
       <DependentUpon>201611091405014_tryone.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611092007472_addedMorePropertiesToTooth.cs" />
+    <Compile Include="Migrations\201611092007472_addedMorePropertiesToTooth.Designer.cs">
+      <DependentUpon>201611092007472_addedMorePropertiesToTooth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\MedicalHistory.cs" />
@@ -357,6 +361,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201611091405014_tryone.resx">
       <DependentUpon>201611091405014_tryone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611092007472_addedMorePropertiesToTooth.resx">
+      <DependentUpon>201611092007472_addedMorePropertiesToTooth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
