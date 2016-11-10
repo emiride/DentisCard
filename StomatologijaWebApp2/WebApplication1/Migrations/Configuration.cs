@@ -19,9 +19,11 @@ namespace WebApplication1.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-
+            //Calling SeedAll method
             SeedAll(context);
-                //var passwordHasher = new PasswordHasher();
+
+            #region commentedOut
+            //var passwordHasher = new PasswordHasher();
             //context.Users.AddOrUpdate(
             //    new Dentist
             //    {
@@ -37,7 +39,7 @@ namespace WebApplication1.Migrations
             //    }
             //    );
 
-            #region commentedOut
+
             ////Seeding Dentist Class
 
             //var passwordHasher = new PasswordHasher();
@@ -195,21 +197,22 @@ namespace WebApplication1.Migrations
             //   }
             //); 
             #endregion
-
-
+            
         }
+
+        //Seeding Patient with Dentist
         private void SeedAll(ApplicationDbContext context)
         {
             context = new ApplicationDbContext();
             var passwordHasher = new PasswordHasher();
             var patient = new WebApplication1.Models.Patient
             {
-                
+
                 UserName = "asdas",
-                PasswordHash = passwordHasher.HashPassword("polamarke"),
+                //PasswordHash = passwordHasher.HashPassword("polamarke"),
+                Password = passwordHasher.HashPassword("fening"),
                 FirstName = "Pacijent",
                 LastName = "Bolesni",
-                Password = "fening",
                 DateOfBirth = new DateTime(1987, 4, 3),
                 Address = "Brcanska 2",
                 DateCreated = DateTime.Now,
@@ -222,11 +225,13 @@ namespace WebApplication1.Migrations
                 // EmploymentStatus =    needs to be implemented...? 
                 // MedicalRecords =      needs to be implemented...? 
             };
+
             var dentist = new Dentist
             {
                 FirstName = "Prvi",
                 LastName = "Doktor",
-                PasswordHash = passwordHasher.HashPassword("polamarke"),
+                //PasswordHash = passwordHasher.HashPassword("polamarke"),
+                Password = passwordHasher.HashPassword("polamarke"),
                 DateOfBirth = new DateTime(1977, 4, 3),
                 EmploymentStatus = EmploymentStatus.Employed,
                 PhoneNumber = "062/062-062",
@@ -234,7 +239,6 @@ namespace WebApplication1.Migrations
                 Address = "Kulovica 9",
                 DateCreated = DateTime.Now,
                 UserName = "asddas",
-                Password = passwordHasher.HashPassword("polamarke"),
                 Patients = new List<Patient> { patient }
             };
             context.Users.AddOrUpdate(dentist);
@@ -243,7 +247,7 @@ namespace WebApplication1.Migrations
             //context.Users.AddOrUpdate(patient)
         }
 
-
+        //Seeding Dentist Class
         private void SeedDentists(ApplicationDbContext context)
         {
             if (!context.Users.Any())
@@ -262,14 +266,15 @@ namespace WebApplication1.Migrations
                     Address = "Kulovica 9",
                     DateCreated = DateTime.Now,
                     EmailConfirmed = true,
-                    
+
                 };
                 userManager.Create(user, "P@ssw0rd");
                 context.SaveChanges();
             }
-            
+
         }
 
+        //Seeding Role Class
         private void SeedRoles(ApplicationDbContext context)
         {
             if (!context.Roles.Any())
@@ -277,7 +282,7 @@ namespace WebApplication1.Migrations
                 var roleStore = new RoleStore<IdentityRole>(context);
                 var roleManager = new RoleManager<IdentityRole>(roleStore);
 
-                var userRole = new IdentityRole {Name = Role.User};
+                var userRole = new IdentityRole { Name = Role.User };
                 roleManager.Create(userRole);
 
                 var adminRole = new IdentityRole { Name = Role.Admin };
@@ -292,5 +297,20 @@ namespace WebApplication1.Migrations
                 context.SaveChanges();
             }
         }
+
+        //Seeding Tooth Class 
+        //
+        //                       NEMOJTE GLEDATI OVE GLUPOSTI...NISAM VISE MOGAO DA RADIM
+        //
+        private void SeedTooth(ApplicationDbContext context)
+        {
+            if (!context.Roles.Any())
+            {
+                var tooth = new Tooth { ToothPosition = ToothPosition.gd1};
+                var tooth2 = new Tooth { ToothPosition = ToothPosition.gl1};
+                context.SaveChanges();
+            }
+        }
+
     }
 }
