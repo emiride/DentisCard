@@ -191,13 +191,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IModificationHistory.cs" />
-    <Compile Include="Migrations\201611091405014_tryone.cs" />
-    <Compile Include="Migrations\201611091405014_tryone.Designer.cs">
-      <DependentUpon>201611091405014_tryone.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611092007472_addedMorePropertiesToTooth.cs" />
-    <Compile Include="Migrations\201611092007472_addedMorePropertiesToTooth.Designer.cs">
-      <DependentUpon>201611092007472_addedMorePropertiesToTooth.cs</DependentUpon>
+    <Compile Include="Migrations\201611100921124_InitialMigration.cs" />
+    <Compile Include="Migrations\201611100921124_InitialMigration.Designer.cs">
+      <DependentUpon>201611100921124_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -359,11 +355,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611091405014_tryone.resx">
-      <DependentUpon>201611091405014_tryone.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611092007472_addedMorePropertiesToTooth.resx">
-      <DependentUpon>201611092007472_addedMorePropertiesToTooth.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611100921124_InitialMigration.resx">
+      <DependentUpon>201611100921124_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

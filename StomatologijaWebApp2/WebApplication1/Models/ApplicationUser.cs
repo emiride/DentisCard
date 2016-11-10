@@ -22,12 +22,6 @@ namespace WebApplication1.Models
         [StringLength(50)]
         public string LastName { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)] //DataType is very powerfull Data Annotation, which can affect our view if we use EF, so I will try to accomplish as much as possible with that
-        [Display(Name = "Password")]
-        public string Password { get; set; }
-
-
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "Date of birth")]

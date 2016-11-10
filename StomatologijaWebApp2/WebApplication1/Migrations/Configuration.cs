@@ -19,7 +19,7 @@ namespace WebApplication1.Migrations
 
         protected override void Seed(ApplicationDbContext context)
         {
-            //Calling SeedAll method
+            SeedRoles(context);
             SeedAll(context);
 
             #region commentedOut
@@ -203,73 +203,132 @@ namespace WebApplication1.Migrations
         //Seeding Patient with Dentist
         private void SeedAll(ApplicationDbContext context)
         {
-            context = new ApplicationDbContext();
             var passwordHasher = new PasswordHasher();
-            var patient = new WebApplication1.Models.Patient
+            var medicalRecord = new MedicalRecord
+            {
+                DateCreated = DateTime.Now,
+                Description = "Vadjena sestica gornja lijeva",
+                Teeth = new List<Tooth>()
+            };
+            var medicalRecord2 = new MedicalRecord
+            {
+                DateCreated = DateTime.Now,
+                Description = "Radjena krunica donje lijeve trice",
+                Teeth = new List<Tooth>()
+            };
+            var patient = new Patient
             {
 
-                UserName = "asdas",
-                //PasswordHash = passwordHasher.HashPassword("polamarke"),
-                Password = passwordHasher.HashPassword("fening"),
-                FirstName = "Pacijent",
-                LastName = "Bolesni",
+                UserName = "omeraga",
+                PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                FirstName = "Omer",
+                LastName = "Ahmetagic",
                 DateOfBirth = new DateTime(1987, 4, 3),
                 Address = "Brcanska 2",
                 DateCreated = DateTime.Now,
-                EmploymentStatus = EmploymentStatus.Employed,
-                //DateModified = new DateTime(2015, 5, 19, 13, 45, 0),
-                Email = "cetvrti@gmail.ocami",
-                PhoneNumber = "062/064-064"
+                EmploymentStatus = EmploymentStatus.Student,
+                Email = "omer.ahmetagic@gmail.ocami",
+                PhoneNumber = "062/064-064",
+                MedicalHistory = new MedicalHistory
+                {
+                    Note = "Patient's teeth are just awesome and he is ready to get married.",
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord}
+                }
+            };
 
-                // Dentist =             needs to be implemented...? 
-                // EmploymentStatus =    needs to be implemented...? 
-                // MedicalRecords =      needs to be implemented...? 
+            var patient2 = new Patient
+            {
+
+                UserName = "jusufaga",
+                PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                FirstName = "Jusuf",
+                LastName = "Koric",
+                DateOfBirth = new DateTime(1993, 4, 3),
+                Address = "Butmirska Neka 12",
+                DateCreated = DateTime.Now,
+                EmploymentStatus = EmploymentStatus.Student,
+                Email = "jusufk12@gmail.com",
+                PhoneNumber = "062/064-064",
+                MedicalHistory = new MedicalHistory
+                {
+                    Note = "Patient's teeth are very good, but since he is awesome looking, he is ready to get married.",
+                    MedicalRecords = new List<MedicalRecord>()
+                }
             };
 
             var dentist = new Dentist
             {
-                FirstName = "Prvi",
-                LastName = "Doktor",
-                //PasswordHash = passwordHasher.HashPassword("polamarke"),
-                Password = passwordHasher.HashPassword("polamarke"),
-                DateOfBirth = new DateTime(1977, 4, 3),
+                FirstName = "Emir",
+                LastName = "Hodzic",
+                UserName = "emiraga",
+                PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                DateOfBirth = new DateTime(1992, 3, 20),
                 EmploymentStatus = EmploymentStatus.Employed,
-                PhoneNumber = "062/062-062",
-                Email = "prvi@gmail.ocami",
-                Address = "Kulovica 9",
+                PhoneNumber = "+38762876923",
+                Email = "emir.hodzich@gmail.com",
+                Address = "Igmanskih Bataljona 27",
                 DateCreated = DateTime.Now,
-                UserName = "asddas",
-                Patients = new List<Patient> { patient }
+                EmailConfirmed = true,
+                Patients = new List<Patient>() { patient, patient2 }
             };
             context.Users.AddOrUpdate(dentist);
             context.Users.AddOrUpdate(patient);
+            context.Users.AddOrUpdate(patient2);
             context.SaveChanges();
-            //context.Users.AddOrUpdate(patient)
         }
 
         //Seeding Dentist Class
-        private void SeedDentists(ApplicationDbContext context)
+        private void SeedAllWithUserManager(ApplicationDbContext context)
         {
+            var passwordHasher = new PasswordHasher();
             if (!context.Users.Any())
             {
-                var userStore = new UserStore<ApplicationUser>(context);
-                var userManager = new UserManager<ApplicationUser>(userStore);
-                var user = new ApplicationUser()
+                //Creation of all stores
+                var dentistStore = new UserStore<Dentist>(context);
+                var patientStore = new UserStore<Patient>(context);
+
+                //Creation of Managers
+                var patientManager = new UserManager<Patient>(patientStore);
+                var dentistManager = new UserManager<Dentist>(dentistStore);
+
+                var patient1 = new Patient
+                {
+                    UserName = "omeraga",
+                    PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                    FirstName = "Omer",
+                    LastName = "Ahmetagic",
+                    DateOfBirth = new DateTime(1987, 4, 3),
+                    Address = "Brcanska 2",
+                    DateCreated = DateTime.Now,
+                    EmploymentStatus = EmploymentStatus.Student,
+                    Email = "omer.ahmetagic@gmail.ocami",
+                    PhoneNumber = "062/064-064",
+                    
+                  
+                };
+                patientManager.Create(patient1);
+
+                var dentist1 = new Dentist
                 {
 
-                    FirstName = "Prvi",
-                    LastName = "Doktor",
-                    DateOfBirth = new DateTime(1977, 4, 3),
+                    FirstName = "Emir",
+                    LastName = "Hodzic",
+                    UserName = "emiraga",
+                    PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                    DateOfBirth = new DateTime(1992,3,20),
                     EmploymentStatus = EmploymentStatus.Employed,
-                    PhoneNumber = "062/062-062",
-                    Email = "prvi@gmail.ocami",
+                    PhoneNumber = "+38762876923",
+                    Email = "emir.hodzich@gmail.com",
                     Address = "Kulovica 9",
                     DateCreated = DateTime.Now,
                     EmailConfirmed = true,
+                    Patients = new List<Patient>() {patient1}
 
                 };
-                userManager.Create(user, "P@ssw0rd");
+                dentistManager.Create(dentist1);
                 context.SaveChanges();
+
+               
             }
 
         }

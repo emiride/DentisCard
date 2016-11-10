@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity.Migrations;
-using System.Web.Mvc;
-using Microsoft.AspNet.Identity;
-using WebApplication1.Enumerations;
-using WebApplication1.Models;
+﻿using System.Web.Mvc;
 
 namespace WebApplication1.Controllers
 {
@@ -31,7 +25,6 @@ namespace WebApplication1.Controllers
 
         public ActionResult LandingPage()
         {
-
             return View();
         }
     }

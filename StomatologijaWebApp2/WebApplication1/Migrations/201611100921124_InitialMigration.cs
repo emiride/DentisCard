@@ -3,7 +3,7 @@ namespace WebApplication1.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class tryone : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -14,7 +14,6 @@ namespace WebApplication1.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         FirstName = c.String(nullable: false, maxLength: 50),
                         LastName = c.String(nullable: false, maxLength: 50),
-                        Password = c.String(nullable: false),
                         DateOfBirth = c.DateTime(nullable: false),
                         Address = c.String(),
                         EmploymentStatus = c.Int(),
@@ -119,6 +118,8 @@ namespace WebApplication1.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        ToothPosition = c.Int(nullable: false),
+                        ToothState = c.Int(nullable: false),
                         MedicalHistory_Id = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
