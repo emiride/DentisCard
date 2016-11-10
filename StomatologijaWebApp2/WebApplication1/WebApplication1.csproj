@@ -182,6 +182,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DentistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Enumerations\EmploymentStatus.cs" />
@@ -339,6 +340,12 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
+    <Content Include="Views\Dentist\Create.cshtml" />
+    <Content Include="Views\Dentist\Delete.cshtml" />
+    <Content Include="Views\Dentist\Details.cshtml" />
+    <Content Include="Views\Dentist\Edit.cshtml" />
+    <Content Include="Views\Dentist\Index.cshtml" />
+    <Content Include="Views\Dentist\Register.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -232,7 +232,7 @@ namespace WebApplication1.Migrations
             var patient = new Patient
             {
 
-                UserName = "omeraga",
+                UserName = "omer.ahmetagic@gmail.ocami",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 FirstName = "Omer",
                 LastName = "Ahmetagic",
@@ -276,7 +276,7 @@ namespace WebApplication1.Migrations
             var patient2 = new Patient
             {
 
-                UserName = "jusufaga",
+                UserName = "jusufk12@gmail.com",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 FirstName = "Jusuf",
                 LastName = "Koric",
@@ -321,7 +321,7 @@ namespace WebApplication1.Migrations
             var patient3 = new Patient
             {
 
-                UserName = "Samac",
+                UserName = "syusuf@gmail.com",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 FirstName = "Sami",
                 LastName = "Yusuf",
@@ -342,7 +342,7 @@ namespace WebApplication1.Migrations
             {
                 FirstName = "Emir",
                 LastName = "Hodzic",
-                UserName = "emiraga",
+                UserName = "emir.hodzich@gmail.com",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 DateOfBirth = new DateTime(1992, 3, 20),
                 EmploymentStatus = EmploymentStatus.Employed,
@@ -352,6 +352,7 @@ namespace WebApplication1.Migrations
                 Place = "Hrasnicka cesta 13",
                 DateCreated = DateTime.Now,
                 EmailConfirmed = true,
+                SecurityStamp = "fakjhdfiasndgsakjfalfjmsoa",
                 Patients = new List<Patient>() { patient, patient2 }
             };
             context.Users.AddOrUpdate(dentist);

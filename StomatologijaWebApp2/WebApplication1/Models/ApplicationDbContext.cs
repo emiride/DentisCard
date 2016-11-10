@@ -46,6 +46,6 @@ namespace WebApplication1.Models
             return result;
         }
 
-        
+        public System.Data.Entity.DbSet<WebApplication1.Models.Schedule> Schedules { get; set; }
     }
 }
