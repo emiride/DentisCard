@@ -200,21 +200,34 @@ namespace WebApplication1.Migrations
             
         }
 
-        //Seeding Patient with Dentist
+        //Seeding everything except Identity tables (Roles, Logins and Claims)
         private void SeedAll(ApplicationDbContext context)
         {
             var passwordHasher = new PasswordHasher();
+
+            var downLeft = new Tooth
+            {
+                ToothPosition = ToothPosition.dl3,
+                ToothState = ToothState.NoTooth
+            };
+
+            var upLeft = new Tooth
+            {
+                ToothPosition = ToothPosition.gl6,
+                ToothState = ToothState.Caries1
+            };
+
             var medicalRecord = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Vadjena sestica gornja lijeva",
-                Teeth = new List<Tooth>()
+                Teeth = new List<Tooth>() { downLeft }
             };
             var medicalRecord2 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Radjena krunica donje lijeve trice",
-                Teeth = new List<Tooth>()
+                Teeth = new List<Tooth>() { upLeft}
             };
             var patient = new Patient
             {
@@ -232,7 +245,7 @@ namespace WebApplication1.Migrations
                 MedicalHistory = new MedicalHistory
                 {
                     Note = "Patient's teeth are just awesome and he is ready to get married.",
-                    MedicalRecords = new List<MedicalRecord>() { medicalRecord}
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord, medicalRecord2}
                 }
             };
 
@@ -267,6 +280,7 @@ namespace WebApplication1.Migrations
                 PhoneNumber = "+38762876923",
                 Email = "emir.hodzich@gmail.com",
                 Address = "Igmanskih Bataljona 27",
+                Place = "Hrasnicka cesta 13",
                 DateCreated = DateTime.Now,
                 EmailConfirmed = true,
                 Patients = new List<Patient>() { patient, patient2 }
