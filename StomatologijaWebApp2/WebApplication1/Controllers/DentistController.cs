@@ -1,4 +1,6 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using WebApplication1.Models;
@@ -14,9 +16,20 @@ namespace WebApplication1.Controllers
         {
             //List<Patient> patients = db.Dentists.Select(p => new Patient {Id = p.Id}).ToList();
             //var applicationUsers = db.Dentists;
-            var patients = db.Patients;
+            IEnumerable<Patient> patients= GetPatients("23fadd50-c295-4a51-96ef-f6ba2fd7191c");
+            
+            
             return View(patients);
         }
+
+        private List<Patient> GetPatients(string dentistId)
+        {
+            return (from d in db.Dentists
+                where d.Id == dentistId
+                select new Patient() {FirstName = d.FirstName}).ToList();
+            /*join p in db.Patients on d.Id equals p.Dentist.Id
+                select new Patient {FirstName = p.FirstName}).ToList();*/
+        } 
 
         // GET: Dentist/Details/5
         public ActionResult Details(string id)

@@ -355,7 +355,26 @@ namespace WebApplication1.Migrations
                 SecurityStamp = "fakjhdfiasndgsakjfalfjmsoa",
                 Patients = new List<Patient>() { patient, patient2 }
             };
+            var dentist2 = new Dentist
+            {
+                FirstName = "Damir",
+                LastName = "Metiljevic",
+                UserName = "damir.metiljevic@gmail.com",
+                PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                DateOfBirth = new DateTime(1992, 3, 20),
+                EmploymentStatus = EmploymentStatus.Unemployed,
+                PhoneNumber = "+38762123456",
+                Email = "damir.metiljevic@gmail.com",
+                Address = "Mumijevi 12",
+                Place = "Ilidzanska cesma 123",
+                DateCreated = DateTime.Now,
+                EmailConfirmed = true,
+                SecurityStamp = "fafgsddggggb",
+                Patients = new List<Patient>() { patient3}
+            };
+            
             context.Users.AddOrUpdate(dentist);
+            context.Users.AddOrUpdate(dentist2);
             context.Users.AddOrUpdate(patient);
             context.Users.AddOrUpdate(patient2);
             context.Users.AddOrUpdate(patient3);
