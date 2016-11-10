@@ -197,7 +197,7 @@ namespace WebApplication1.Migrations
             //   }
             //); 
             #endregion
-            
+
         }
 
         //Seeding everything except Identity tables (Roles, Logins and Claims)
@@ -217,17 +217,17 @@ namespace WebApplication1.Migrations
                 ToothState = ToothState.Caries1
             };
 
-            var medicalRecord = new MedicalRecord
+            var medicalRecord01 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
-                Description = "Vadjena sestica gornja lijeva",
+                Description = "Vadjena trica donja lijeva",
                 Teeth = new List<Tooth>() { downLeft }
             };
-            var medicalRecord2 = new MedicalRecord
+            var medicalRecord02 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
-                Description = "Radjena krunica donje lijeve trice",
-                Teeth = new List<Tooth>() { upLeft}
+                Description = "Radjena krunica gornje lijeve sestice",
+                Teeth = new List<Tooth>() { upLeft }
             };
             var patient = new Patient
             {
@@ -245,10 +245,34 @@ namespace WebApplication1.Migrations
                 MedicalHistory = new MedicalHistory
                 {
                     Note = "Patient's teeth are just awesome and he is ready to get married.",
-                    MedicalRecords = new List<MedicalRecord>() { medicalRecord, medicalRecord2}
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord01, medicalRecord02 }
                 }
             };
 
+            var downRight2 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd3,
+                ToothState = ToothState.NoTooth
+            };
+
+            var upRight2 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd5,
+                ToothState = ToothState.Caries1
+            };
+
+            var medicalRecord11 = new MedicalRecord
+            {
+                DateCreated = DateTime.Now,
+                Description = "Vadjena trica donja desna",
+                Teeth = new List<Tooth>() { downRight2 }
+            };
+            var medicalRecord12 = new MedicalRecord
+            {
+                DateCreated = DateTime.Now,
+                Description = "Zalivena gornja desna petica",
+                Teeth = new List<Tooth>() { upRight2 }
+            };
             var patient2 = new Patient
             {
 
@@ -265,7 +289,52 @@ namespace WebApplication1.Migrations
                 MedicalHistory = new MedicalHistory
                 {
                     Note = "Patient's teeth are very good, but since he is awesome looking, he is ready to get married.",
-                    MedicalRecords = new List<MedicalRecord>()
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord11, medicalRecord12 }
+                }
+            };
+
+            //samac
+            var upRight3 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd2,
+                ToothState = ToothState.Caries1
+            };
+
+            var upRight31 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd1,
+                ToothState = ToothState.Healthy
+            };
+
+            var downRight3 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd3,
+                ToothState = ToothState.Healthy
+            };
+
+            var medicalRecord31 = new MedicalRecord
+            {
+                DateCreated = DateTime.Now,
+                Description = "Zalivena gornja desna dvica",
+                Teeth = new List<Tooth>() { upRight3 }
+            };
+            var patient3 = new Patient
+            {
+
+                UserName = "Samac",
+                PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                FirstName = "Sami",
+                LastName = "Yusuf",
+                DateOfBirth = new DateTime(1973, 4, 3),
+                Address = "Londonska 3",
+                DateCreated = DateTime.Now,
+                EmploymentStatus = EmploymentStatus.Employed,
+                Email = "syusuf@gmail.com",
+                PhoneNumber = "0699/064-064",
+                MedicalHistory = new MedicalHistory
+                {
+                    Note = "Patient's teeth are excellent, he can perform good on stage.",
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord31 }
                 }
             };
 
@@ -288,6 +357,7 @@ namespace WebApplication1.Migrations
             context.Users.AddOrUpdate(dentist);
             context.Users.AddOrUpdate(patient);
             context.Users.AddOrUpdate(patient2);
+            context.Users.AddOrUpdate(patient3);
             context.SaveChanges();
         }
 
@@ -317,8 +387,8 @@ namespace WebApplication1.Migrations
                     EmploymentStatus = EmploymentStatus.Student,
                     Email = "omer.ahmetagic@gmail.ocami",
                     PhoneNumber = "062/064-064",
-                    
-                  
+
+
                 };
                 patientManager.Create(patient1);
 
@@ -329,20 +399,18 @@ namespace WebApplication1.Migrations
                     LastName = "Hodzic",
                     UserName = "emiraga",
                     PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
-                    DateOfBirth = new DateTime(1992,3,20),
+                    DateOfBirth = new DateTime(1992, 3, 20),
                     EmploymentStatus = EmploymentStatus.Employed,
                     PhoneNumber = "+38762876923",
                     Email = "emir.hodzich@gmail.com",
                     Address = "Kulovica 9",
                     DateCreated = DateTime.Now,
                     EmailConfirmed = true,
-                    Patients = new List<Patient>() {patient1}
+                    Patients = new List<Patient>() { patient1 }
 
                 };
                 dentistManager.Create(dentist1);
                 context.SaveChanges();
-
-               
             }
 
         }
@@ -367,20 +435,6 @@ namespace WebApplication1.Migrations
                 var patientRole = new IdentityRole { Name = Role.Patient };
                 roleManager.Create(patientRole);
 
-                context.SaveChanges();
-            }
-        }
-
-        //Seeding Tooth Class 
-        //
-        //                       NEMOJTE GLEDATI OVE GLUPOSTI...NISAM VISE MOGAO DA RADIM
-        //
-        private void SeedTooth(ApplicationDbContext context)
-        {
-            if (!context.Roles.Any())
-            {
-                var tooth = new Tooth { ToothPosition = ToothPosition.gd1};
-                var tooth2 = new Tooth { ToothPosition = ToothPosition.gl1};
                 context.SaveChanges();
             }
         }
