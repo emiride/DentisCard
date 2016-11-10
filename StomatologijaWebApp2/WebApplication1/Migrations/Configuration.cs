@@ -316,7 +316,7 @@ namespace WebApplication1.Migrations
             {
                 DateCreated = DateTime.Now,
                 Description = "Zalivena gornja desna dvica",
-                Teeth = new List<Tooth>() { upRight3 }
+                Teeth = new List<Tooth>() { upRight3, upRight31, downRight3 }
             };
             var patient3 = new Patient
             {
