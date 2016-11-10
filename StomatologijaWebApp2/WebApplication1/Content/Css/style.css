@@ -647,8 +647,9 @@ section.banner-carousel {
           transition: .3s ease;
 }
 .download-block .btn-download:hover {
-  background: #ff7f66;
-}
+  background: rgba(0, 167, 221, 0.70);
+} 
+
 .banner-carousel .app,
 .banner .app {
   text-align: center;
