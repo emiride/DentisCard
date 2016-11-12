@@ -12,6 +12,7 @@ namespace WebApplication1.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Dentist
+        [Authorize]
         public ActionResult Index(string id)
         {
             //List<Patient> patients = db.Dentists.Select(p => new Patient {Id = p.Id}).ToList();
