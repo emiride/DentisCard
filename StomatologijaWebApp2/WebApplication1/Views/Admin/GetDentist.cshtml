@@ -72,7 +72,7 @@
             @Html.DisplayNameFor(model => model.PatientId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Schedule.Id)
+           @* @Html.DisplayNameFor(model => model.Schedule.Id) *@
         </th>
         <th></th>
     </tr>
@@ -140,7 +140,7 @@
             @Html.DisplayFor(modelItem => item.PatientId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Schedule.Id)
+           @* @Html.DisplayNameFor(model => model.Schedule.Id) *@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
