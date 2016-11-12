@@ -9,8 +9,8 @@ namespace WebApplication1.Models
     {
 
         public string Place { get; set; }
-        
 
+        public string PatientId { get; set; }
         //Relations
         public virtual ICollection<Patient> Patients { get; set; }
         public virtual Schedule Schedule { get; set; }
