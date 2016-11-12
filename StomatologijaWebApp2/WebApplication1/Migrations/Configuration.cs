@@ -380,7 +380,8 @@ namespace WebApplication1.Migrations
             context.Users.AddOrUpdate(patient);
             context.Users.AddOrUpdate(patient2);
             context.Users.AddOrUpdate(patient3);
-
+            
+            //Assign Dentist role between two functions "SaveChanges()" in order to make it work
             context.SaveChanges();
 
             var userStore = new UserStore<Dentist>(context);
@@ -438,6 +439,8 @@ namespace WebApplication1.Migrations
                     Patients = new List<Patient>() { patient1 }
 
                 };
+
+               
                 dentistManager.Create(dentist1);
                 dentistManager.AddToRole(dentist1.Id, "Dentist");
                 context.SaveChanges();
