@@ -134,5 +134,11 @@ namespace WebApplication1.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult GetDentist(string id)
+        {
+            var query = db.Dentists;
+            return View(query);
+        }
     }
 }
