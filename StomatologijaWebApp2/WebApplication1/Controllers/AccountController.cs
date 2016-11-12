@@ -140,13 +140,6 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        public ActionResult DentistRegister()
-        {
-            //####
-
-            return View("Register");
-        }
-
         //
         // POST: /Account/Register
         [HttpPost]

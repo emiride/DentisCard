@@ -207,6 +207,10 @@
     <Compile Include="Migrations\201611121444144_AdminAdded.Designer.cs">
       <DependentUpon>201611121444144_AdminAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611121956129_BirthDateNullable.cs" />
+    <Compile Include="Migrations\201611121956129_BirthDateNullable.Designer.cs">
+      <DependentUpon>201611121956129_BirthDateNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="ViewModels\Dentist\DentistIndexData.cs" />
+    <Compile Include="ViewModels\Dentist\DentistRegisterViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
     <Compile Include="Models\MedicalRecord.cs" />
@@ -454,7 +459,6 @@
     <Content Include="Content\kendo\kendo.silver.mobile.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.mobile.min.css.map" />
-    <Fakes Include="Fakes\Kendo.Mvc.fakes" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -803,6 +807,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611121444144_AdminAdded.resx">
       <DependentUpon>201611121444144_AdminAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611121956129_BirthDateNullable.resx">
+      <DependentUpon>201611121956129_BirthDateNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
