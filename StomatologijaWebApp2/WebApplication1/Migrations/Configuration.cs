@@ -203,6 +203,8 @@ namespace WebApplication1.Migrations
         //Seeding everything except Identity tables (Roles, Logins and Claims)
         private void SeedAll(ApplicationDbContext context)
         {
+            
+
             var passwordHasher = new PasswordHasher();
 
             var downLeft = new Tooth
@@ -378,6 +380,13 @@ namespace WebApplication1.Migrations
             context.Users.AddOrUpdate(patient);
             context.Users.AddOrUpdate(patient2);
             context.Users.AddOrUpdate(patient3);
+
+            context.SaveChanges();
+
+            var userStore = new UserStore<Dentist>(context);
+            var userManager = new UserManager<Dentist>(userStore);
+            userManager.AddToRole(dentist.Id, "Dentist");
+
             context.SaveChanges();
         }
 
@@ -430,6 +439,7 @@ namespace WebApplication1.Migrations
 
                 };
                 dentistManager.Create(dentist1);
+                dentistManager.AddToRole(dentist1.Id, "Dentist");
                 context.SaveChanges();
             }
 
