@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -59,25 +61,22 @@ namespace WebApplication1.Controllers
 
         // GET: Dentist
         [Authorize (Roles = Role.Dentist)]
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
-            //List<Patient> patients = db.Dentists.Select(p => new Patient {Id = p.Id}).ToList();
-            //var applicationUsers = db.Dentists;
 
-            //var dentists = db.Dentists;
-
-
-            var viewModel = new DentistIndexData();
-            viewModel.Dentists = db.Dentists.Include(i => i.Patients);
-
-            if (id != "")
+            var dentistID = User.Identity.GetUserId();
+            List<Patient> patientList = new List<Patient>();
+          
+            var patients = db.Patients;
+            foreach (var patient in patients)
             {
-                ViewBag.DentistId = id;
-                viewModel.Patients = viewModel.Dentists.Single(i => i.Id == id).Patients;
+                if (patient.DentistId == dentistID)
+                {
+                    patientList.Add(patient);
+                }
             }
-
-            //var patients = db.Patients;
-            return View(viewModel);
+            
+            return View(patientList);
         }
 
         // GET: Dentist/Details/5
