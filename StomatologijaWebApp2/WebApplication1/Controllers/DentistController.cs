@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections;
+﻿using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin.Security;
-using Microsoft.AspNet.Identity.Owin;
-using WebApplication1.Enumerations;
 using WebApplication1.Models;
-using WebApplication1.ViewModels.Account;
 using WebApplication1.ViewModels.Dentist;
 
 namespace WebApplication1.Controllers
@@ -77,6 +73,32 @@ namespace WebApplication1.Controllers
             }
             
             return View(patientList);
+        }
+
+        public ActionResult PatientRead([DataSourceRequest] DataSourceRequest request)
+        {
+            var dentistId = User.Identity.GetUserId();
+            List<Patient> patientList = new List<Patient>();
+
+            var patients = db.Patients;
+            foreach (var patient in patients)
+            {
+                if (patient.DentistId == dentistId)
+                {
+                    patientList.Add(patient);
+                }
+            }
+
+            DataSourceResult result = patientList.ToDataSourceResult(request, p => new Patient
+            {
+                Id = p.Id,
+                FirstName = p.FirstName,
+                LastName = p.LastName,
+                Address = p.Address,
+                Email = p.Email,
+            });
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Dentist/Details/5

@@ -1,7 +1,7 @@
 ﻿@using Kendo.Mvc
 @using Kendo.Mvc.UI
 @using WebApplication1.Models
-@model IEnumerable<WebApplication1.Models.Patient> 
+@model IEnumerable<WebApplication1.Models.Patient>
 
 
 @{
@@ -14,26 +14,109 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-<table class="table">
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Date Created</th>
-        <th>Address</th>
-        <th>E-mail</th>
-        <th>Medical History</th>
-    </tr>
-    @foreach (var patient in Model)
-    {
-        <tr>
-            <td>@patient.FirstName</td>
-            <td>@patient.LastName</td>
-            <td>@patient.DateCreated</td>
-            <td>@patient.Address</td>
-            <td>@patient.Email</td>
+@(Html.Kendo().Grid<Patient>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(c => c.FirstName);
+            columns.Bound(c => c.LastName);
+            columns.Bound(c => c.Address);
+            columns.Bound(c => c.Email);
+        })
+        .HtmlAttributes(new { style = "height: 550px;" })
+        .Scrollable()
+        .Groupable()
+        .Sortable()
+        .ClientDetailTemplateId("template")
+        .Pageable(pageable => pageable
+            .Refresh(true)
+            .PageSizes(true)
+            .ButtonCount(5))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Read(read => read.Action("PatientRead", "Dentist"))
+            .PageSize(20)
+        )
+        .Events(events => events.DataBound("dataBound"))
 
-        </tr>
+)
+
+<script id="template" type="text/kendo-tmpl">
+    @(Html.Kendo().TabStrip()
+            .Name("tabStrip_#=Id#")
+            .SelectedIndex(0)
+            .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+            .Items(items =>
+            {
+                @*items.Add().Text("Orders").Content(@<text>
+                     @(Html.Kendo().Grid<Patient>()
+                            .Name("grid_#=Id#") // template expression, to be evaluated in the master context
+                            .Columns(columns =>
+                            {
+                                columns.Bound(o => o.FirstName).Title("ID").Width(56);
+                                columns.Bound(o => o.LastName).Width(110);
+                                columns.Bound(o => o.Address);//.ClientTemplate("\\#= ShipAddress \\#"); // escaped template expression, to be evaluated in the child/detail context
+                                columns.Bound(o => o.Email).Width(190);
+                            })
+                            .DataSource(dataSource => dataSource
+                                .Ajax()
+                                .PageSize(5)
+                                .Read(read => read.Action("PatientRead", "Dentist", new {Id = "#Id#" }))
+                            )
+                            .Pageable()
+                            .Sortable()
+                            .ToClientTemplate())
+                    </text>
+                    );*@
+                items.Add().Text("Contact Information").Content(
+                    "<div class='patient-details'>" +
+                        "<ul>" +
+                            "<li><label>First Name:</label>#= FirstName #</li>" +
+                            "<li><label>Last Name:</label>#= LastName #</li>" +
+                            "<li><label>Address:</label>#= Address #</li>" +
+                            "<li><label>Email:</label>#= Email #</li>" +
+                        "</ul>" +
+                    "</div>"
+
+                    );
+            })
+            .ToClientTemplate())
+</script>
+
+
+
+
+
+
+<script>
+    function dataBound() {
+        this.expandRow(this.tbody.find("tr.k-master-row").first());
+    }
+</script>
+
+<style>
+    .k-detail-cell .k-tabstrip .k-content {
+        padding: 0.2em;
     }
 
-</table>
+    .patient-details ul {
+        list-style: none;
+        font-style: italic;
+        margin: 15px;
+        padding: 0;
+    }
 
+        .patient-details ul li {
+            margin: 0;
+            line-height: 1.7em;
+        }
+
+    .patient-details label {
+        display: inline-block;
+        width: 90px;
+        padding-right: 10px;
+        text-align: right;
+        font-style: normal;
+        font-weight: bold;
+    }
+</style>
