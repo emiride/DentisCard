@@ -47,6 +47,7 @@ namespace WebApplication1.Models
             
             return result;
         }
-        
+
+        public System.Data.Entity.DbSet<WebApplication1.Models.MedicalHistory> MedicalHistories { get; set; }
     }
 }

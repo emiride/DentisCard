@@ -1,7 +1,7 @@
 ﻿@using Kendo.Mvc
 @using Kendo.Mvc.UI
 @using WebApplication1.Models
-@model IEnumerable<WebApplication1.Models.Patient>
+@*@model IEnumerable<Patient>*@
 
 
 @{
@@ -14,41 +14,55 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 
-@(Html.Kendo().Grid<Patient>()
+@(Html.Kendo().Grid<PatientDTO>()
         .Name("grid")
         .Columns(columns =>
         {
+            columns.Bound(c => c.Id);
             columns.Bound(c => c.FirstName);
             columns.Bound(c => c.LastName);
-            columns.Bound(c => c.Address);
-            columns.Bound(c => c.Email);
         })
         .HtmlAttributes(new { style = "height: 550px;" })
         .Scrollable()
         .Groupable()
         .Sortable()
-        .ClientDetailTemplateId("template")
+        //.ClientDetailTemplateId("template")
         .Pageable(pageable => pageable
             .Refresh(true)
             .PageSizes(true)
             .ButtonCount(5))
         .DataSource(dataSource => dataSource
-            .Ajax()
-            .Read(read => read.Action("PatientRead", "Dentist"))
-            .PageSize(20)
+            .WebApi()
+            .Model(model =>
+            {
+                model.Id(p => p.Id);
+                
+            })
+            .Events(events => events.Error("error_handler"))
+            .Read(r => r.Url(Url.HttpRouteUrl("DefaultApi", new {controller = "Patients"})))
         )
-        .Events(events => events.DataBound("dataBound"))
+        //.Events(events => events.DataBound("dataBound"))
 
 )
 
-<script id="template" type="text/kendo-tmpl">
+<script>
+function error_handler(e) {
+    var errors = $.parseJSON(e.xhr.responseText);
+
+    if (errors) {
+        alert("Errors:\n" + errors.join("\n"));
+    }
+}
+</script>
+
+@*<script id="template" type="text/kendo-tmpl">
     @(Html.Kendo().TabStrip()
             .Name("tabStrip_#=Id#")
             .SelectedIndex(0)
             .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
             .Items(items =>
             {
-                @*items.Add().Text("Orders").Content(@<text>
+                items.Add().Text("Orders").Content(@<text>
                      @(Html.Kendo().Grid<Patient>()
                             .Name("grid_#=Id#") // template expression, to be evaluated in the master context
                             .Columns(columns =>
@@ -67,7 +81,7 @@
                             .Sortable()
                             .ToClientTemplate())
                     </text>
-                    );*@
+                    );
                 items.Add().Text("Contact Information").Content(
                     "<div class='patient-details'>" +
                         "<ul>" +
@@ -81,7 +95,7 @@
                     );
             })
             .ToClientTemplate())
-</script>
+</script>*@
 
 
 

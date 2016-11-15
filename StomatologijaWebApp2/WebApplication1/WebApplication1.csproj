@@ -193,6 +193,7 @@
     <Compile Include="Controllers\DentistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Enumerations\EmploymentStatus.cs" />
     <Compile Include="Enumerations\ToothPosition.cs" />
     <Compile Include="Enumerations\ToothState.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\MedicalHistory.cs" />
+    <Compile Include="Models\PatientDTO.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Tooth.cs" />
