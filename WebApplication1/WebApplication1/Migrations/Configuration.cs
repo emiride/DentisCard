@@ -244,7 +244,9 @@ namespace WebApplication1.Migrations
                 EmploymentStatus = EmploymentStatus.Student,
                 Email = "omer.ahmetagic@gmail.ocami",
                 PhoneNumber = "062/064-064",
+                SecurityStamp = "dcvfgdve",
                 MedicalHistory = new MedicalHistory
+                
                 {
                     Note = "Patient's teeth are just awesome and he is ready to get married.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord01, medicalRecord02 }
@@ -320,6 +322,7 @@ namespace WebApplication1.Migrations
                 Description = "Zalivena gornja desna dvica",
                 Teeth = new List<Tooth>() { upRight3, upRight31, downRight3 }
             };
+
             var patient3 = new Patient
             {
 
@@ -331,6 +334,7 @@ namespace WebApplication1.Migrations
                 Address = "Londonska 3",
                 DateCreated = DateTime.Now,
                 EmploymentStatus = EmploymentStatus.Employed,
+                SecurityStamp = "fakjhdfiasndgsakjfalfjsadasdamsoa",
                 Email = "syusuf@gmail.com",
                 PhoneNumber = "0699/064-064",
                 MedicalHistory = new MedicalHistory
@@ -374,12 +378,33 @@ namespace WebApplication1.Migrations
                 SecurityStamp = "fafgsddggggb",
                 Patients = new List<Patient>() { patient3}
             };
-            
+
+            var admin = new Admin
+            {
+                FirstName = "Admin",
+                LastName = "Adminic",
+                UserName = "admin@gmail.com",
+                PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                DateOfBirth = new DateTime(1992, 3, 20),
+                EmploymentStatus = EmploymentStatus.Unemployed,
+                PhoneNumber = "+38762123456",
+                Email = "admin@gmail.com",
+                Address = "Mumijevi 12",
+                //Place = "Ilidzanska cesma 123",
+                DateCreated = DateTime.Now,
+                EmailConfirmed = true,
+                SecurityStamp = "fafgsddggsafwefaggb",
+                //Patients = new List<Patient>() { patient3 }
+                comment = "djesi"
+            };
+
+
             context.Users.AddOrUpdate(dentist);
             context.Users.AddOrUpdate(dentist2);
             context.Users.AddOrUpdate(patient);
             context.Users.AddOrUpdate(patient2);
             context.Users.AddOrUpdate(patient3);
+            context.Users.AddOrUpdate(admin);
             
             //Assign Dentist role between two functions "SaveChanges()" in order to make it work
             context.SaveChanges();
@@ -387,6 +412,18 @@ namespace WebApplication1.Migrations
             var userStore = new UserStore<Dentist>(context);
             var userManager = new UserManager<Dentist>(userStore);
             userManager.AddToRole(dentist.Id, "Dentist");
+
+            var userStore2 = new UserStore<Patient>(context);
+            var userManager2 = new UserManager<Patient>(userStore2);
+
+            var userStore3 = new UserStore<Admin>(context);
+            var userManager3 = new UserManager<Admin>(userStore3);
+
+            userManager2.AddToRole(patient.Id, "Patient");
+            userManager2.AddToRole(patient2.Id, "Patient");
+            userManager2.AddToRole(patient3.Id, "Patient");
+            userManager3.AddToRole(admin.Id, "Admin");
+
 
             context.SaveChanges();
         }

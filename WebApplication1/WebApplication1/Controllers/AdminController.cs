@@ -11,6 +11,7 @@ using WebApplication1.ViewModels.Dentist;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize (Roles = Role.Admin)]
     public class AdminController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -45,7 +46,7 @@ namespace WebApplication1.Controllers
             }
             return View(admin);
         }
-
+        
         // GET: Admin/Create
         public ActionResult Create()
         {
@@ -135,7 +136,7 @@ namespace WebApplication1.Controllers
             base.Dispose(disposing);
         }
 
-        public ActionResult GetDentist(string id)
+        public ActionResult GetDentist()
         {
             var query = db.Dentists;
             return View(query);
