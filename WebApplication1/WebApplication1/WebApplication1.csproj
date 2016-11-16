@@ -773,6 +773,10 @@
     <Content Include="Views\Admin\GetDentist.cshtml" />
     <Content Include="Views\Patient\Index.cshtml" />
     <Content Include="Views\Patient\FindDoctor.cshtml" />
+    <Content Include="Views\Dentist\Index.cshtml" />
+    <Content Include="Views\Dentist\MySchedule.cshtml" />
+    <Content Include="Views\Patient\ArrangeAppointment.cshtml" />
+    <Content Include="Views\Patient\MyDentist.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

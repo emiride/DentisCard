@@ -55,11 +55,35 @@ namespace WebApplication1.Controllers
             }
         }
 
-        // GET: Dentist
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        // GET: Dentist         Ti si ovaj dio koda izbrisao pa da ja sad ne trazim gdje si ga stavio i kako ja sam ga vratio 
+        //dok ne proradi pa ti onda mjenjaj poslije.
         [Authorize (Roles = Role.Dentist)]
         public ActionResult MyPatients()
         {
-            
+            var dentistID = User.Identity.GetUserId();
+            List<Patient> patientList = new List<Patient>();
+
+            var patients = db.Patients;
+            foreach (var patient in patients)
+            {
+                if (patient.DentistId == dentistID)
+                {
+                    patientList.Add(patient);
+                }
+            }
+
+            return View(patientList);
+        }
+
+
+        [Authorize(Roles = Role.Dentist)]
+        public ActionResult MySchedule()
+        {
             return View();
         }
 
