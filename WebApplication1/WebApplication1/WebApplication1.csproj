@@ -221,6 +221,7 @@
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Tooth.cs" />
+    <Compile Include="Services\PatientService.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Dentist.cs" />
@@ -639,7 +640,7 @@
     <Content Include="Views\Dentist\Delete.cshtml" />
     <Content Include="Views\Dentist\Details.cshtml" />
     <Content Include="Views\Dentist\Edit.cshtml" />
-    <Content Include="Views\Dentist\Index.cshtml" />
+    <Content Include="Views\Dentist\MyPatients.cshtml" />
     <Content Include="Views\Dentist\Register.cshtml" />
     <Content Include="Scripts\kendo\jquery.min.map" />
     <Content Include="Scripts\kendo\kendo.all.min.js.map" />

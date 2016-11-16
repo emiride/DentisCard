@@ -1,14 +1,13 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
-using Microsoft.AspNet.Identity;
-using System.Collections.Generic;
-using System.Data.Entity;
+using System;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
-using System.Web.Http.Description;
 using WebApplication1.Models;
+using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
@@ -16,139 +15,58 @@ namespace WebApplication1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        
+        private PatientService service;
 
-        // GET: api/Patients
-        private IEnumerable<PatientDTO> Patients()
+        public PatientsController()
         {
-            var dentistId = User.Identity.GetUserId();
-            var patients = from p in db.Patients
-                           where p.DentistId == dentistId
-                select new PatientDTO
-                {
-                    Id = p.Id,
-                    FirstName = p.FirstName,
-                    LastName = p.LastName
-                    
-                };
-
-            return patients.ToList();
+            service = new PatientService(db);
         }
 
         public DataSourceResult Get([System.Web.Http.ModelBinding.ModelBinder(typeof(WebApiDataSourceRequestModelBinder))]DataSourceRequest request)
         {
-            var result = Patients().ToDataSourceResult(request);
-            return result;
+            return service.GetAllMyPatients().ToDataSourceResult(request);
         }
 
-
-
-        // GET: api/Patients/5
-        [ResponseType(typeof(Patient))]
-        public IHttpActionResult GetPatient(string id)
+        public HttpResponseMessage Post(Patient patient)
         {
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
-            }
+                service.Create(patient);
 
-            return Ok(patient);
+                var response = Request.CreateResponse(HttpStatusCode.Created, new DataSourceResult { Data = new[] { patient }, Total = 1 });
+                response.Headers.Location = new Uri(Url.Link("DefaultApi", new { id = patient.Id }));
+                return response;
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage);
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest, errors);
+            }
         }
 
-        // PUT: api/Patients/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutPatient(string id, Patient patient)
+        public HttpResponseMessage Put(string id, Patient patient)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid && id == patient.Id)
             {
-                return BadRequest(ModelState);
-            }
-
-            if (id != patient.Id)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(patient).State = EntityState.Modified;
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PatientExists(id))
+                try
                 {
-                    return NotFound();
+                    service.Update(id, patient);
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
-            }
 
-            return StatusCode(HttpStatusCode.NoContent);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            else
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors).Select(error => error.ErrorMessage);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, errors);
+            }
         }
 
-        // POST: api/Patients
-        [ResponseType(typeof(Patient))]
-        public IHttpActionResult PostPatient(Patient patient)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
-            db.Patients.Add(patient);
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (PatientExists(patient.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return CreatedAtRoute("DefaultApi", new { id = patient.Id }, patient);
-        }
-
-        // DELETE: api/Patients/5
-        [ResponseType(typeof(Patient))]
-        public IHttpActionResult DeletePatient(string id)
-        {
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
-            {
-                return NotFound();
-            }
-
-            db.Patients.Remove(patient);
-            db.SaveChanges();
-
-            return Ok(patient);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool PatientExists(string id)
-        {
-            return db.Patients.Count(e => e.Id == id) > 0;
-        }
     }
 }

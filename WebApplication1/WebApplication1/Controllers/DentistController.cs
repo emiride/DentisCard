@@ -57,22 +57,10 @@ namespace WebApplication1.Controllers
 
         // GET: Dentist
         [Authorize (Roles = Role.Dentist)]
-        public ActionResult Index()
+        public ActionResult MyPatients()
         {
-
-            var dentistID = User.Identity.GetUserId();
-            List<Patient> patientList = new List<Patient>();
-          
-            var patients = db.Patients;
-            foreach (var patient in patients)
-            {
-                if (patient.DentistId == dentistID)
-                {
-                    patientList.Add(patient);
-                }
-            }
             
-            return View(patientList);
+            return View();
         }
 
         public ActionResult PatientRead([DataSourceRequest] DataSourceRequest request)

@@ -1,9 +1,5 @@
-﻿@using Kendo.Mvc
-@using Kendo.Mvc.UI
+﻿@using Kendo.Mvc.UI
 @using WebApplication1.Models
-@*@model IEnumerable<Patient>*@
-
-
 @{
     ViewBag.Title = "Index";
 }
@@ -18,41 +14,44 @@
         .Name("grid")
         .Columns(columns =>
         {
-            columns.Bound(c => c.Id);
             columns.Bound(c => c.FirstName);
             columns.Bound(c => c.LastName);
+            columns.Bound(c => c.BirthDate).Format("{0:d}");
+            columns.Bound(c => c.DateCreated).Format("{0:d}");
+            columns.Command(c => { c.Edit(); });
         })
         .HtmlAttributes(new { style = "height: 550px;" })
         .Scrollable()
         .Groupable()
         .Sortable()
         //.ClientDetailTemplateId("template")
-        .Pageable(pageable => pageable
-            .Refresh(true)
-            .PageSizes(true)
-            .ButtonCount(5))
+        .Pageable(pageable => pageable.Refresh(true).PageSizes(true).ButtonCount(5))
+        .Editable(editable => editable.Mode(GridEditMode.InLine))
         .DataSource(dataSource => dataSource
             .WebApi()
             .Model(model =>
             {
                 model.Id(p => p.Id);
-                
+
             })
-            .Events(events => events.Error("error_handler"))
+            .Events(events => events.Error("error_handler") )
             .Read(r => r.Url(Url.HttpRouteUrl("DefaultApi", new {controller = "Patients"})))
+            .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Patients" })))
+            .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Patients", id = "{0}"} )))
+
         )
-        //.Events(events => events.DataBound("dataBound"))
+
 
 )
 
 <script>
-function error_handler(e) {
-    var errors = $.parseJSON(e.xhr.responseText);
+    function error_handler(e) {
+        var errors = $.parseJSON(e.xhr.responseText);
 
-    if (errors) {
-        alert("Errors:\n" + errors.join("\n"));
+        if (errors) {
+            alert("Errors:\n" + errors.join("\n"));
+        }
     }
-}
 </script>
 
 @*<script id="template" type="text/kendo-tmpl">
