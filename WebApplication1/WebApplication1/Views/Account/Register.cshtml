@@ -1,41 +1,69 @@
 ﻿@model WebApplication1.ViewModels.Account.RegisterViewModel
 @{
-    ViewBag.Title = "Register";
+    ViewBag.Title = "Register as a dentist";
 }
 
 <h2>@ViewBag.Title.</h2>
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    <h4>Create a new account.</h4>
-    <hr />
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <div class="form-group">
-        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-        <div class="col-md-10">
-            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Register" />
-        </div>
-    </div>
+@* PART WITH SPECIAL CSS*@
+@section css {
+    <link href="@Url.Content("~/Content/registercss/register.css")" rel="stylesheet" />
 }
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Login Form</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <div class="join">Join Today</div>
+        <div class="lock"></div>
+        <div class="clr"></div>
+        <div class="login-options">Choose on of the following sign up methods.</div>
+        <a class="facebook" href="#">Facebook</a>
+        <a class="google" href="#">Google+</a>
+        <div class="clr"><hr /></div>
+        <div class="mail-text">Or sign up using your email address.</div>
+        <div class="forms">
+            <form action="" method="get" name="register">
+                <input name="fullname" type="text" value="Enter your full name..." size="70" id="username" />
+                <input name="email" type="text" value="Enter your email address..." size="70" id="mail" />
+                <input name="password" type="password" value="Enter a password..." size="70" id="password" />
+            </form>
+        </div>
+        <a class="create-acc" href="#">Create My Account</a>
+    </div>
+</body>
+
+    @*@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            <h4>Create a new dentist account.</h4>
+            <hr />
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" class="btn btn-default" value="Register" />
+                </div>
+            </div>
+        }*@
+

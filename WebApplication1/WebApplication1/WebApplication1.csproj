@@ -264,6 +264,7 @@
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.theme.css" />
     <Content Include="Content\css\preload.css" />
+    <Content Include="Content\registercss\register.css" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\YTPlayer.css" />
