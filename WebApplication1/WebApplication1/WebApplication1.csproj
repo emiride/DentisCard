@@ -258,8 +258,8 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\CustomLogin.css" />
     <Content Include="Content\css\demo.css" />
-    <Content Include="Content\css\font-awesome.min.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\owl.carousel.css" />
     <Content Include="Content\css\owl.theme.css" />
@@ -267,6 +267,8 @@
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\YTPlayer.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\Images\download_bg.jpg" />
     <Content Include="Content\Images\feature_bg.jpg" />
     <Content Include="Content\Images\footer_bg.jpg" />
@@ -286,6 +288,7 @@
     <Content Include="Content\Images\screenshot.jpg" />
     <Content Include="Content\Images\subscription_bg.jpg" />
     <Content Include="Content\Images\thumb-1.png" />
+    <Content Include="Content\Images\tooth.jpg" />
     <Content Include="Content\Images\transparent-bg.png" />
     <Content Include="Content\Images\ui.totop.png" />
     <Content Include="Content\Images\video_bg.jpg" />
@@ -385,6 +388,7 @@
     <Content Include="Content\kendo\kendo.uniform.mobile.min.css" />
     <Content Include="Dependencies\Kendo.Mvc.dll" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -465,6 +469,11 @@
     <Content Include="Content\kendo\kendo.silver.mobile.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.min.css.map" />
     <Content Include="Content\kendo\kendo.uniform.mobile.min.css.map" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -622,7 +631,6 @@
     <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
     <Content Include="Views\Account\ForgotPassword.cshtml" />
     <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
@@ -777,6 +785,7 @@
     <Content Include="Views\Dentist\MySchedule.cshtml" />
     <Content Include="Views\Patient\ArrangeAppointment.cshtml" />
     <Content Include="Views\Patient\MyDentist.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
