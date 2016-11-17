@@ -234,7 +234,7 @@ namespace WebApplication1.Migrations
             var patient = new Patient
             {
 
-                UserName = "omer.ahmetagic@gmail.ocami",
+                UserName = "Omeraga",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 FirstName = "Omer",
                 LastName = "Ahmetagic",
@@ -280,7 +280,7 @@ namespace WebApplication1.Migrations
             var patient2 = new Patient
             {
 
-                UserName = "jusufk12@gmail.com",
+                UserName = "Jusufaga",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 FirstName = "Jusuf",
                 LastName = "Koric",
@@ -326,7 +326,7 @@ namespace WebApplication1.Migrations
             var patient3 = new Patient
             {
 
-                UserName = "syusuf@gmail.com",
+                UserName = "Sexy Yusuf",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 FirstName = "Sami",
                 LastName = "Yusuf",
@@ -348,7 +348,7 @@ namespace WebApplication1.Migrations
             {
                 FirstName = "Emir",
                 LastName = "Hodzic",
-                UserName = "emir.hodzich@gmail.com",
+                UserName = "Emiraga",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 DateOfBirth = new DateTime(1992, 3, 20),
                 EmploymentStatus = EmploymentStatus.Employed,
@@ -365,7 +365,7 @@ namespace WebApplication1.Migrations
             {
                 FirstName = "Damir",
                 LastName = "Metiljevic",
-                UserName = "damir.metiljevic@gmail.com",
+                UserName = "Damir92",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 DateOfBirth = new DateTime(1992, 3, 20),
                 EmploymentStatus = EmploymentStatus.Unemployed,
@@ -383,7 +383,7 @@ namespace WebApplication1.Migrations
             {
                 FirstName = "Admin",
                 LastName = "Adminic",
-                UserName = "admin@gmail.com",
+                UserName = "Admin Master",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 DateOfBirth = new DateTime(1992, 3, 20),
                 EmploymentStatus = EmploymentStatus.Unemployed,
