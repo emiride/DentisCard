@@ -59,6 +59,10 @@ html {
 
 body {
   margin: 0;
+  height:100%;
+  background: url(images/plavo.jpg) no-repeat fixed;
+  background-size: cover;
+   background-repeat: no-repeat;
 }
 
 a:focus {
@@ -314,7 +318,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.428571429;
-  color: #333333;
+  color: #00055e;
   background-color: #ffffff;
 }
 
@@ -4501,31 +4505,31 @@ textarea.input-group-sm > .input-group-btn > .btn {
 }
 
 .navbar-inverse {
-  background-color: #222222;
-  border-color: #080808;
+  background-color: #335382;
+  border-color: #428bca;
 }
 
 .navbar-inverse .navbar-brand {
-  color: #999999;
+  color: #fff;
 }
 
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #ffffff;
+  color: #999;
   background-color: transparent;
 }
 
 .navbar-inverse .navbar-text {
-  color: #999999;
+  color: #fff;
 }
 
 .navbar-inverse .navbar-nav > li > a {
-  color: #999999;
+  color: #fff;
 }
 
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #ffffff;
+  color: #999;
   background-color: transparent;
 }
 

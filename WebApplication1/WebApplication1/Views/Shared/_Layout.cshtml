@@ -24,7 +24,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <!-- <li>@Html.ActionLink("Home", "Index", "Home")</li> --> <!--DentisC<d>ard is serving as a Home link-->
                     
                     @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
                     {
@@ -64,7 +64,7 @@
         </footer>
     </div>
 
-    
+   </div>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
