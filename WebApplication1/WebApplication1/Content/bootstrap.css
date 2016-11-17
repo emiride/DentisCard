@@ -1485,7 +1485,7 @@ th {
 
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-  background-color: #f9f9f9;
+  background: #b9b1b1;
 }
 
 .table-hover > tbody > tr:hover > td,
