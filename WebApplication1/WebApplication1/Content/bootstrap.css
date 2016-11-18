@@ -1485,8 +1485,14 @@ th {
 
 .table-striped > tbody > tr:nth-child(odd) > td,
 .table-striped > tbody > tr:nth-child(odd) > th {
-  background: #b9b1b1;
+  background: #fff;
 }
+
+.table-striped > tbody > tr:nth-child(even) > td,
+.table-striped > tbody > tr:nth-child(even) > th {
+  background: #e8e8e8;
+}
+
 
 .table-hover > tbody > tr:hover > td,
 .table-hover > tbody > tr:hover > th {
