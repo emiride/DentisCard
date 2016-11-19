@@ -1436,7 +1436,8 @@ th {
 
 .table thead > tr > th {
   vertical-align: bottom;
-  border-bottom: 2px solid #dddddd;
+  /*border-bottom: 2px solid #dddddd;*/
+  background-color: #aaa6ff
 }
 
 .table caption + thead tr:first-child th,

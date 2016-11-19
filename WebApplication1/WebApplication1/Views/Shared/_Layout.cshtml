@@ -44,10 +44,10 @@
                     @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                     {
                         <li class="dropdown">
-                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Click me<b class="caret"></b></a>
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Users management<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li>@Html.ActionLink("Get Dentist", "GetDentist", "Admin")</li>
-                                <li>@Html.ActionLink("Details", "Details", "Admin")</li>
+                                <li>@Html.ActionLink("List Dentist", "GetDentist", "Admin")</li>
+                                <li>@Html.ActionLink("List Patients ", "GetPatients", "Admin")</li>
                             </ul>
                         </li>
                                        

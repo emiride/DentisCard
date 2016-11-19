@@ -50,12 +50,16 @@ namespace WebApplication1.Controllers
             }
         }
 
-        //
+        // Logged user cannot access login page
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            ViewBag.ReturnUrl = returnUrl;
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            ViewBag.ReturnUrl = returnUrl ?? Url.Action("Index", "Home");
             return View();
         }
 

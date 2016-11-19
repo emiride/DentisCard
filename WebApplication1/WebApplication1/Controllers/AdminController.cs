@@ -141,5 +141,13 @@ namespace WebApplication1.Controllers
             var query = db.Dentists;
             return View(query);
         }
+
+        public ActionResult GetPatients()
+        {
+            var query = db.Patients;
+            return View(query);
+        }
+        
+
     }
 }
