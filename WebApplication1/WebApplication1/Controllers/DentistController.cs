@@ -14,6 +14,7 @@ using WebApplication1.ViewModels.Dentist;
 
 namespace WebApplication1.Controllers
 {
+    [Authorize]
     public class DentistController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -140,17 +141,26 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place")] Dentist dentist)
+        public ActionResult Create([Bind(Include = "FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,PhoneNumber")] Patient patient)
         {
+            var passwordHasher = new PasswordHasher();
+            var dentistId = User.Identity.GetUserId();
             if (ModelState.IsValid)
             {
-                db.Dentists.Add(dentist);
+                patient.Id = Guid.NewGuid().ToString();
+                patient.PasswordHash = passwordHasher.HashPassword("P@ssw0rd");
+                patient.UserName = patient.Email;
+                patient.DentistId = dentistId;
+                db.Patients.Add(patient);
                 db.SaveChanges();
+                UserManager.AddToRole(patient.Id, Role.Patient);
+                db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", dentist.Id);
-            return View(dentist);
+            //ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", dentist.Id);
+            return View(patient);
         }
 
         // GET: Dentist/Edit/5
@@ -160,13 +170,13 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dentist dentist = db.Dentists.Find(id);
-            if (dentist == null)
+            Patient patient = db.Patients.Find(id);
+            if (patient == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", dentist.Id);
-            return View(dentist);
+            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", patient.Id);
+            return View(patient);
         }
 
         // POST: Dentist/Edit/5
@@ -174,17 +184,17 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place")] Dentist dentist)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place")] Patient patient)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(dentist).State = EntityState.Modified;
+                db.Entry(patient).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", dentist.Id);
-            return View(dentist);
-        }
+            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", patient.Id);
+            return View(patient);
+        }   
 
         // GET: Dentist/Delete/5
         public ActionResult Delete(string id)
@@ -193,12 +203,12 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dentist dentist = db.Dentists.Find(id);
-            if (dentist == null)
+            Patient patient = db.Patients.Find(id);
+            if (patient == null)
             {
                 return HttpNotFound();
             }
-            return View(dentist);
+            return View(patient);
         }
 
         // POST: Dentist/Delete/5
