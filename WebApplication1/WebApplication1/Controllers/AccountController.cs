@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -55,7 +56,7 @@ namespace WebApplication1.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.Identity.IsAuthenticated) 
             {
                 return RedirectToAction("Index", "Home");
             }
@@ -80,9 +81,30 @@ namespace WebApplication1.Controllers
             var user = UserManager.FindByEmail(model.Email);
             var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
-            {
+            {//kaze da je objek null, ja preptppostavljam da je to zato sto je ova metoda asinhrona
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //oke oke kontam, oni tamo mozda nisu imali pa su morali, let's try
+                    var roles = UserManager.GetRoles(user.Id);
+                    
+
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else if (roles.Contains("Dentist"))
+                    {
+                        return RedirectToAction("Index", "Dentist");
+                    }
+
+                    else if (roles.Contains("Patient"))
+                    {
+                        return RedirectToAction("Index", "Patient");
+                    }
+                    else
+                    {
+                        return RedirectToLocal(returnUrl);
+                    }
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -167,7 +189,7 @@ namespace WebApplication1.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Patient");
                 }
                 AddErrors(result);
             }
@@ -396,7 +418,7 @@ namespace WebApplication1.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("LandingPage", "Home");
         }
 
         //

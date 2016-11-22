@@ -1,8 +1,4 @@
 ﻿@model WebApplication1.ViewModels.Account.RegisterViewModel
-
-
-
-
 <html>
 <head>
     <link href="~/Content/css/CustomLogin.css" rel="stylesheet" />
@@ -39,6 +35,7 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 <div class="main">
+
                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder="Email" })
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder="Password" })
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
