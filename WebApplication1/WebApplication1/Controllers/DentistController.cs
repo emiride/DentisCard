@@ -11,6 +11,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.ViewModels.Dentist;
+using System.Linq;
 
 namespace WebApplication1.Controllers
 {
@@ -64,7 +65,7 @@ namespace WebApplication1.Controllers
         // GET: Dentist         Ti si ovaj dio koda izbrisao pa da ja sad ne trazim gdje si ga stavio i kako ja sam ga vratio 
         //dok ne proradi pa ti onda mjenjaj poslije.
         [Authorize (Roles = Role.Dentist)]
-        public ActionResult MyPatients()
+        public ActionResult MyPatients(string sortOrder, string searchString)
         {
             var dentistID = User.Identity.GetUserId();
             List<Patient> patientList = new List<Patient>();
@@ -78,7 +79,47 @@ namespace WebApplication1.Controllers
                 }
             }
 
-            return View(patientList);
+            //Sorting
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LNameSortParm = String.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.BDateSortParm = sortOrder == "BDate" ? "Bdate_desc" : "BDate";
+
+            var patientOrder = from s in patientList
+                               select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                patientOrder = patientOrder.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.Contains(searchString.ToLower()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.FirstName);
+                    break;
+                case "LName":
+                    patientOrder = patientOrder.OrderBy(s => s.LastName);
+                    break;
+                case "LName_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    patientOrder = patientOrder.OrderBy(s => s.DateCreated);
+                    break;
+                case "date_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.DateCreated);
+                    break;
+                case "BDate":
+                    patientOrder = patientOrder.OrderBy(s => s.DateOfBirth);
+                    break;
+                case "Bdate_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.DateOfBirth);
+                    break;
+                default:
+                    patientOrder = patientOrder.OrderBy(s => s.FirstName);
+                    break;
+            }
+
+            return View(patientOrder);
         }
 
 

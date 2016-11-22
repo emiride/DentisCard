@@ -8,27 +8,59 @@
 
 <h2>My patients</h2>
 
-<p>
+<p style="text-decoration:underline">
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (@Html.BeginForm("MyPatients", "Dentist", FormMethod.Get))
+{
+
+
+    @*<input type="text" name="search" placeholder="Search...">        ,null, new { @class = "tandara" }
+    <div class="form-group has-feedback">
+        <input type="text" class="form-control" id="inputSuccess2" />
+        <span class="glyphicon glyphicon-search form-control-feedback"></span>
+        @Html.TextBox("searchString",null, new {@type="text",@class="form-control",@id="inpuSuccess2"})
+    </div>*@
+
+    @Html.TextBox("searchString");          @*Right way of input for search*@
+
+    @*<div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div id="custom-search-input">
+                    <div class="input-group">
+                        <input type="text" class="form-control input" placeholder="Buscar" />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+}
+
 
 <div style="overflow-x:auto;">
     <table class="table">
         <thead class="thead-inverse">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    @Html.ActionLink("First Name", "MyPatients", new { sortOrder = ViewBag.NameSortParm })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LastName)
+                    @Html.ActionLink("Last Name", "MyPatients", new { sortOrder = ViewBag.LNameSortParm })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                    @Html.ActionLink("Date of birth", "MyPatients", new { sortOrder = ViewBag.BDateSortParm })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
+                    @Html.ActionLink("Date Created", "MyPatients", new { sortOrder = ViewBag.DateSortParm })
                 </th>
-                <th></th>
+                <th style="color:#335381"></th>
             </tr>
         </thead>
 
@@ -47,7 +79,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.DateCreated)
                 </td>
-                <td>
+                <td style="color:#335381">
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
@@ -62,90 +94,90 @@
 
 
 @*@(Html.Kendo().Grid<PatientDTO>()
-        .Name("grid")
-        .Columns(columns =>
-        {
-            columns.Bound(c => c.FirstName);
-            columns.Bound(c => c.LastName);
-            columns.Bound(c => c.BirthDate).Format("{0:d}");
-            columns.Bound(c => c.DateCreated).Format("{0:d}");
-            columns.Command(c => { c.Edit(); });
-        })
-        .HtmlAttributes(new { style = "height: 550px;" })
-        .Scrollable()
-        .Groupable()
-        .Sortable()
-        //.ClientDetailTemplateId("template")
-        .Pageable(pageable => pageable.Refresh(true).PageSizes(true).ButtonCount(5))
-        .Editable(editable => editable.Mode(GridEditMode.InLine))
-        .DataSource(dataSource => dataSource
-            .WebApi()
-            .Model(model =>
+            .Name("grid")
+            .Columns(columns =>
             {
-                model.Id(p => p.Id);
-
+                columns.Bound(c => c.FirstName);
+                columns.Bound(c => c.LastName);
+                columns.Bound(c => c.BirthDate).Format("{0:d}");
+                columns.Bound(c => c.DateCreated).Format("{0:d}");
+                columns.Command(c => { c.Edit(); });
             })
-            .Events(events => events.Error("error_handler") )
-            .Read(r => r.Url(Url.HttpRouteUrl("DefaultApi", new {controller = "Patients"})))
-            .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Patients" })))
-            .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Patients", id = "{0}"} )))
+            .HtmlAttributes(new { style = "height: 550px;" })
+            .Scrollable()
+            .Groupable()
+            .Sortable()
+            //.ClientDetailTemplateId("template")
+            .Pageable(pageable => pageable.Refresh(true).PageSizes(true).ButtonCount(5))
+            .Editable(editable => editable.Mode(GridEditMode.InLine))
+            .DataSource(dataSource => dataSource
+                .WebApi()
+                .Model(model =>
+                {
+                    model.Id(p => p.Id);
 
-        )
+                })
+                .Events(events => events.Error("error_handler") )
+                .Read(r => r.Url(Url.HttpRouteUrl("DefaultApi", new {controller = "Patients"})))
+                .Create(create => create.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Patients" })))
+                .Update(update => update.Url(Url.HttpRouteUrl("DefaultApi", new { controller = "Patients", id = "{0}"} )))
+
+            )
 
 
-)
+    )
 
-<script>
-    function error_handler(e) {
-        var errors = $.parseJSON(e.xhr.responseText);
+    <script>
+        function error_handler(e) {
+            var errors = $.parseJSON(e.xhr.responseText);
 
-        if (errors) {
-            alert("Errors:\n" + errors.join("\n"));
+            if (errors) {
+                alert("Errors:\n" + errors.join("\n"));
+            }
         }
-    }
-</script>*@
+    </script>*@
 
 @*<script id="template" type="text/kendo-tmpl">
-    @(Html.Kendo().TabStrip()
-            .Name("tabStrip_#=Id#")
-            .SelectedIndex(0)
-            .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
-            .Items(items =>
-            {
-                items.Add().Text("Orders").Content(@<text>
-                     @(Html.Kendo().Grid<Patient>()
-                            .Name("grid_#=Id#") // template expression, to be evaluated in the master context
-                            .Columns(columns =>
-                            {
-                                columns.Bound(o => o.FirstName).Title("ID").Width(56);
-                                columns.Bound(o => o.LastName).Width(110);
-                                columns.Bound(o => o.Address);//.ClientTemplate("\\#= ShipAddress \\#"); // escaped template expression, to be evaluated in the child/detail context
-                                columns.Bound(o => o.Email).Width(190);
-                            })
-                            .DataSource(dataSource => dataSource
-                                .Ajax()
-                                .PageSize(5)
-                                .Read(read => read.Action("PatientRead", "Dentist", new {Id = "#Id#" }))
-                            )
-                            .Pageable()
-                            .Sortable()
-                            .ToClientTemplate())
-                    </text>
-                    );
-                items.Add().Text("Contact Information").Content(
-                    "<div class='patient-details'>" +
-                        "<ul>" +
-                            "<li><label>First Name:</label>#= FirstName #</li>" +
-                            "<li><label>Last Name:</label>#= LastName #</li>" +
-                            "<li><label>Address:</label>#= Address #</li>" +
-                            "<li><label>Email:</label>#= Email #</li>" +
-                        "</ul>" +
-                    "</div>"
+        @(Html.Kendo().TabStrip()
+                .Name("tabStrip_#=Id#")
+                .SelectedIndex(0)
+                .Animation(animation => animation.Open(open => open.Fade(FadeDirection.In)))
+                .Items(items =>
+                {
+                    items.Add().Text("Orders").Content(@<text>
+                         @(Html.Kendo().Grid<Patient>()
+                                .Name("grid_#=Id#") // template expression, to be evaluated in the master context
+                                .Columns(columns =>
+                                {
+                                    columns.Bound(o => o.FirstName).Title("ID").Width(56);
+                                    columns.Bound(o => o.LastName).Width(110);
+                                    columns.Bound(o => o.Address);//.ClientTemplate("\\#= ShipAddress \\#"); // escaped template expression, to be evaluated in the child/detail context
+                                    columns.Bound(o => o.Email).Width(190);
+                                })
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .PageSize(5)
+                                    .Read(read => read.Action("PatientRead", "Dentist", new {Id = "#Id#" }))
+                                )
+                                .Pageable()
+                                .Sortable()
+                                .ToClientTemplate())
+                        </text>
+                        );
+                    items.Add().Text("Contact Information").Content(
+                        "<div class='patient-details'>" +
+                            "<ul>" +
+                                "<li><label>First Name:</label>#= FirstName #</li>" +
+                                "<li><label>Last Name:</label>#= LastName #</li>" +
+                                "<li><label>Address:</label>#= Address #</li>" +
+                                "<li><label>Email:</label>#= Email #</li>" +
+                            "</ul>" +
+                        "</div>"
 
-                    );
-            })
-            .ToClientTemplate())
-</script>*@
+                        );
+                })
+                .ToClientTemplate())
+    </script>*@
 
 
 
@@ -153,34 +185,34 @@
 
 
 @*<script>
-    function dataBound() {
-        this.expandRow(this.tbody.find("tr.k-master-row").first());
-    }
-</script>
+        function dataBound() {
+            this.expandRow(this.tbody.find("tr.k-master-row").first());
+        }
+    </script>
 
-<style>
-    .k-detail-cell .k-tabstrip .k-content {
-        padding: 0.2em;
-    }
-
-    .patient-details ul {
-        list-style: none;
-        font-style: italic;
-        margin: 15px;
-        padding: 0;
-    }
-
-        .patient-details ul li {
-            margin: 0;
-            line-height: 1.7em;
+    <style>
+        .k-detail-cell .k-tabstrip .k-content {
+            padding: 0.2em;
         }
 
-    .patient-details label {
-        display: inline-block;
-        width: 90px;
-        padding-right: 10px;
-        text-align: right;
-        font-style: normal;
-        font-weight: bold;
-    }
-</style>*@
+        .patient-details ul {
+            list-style: none;
+            font-style: italic;
+            margin: 15px;
+            padding: 0;
+        }
+
+            .patient-details ul li {
+                margin: 0;
+                line-height: 1.7em;
+            }
+
+        .patient-details label {
+            display: inline-block;
+            width: 90px;
+            padding-right: 10px;
+            text-align: right;
+            font-style: normal;
+            font-weight: bold;
+        }
+    </style>*@

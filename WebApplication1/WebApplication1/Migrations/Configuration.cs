@@ -412,12 +412,14 @@ namespace WebApplication1.Migrations
             var userStore = new UserStore<Dentist>(context);
             var userManager = new UserManager<Dentist>(userStore);
             userManager.AddToRole(dentist.Id, "Dentist");
+            userManager.AddToRole(dentist2.Id, "Dentist");
 
             var userStore2 = new UserStore<Patient>(context);
             var userManager2 = new UserManager<Patient>(userStore2);
 
             var userStore3 = new UserStore<Admin>(context);
             var userManager3 = new UserManager<Admin>(userStore3);
+
 
             userManager2.AddToRole(patient.Id, "Patient");
             userManager2.AddToRole(patient2.Id, "Patient");

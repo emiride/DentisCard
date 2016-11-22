@@ -32,6 +32,7 @@ hgroup,
 main,
 nav,
 section,
+
 summary {
   display: block;
 }
@@ -200,6 +201,58 @@ input[type="radio"] {
   box-sizing: border-box;
 }
 
+/*.tandara {
+    width: 130px;
+    height: 40px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+.tandara:focus {
+    width: 100%;
+}*/
+
+               /*#custom-search-input{
+                padding: 1px;
+                border: solid 1px #E4E4E4;
+                border-radius: 6px;
+                background-color: #fff;
+            }
+
+            #custom-search-input input{
+                border: 0;
+                box-shadow: none;
+            }
+
+            #custom-search-input button{
+                margin: 2px 0 0 0;
+                background: none;
+                box-shadow: none;
+                border: 0;
+                color: #666666;
+                padding: 0 8px 0 10px;
+                border-left: solid 1px #ccc;
+            }
+
+            #custom-search-input button:hover{
+                border: 0;
+                box-shadow: none;
+                border-left: solid 1px #ccc;
+            }
+
+            #custom-search-input .glyphicon-search{
+                font-size: 23px;
+            }*/
+
 input[type="search"] {
   -webkit-box-sizing: content-box;
      -moz-box-sizing: content-box;
@@ -339,13 +392,13 @@ textarea {
 }
 
 a {
-  color: #428bca;
+  color: #000;
   text-decoration: none;
 }
 
 a:hover,
 a:focus {
-  color: #2a6496;
+  color: #0f33bf;
   text-decoration: underline;
 }
 
@@ -1437,7 +1490,7 @@ th {
 .table thead > tr > th {
   vertical-align: bottom;
   /*border-bottom: 2px solid #dddddd;*/
-  background-color: #aaa6ff
+  /*background-color: #335381;*/
 }
 
 .table caption + thead tr:first-child th,
