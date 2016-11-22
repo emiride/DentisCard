@@ -129,6 +129,19 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize(Roles = Role.Dentist)]
+        public ActionResult Notes()
+        {
+            return View();
+        }
+
+
+        [Authorize(Roles = Role.Dentist)]
+        public ActionResult Draft()
+        {
+            return View();
+        }
+
         public ActionResult PatientRead([DataSourceRequest] DataSourceRequest request)
         {
             var dentistId = User.Identity.GetUserId();
@@ -322,5 +335,6 @@ namespace WebApplication1.Controllers
             }
             base.Dispose(disposing);
         }
+
     }
 }
