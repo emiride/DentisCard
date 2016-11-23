@@ -25,15 +25,15 @@
                 </button>
                 @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
                 {
-                    @Html.ActionLink("DentisCard", "Index", "Dentist", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("DentisCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 @if (ViewContext.HttpContext.User.IsInRole("Patient"))
                 {
-                     @Html.ActionLink("DentisCard", "Index", "Patient", new { area = "" }, new { @class = "navbar-brand" })
+                     @Html.ActionLink("DentisCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                 {
-                     @Html.ActionLink("DentisCard", "Index", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                     @Html.ActionLink("DentisCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
                
             </div>
@@ -43,18 +43,21 @@
                     
                     @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
                     {
+                        <li>@Html.ActionLink("My Profile", "Index", "Dentist")</li>
                         <li>@Html.ActionLink("My Patients", "MyPatients", "Dentist")</li>
                         <li>@Html.ActionLink("My Schedule", "MySchedule", "Dentist")</li>
                     }
 
                     @if (ViewContext.HttpContext.User.IsInRole("Patient"))
                     {
+                        <li>@Html.ActionLink("My Profile", "Index", "Patient")</li>
                         <li>@Html.ActionLink("Arrange Appointment", "ArrangeAppointment", "Patient")</li>
                         <li>@Html.ActionLink("My Dentist", "MyDentist", "Patient")</li>
                     }
 
                     @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                     {
+                        <li>@Html.ActionLink("My Profile", "Index", "Admin")</li>
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Users management<b class="caret"></b></a>
                             <ul class="dropdown-menu">

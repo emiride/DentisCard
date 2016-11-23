@@ -221,7 +221,7 @@ input[type="radio"] {
     width: 100%;
 }*/
 
-               /*#custom-search-input{
+               #custom-search-input{
                 padding: 1px;
                 border: solid 1px #E4E4E4;
                 border-radius: 6px;
@@ -251,7 +251,7 @@ input[type="radio"] {
 
             #custom-search-input .glyphicon-search{
                 font-size: 23px;
-            }*/
+            }
 
 input[type="search"] {
   -webkit-box-sizing: content-box;

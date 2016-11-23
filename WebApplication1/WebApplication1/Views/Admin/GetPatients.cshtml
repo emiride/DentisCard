@@ -1,30 +1,53 @@
 ﻿@model IEnumerable<WebApplication1.Models.Patient>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "GetPatients";
 }
 
-<h2>Patients</h2>
+<h2>List Patients</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New Patient", "Create")
 </p>
+
+@using (@Html.BeginForm("GetPatients", "Admin", FormMethod.Get))
+{
+    @*HTML helper way of input for search
+        @Html.TextBox("searchString",null, new {id = "custom-search-input", @class = "form-control input"});*@
+
+    <div class="container" style="padding-left:0px; padding-right:0px">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="custom-search-input">
+                    <div class="input-group">
+                        <input type="text" id="searchString" name="searchString" class="form-control input" placeholder="Search first and last name..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
 <div style="overflow-x:auto;">
     <table class="table">
         <thead class="thead-inverse">
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
+                    @Html.ActionLink("First Name", "GetPatients", new { sortOrder = ViewBag.NameSortParm })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.LastName)
+                    @Html.ActionLink("Last Name", "GetPatients", new { sortOrder = ViewBag.LNameSortParm })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateOfBirth)
+                    @Html.ActionLink("Date of birth", "GetPatients", new { sortOrder = ViewBag.BDateSortParm })
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.DateCreated)
+                    @Html.ActionLink("Date Created", "GetPatients", new { sortOrder = ViewBag.DateSortParm })
                 </th>
                 <th></th>
             </tr>

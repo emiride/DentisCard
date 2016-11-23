@@ -62,8 +62,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
-        // GET: Dentist         Ti si ovaj dio koda izbrisao pa da ja sad ne trazim gdje si ga stavio i kako ja sam ga vratio 
-        //dok ne proradi pa ti onda mjenjaj poslije.
+        // GET: Patients
         [Authorize (Roles = Role.Dentist)]
         public ActionResult MyPatients(string sortOrder, string searchString)
         {
@@ -89,7 +88,7 @@ namespace WebApplication1.Controllers
                                select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                patientOrder = patientOrder.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.Contains(searchString.ToLower()));
+                patientOrder = patientOrder.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower()));
             }
             switch (sortOrder)
             {
