@@ -260,6 +260,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\CustomLeftNavbar.css" />
     <Content Include="Content\css\CustomLogin.css" />
+    <Content Include="Content\css\CustomProfile.css" />
     <Content Include="Content\css\demo.css" />
     <Content Include="Content\css\magnific-popup.css" />
     <Content Include="Content\css\owl.carousel.css" />
