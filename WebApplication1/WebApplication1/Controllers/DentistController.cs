@@ -5,17 +5,17 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.ViewModels.Dentist;
-using System.Linq;
 
 namespace WebApplication1.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = Role.Dentist)]
     public class DentistController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -63,16 +63,16 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Patients
-        [Authorize (Roles = Role.Dentist)]
+        
         public ActionResult MyPatients(string sortOrder, string searchString)
         {
-            var dentistID = User.Identity.GetUserId();
+            var dentistId = User.Identity.GetUserId();
             List<Patient> patientList = new List<Patient>();
 
             var patients = db.Patients;
             foreach (var patient in patients)
             {
-                if (patient.DentistId == dentistID)
+                if (patient.DentistId == dentistId)
                 {
                     patientList.Add(patient);
                 }
@@ -86,7 +86,7 @@ namespace WebApplication1.Controllers
 
             var patientOrder = from s in patientList
                                select s;
-            if (!String.IsNullOrEmpty(searchString))
+            if (!string.IsNullOrEmpty(searchString))
             {
                 patientOrder = patientOrder.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower()));
             }
@@ -121,21 +121,16 @@ namespace WebApplication1.Controllers
             return View(patientOrder);
         }
 
-
-        [Authorize(Roles = Role.Dentist)]
         public ActionResult MySchedule()
         {
             return View();
         }
 
-        [Authorize(Roles = Role.Dentist)]
         public ActionResult Notes()
         {
             return View();
         }
 
-
-        [Authorize(Roles = Role.Dentist)]
         public ActionResult Draft()
         {
             return View();
@@ -174,12 +169,12 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Dentist dentist = db.Dentists.Find(id);
-            if (dentist == null)
+            Patient patient = db.Patients.Find(id);
+            if (patient == null)
             {
                 return HttpNotFound();
             }
-            return View(dentist);
+            return View(patient);
         }
 
         // GET: Dentist/Create
@@ -209,7 +204,7 @@ namespace WebApplication1.Controllers
                 UserManager.AddToRole(patient.Id, Role.Patient);
                 db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("MyPatients");
             }
 
             //ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", dentist.Id);
@@ -269,10 +264,15 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Dentist dentist = db.Dentists.Find(id);
-            db.Dentists.Remove(dentist);
+            Patient patient = db.Patients.Find(id);
+            //var medicalHistory = db.MedicalHistories.Where(pid => pid.PatientId == id).ToList();
+
+            db.MedicalRecords.RemoveRange(patient.MedicalHistory.MedicalRecords);
+            db.MedicalHistories.Remove(patient.MedicalHistory);
+            db.Patients.Remove(patient);
+            
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyPatients");
         }
 
         [AllowAnonymous]

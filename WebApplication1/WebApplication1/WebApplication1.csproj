@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201611121956129_BirthDateNullable.Designer.cs">
       <DependentUpon>201611121956129_BirthDateNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611240927353_smallTinyChange.cs" />
+    <Compile Include="Migrations\201611240927353_smallTinyChange.Designer.cs">
+      <DependentUpon>201611240927353_smallTinyChange.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -831,6 +835,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611121956129_BirthDateNullable.resx">
       <DependentUpon>201611121956129_BirthDateNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611240927353_smallTinyChange.resx">
+      <DependentUpon>201611240927353_smallTinyChange.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

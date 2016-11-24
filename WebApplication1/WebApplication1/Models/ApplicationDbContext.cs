@@ -13,6 +13,8 @@ namespace WebApplication1.Models
         public DbSet<Patient> Patients { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<MedicalHistory> MedicalHistories { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
 
         public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
@@ -49,6 +51,6 @@ namespace WebApplication1.Models
             return result;
         }
 
-        public System.Data.Entity.DbSet<WebApplication1.Models.MedicalHistory> MedicalHistories { get; set; }
+        
     }
 }
