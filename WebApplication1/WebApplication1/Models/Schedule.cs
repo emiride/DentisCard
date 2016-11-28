@@ -8,6 +8,8 @@ namespace WebApplication1.Models
         [ForeignKey("Dentist")]
         public string Id { get; set; }
 
+        
+        public string DentistId { get; set; }
         //Relations
         public virtual Dentist Dentist { get; set; }
         public ICollection<Appointment> Appointments { get; set; }

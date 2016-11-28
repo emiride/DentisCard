@@ -195,6 +195,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\SchedulerController.cs" />
     <Compile Include="Enumerations\EmploymentStatus.cs" />
     <Compile Include="Enumerations\ToothPosition.cs" />
     <Compile Include="Enumerations\ToothState.cs" />
@@ -202,21 +203,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IModificationHistory.cs" />
-    <Compile Include="Migrations\201611111335565_InitialMigration.cs" />
-    <Compile Include="Migrations\201611111335565_InitialMigration.Designer.cs">
-      <DependentUpon>201611111335565_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611121444144_AdminAdded.cs" />
-    <Compile Include="Migrations\201611121444144_AdminAdded.Designer.cs">
-      <DependentUpon>201611121444144_AdminAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611121956129_BirthDateNullable.cs" />
-    <Compile Include="Migrations\201611121956129_BirthDateNullable.Designer.cs">
-      <DependentUpon>201611121956129_BirthDateNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201611240927353_smallTinyChange.cs" />
-    <Compile Include="Migrations\201611240927353_smallTinyChange.Designer.cs">
-      <DependentUpon>201611240927353_smallTinyChange.cs</DependentUpon>
+    <Compile Include="Migrations\201611281314112_InitialMigration.cs" />
+    <Compile Include="Migrations\201611281314112_InitialMigration.Designer.cs">
+      <DependentUpon>201611281314112_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -227,6 +216,7 @@
     <Compile Include="Models\Schedule.cs" />
     <Compile Include="Models\Tooth.cs" />
     <Compile Include="Services\PatientService.cs" />
+    <Compile Include="Services\SchedulerAppointmentService.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
     <Compile Include="Models\ApplicationDbContext.cs" />
     <Compile Include="Models\Dentist.cs" />
@@ -817,6 +807,7 @@
     <Folder Include="Content\kendo\Uniform\" />
     <Folder Include="Scripts\kendo\cultures\" />
     <Folder Include="Scripts\kendo\messages\" />
+    <Folder Include="Views\Scheduler\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -827,17 +818,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201611111335565_InitialMigration.resx">
-      <DependentUpon>201611111335565_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611121444144_AdminAdded.resx">
-      <DependentUpon>201611121444144_AdminAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611121956129_BirthDateNullable.resx">
-      <DependentUpon>201611121956129_BirthDateNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201611240927353_smallTinyChange.resx">
-      <DependentUpon>201611240927353_smallTinyChange.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611281314112_InitialMigration.resx">
+      <DependentUpon>201611281314112_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

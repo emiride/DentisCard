@@ -277,6 +277,17 @@ namespace WebApplication1.Migrations
                 Description = "Zalivena gornja desna petica",
                 Teeth = new List<Tooth>() { upRight2 }
             };
+
+            var appointment = new Appointment
+            {
+                PatientId = patient.Id,
+                Id = Guid.NewGuid().ToString(),
+                Description = "Probni appointment, vjerovatno ce ostati do kraja :)",
+                Title = "Proba",
+                Start = new DateTime(2016, 11, 29, 14, 0, 0),
+                End = new DateTime(2016, 11, 29, 15, 0, 0),
+            };
+
             var patient2 = new Patient
             {
 
@@ -292,9 +303,12 @@ namespace WebApplication1.Migrations
                 PhoneNumber = "062/064-064",
                 MedicalHistory = new MedicalHistory
                 {
+                    PatientId = patient.Id,
                     Note = "Patient's teeth are very good, but since he is awesome looking, he is ready to get married.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord11, medicalRecord12 }
-                }
+                },
+                Appointments = new List<Appointment>() { appointment }
+                
             };
 
             //samac
@@ -339,11 +353,13 @@ namespace WebApplication1.Migrations
                 PhoneNumber = "0699/064-064",
                 MedicalHistory = new MedicalHistory
                 {
+                    
                     Note = "Patient's teeth are excellent, he can perform good on stage.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord31 }
                 }
             };
 
+            
             var dentist = new Dentist
             {
                 FirstName = "Emir",
@@ -359,8 +375,15 @@ namespace WebApplication1.Migrations
                 DateCreated = DateTime.Now,
                 EmailConfirmed = true,
                 SecurityStamp = "fakjhdfiasndgsakjfalfjmsoa",
-                Patients = new List<Patient>() { patient, patient2 }
+                Patients = new List<Patient>() { patient, patient2 },
+                Schedule = new Schedule
+                {
+                    Appointments = new List<Appointment>() { appointment}
+                }
+                
             };
+            
+
             var dentist2 = new Dentist
             {
                 FirstName = "Damir",

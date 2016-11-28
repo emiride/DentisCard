@@ -15,6 +15,7 @@ namespace WebApplication1.Models
         public DbSet<Schedule> Schedules { get; set; }
         public DbSet<MedicalHistory> MedicalHistories { get; set; }
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
 
         public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
