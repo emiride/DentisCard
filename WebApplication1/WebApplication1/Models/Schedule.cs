@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
     public class Schedule
     {
+        public Schedule()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         [ForeignKey("Dentist")]
         public string Id { get; set; }
 

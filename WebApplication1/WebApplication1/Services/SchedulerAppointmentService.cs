@@ -1,7 +1,7 @@
 ﻿using Kendo.Mvc.UI;
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 
@@ -59,28 +59,51 @@ namespace WebApplication1.Services
 
         public virtual IQueryable<Appointment> GetAll()
         {
-            bool isWebApiRequest = HttpContext.Current.Request.AppRelativeCurrentExecutionFilePath.StartsWith("~/api");
-
-            IQueryable<Appointment> result = null;
-
-            //if (!isWebApiRequest)
-            //{
-            //    result = HttpContext.Current.Session["SchedulerAppointments"] as IQueryable<Appointment>;
-            //}
-
-            if (result == null || UpdateDatabase)
-            {
-                result = db.Appointments;
-
-                if (!isWebApiRequest)
+            
+                var result = db.Appointments.Select(a => new Appointment
                 {
-                    HttpContext.Current.Session["SchedulerTasks"] = result;
-                }
-            }
-            var list = result.ToList();
+                    Id = a.Id,
+                    Title = a.Title,
+                    Start = a.Start,
+                    End = a.End,
+                    StartTimezone = a.StartTimezone,
+                    EndTimezone = a.EndTimezone,
+                    Description = a.Description,
+                    IsAllDay = a.IsAllDay,
+                    RecurrenceRule = a.RecurrenceRule,
+                    RecurrenceException = a.RecurrenceException,
+                    Recurrence = a.Recurrence,
+                    ScheduleId = a.ScheduleId,
+                    PatientId = a.PatientId,
+                    Patient = a.Patient,
+                    DateCreated = a.DateCreated,
+                    Schedule = a.Schedule,
+                    DateModified = a.DateModified
+                });
             return result;
         }
+        
+        public List<Appointment> GetList()
+        {
+            var result = db.Appointments.ToList().Select(a => new Appointment
+            {
+                Id = a.Id,
+                Title = a.Title,
+                Start = a.Start,
+                End = a.End,
+                StartTimezone = a.StartTimezone,
+                EndTimezone = a.EndTimezone,
+                Description = a.Description,
+                IsAllDay = a.IsAllDay,
+                RecurrenceRule = a.RecurrenceRule,
+                RecurrenceException = a.RecurrenceException,
+                Recurrence = a.Recurrence,
+                ScheduleId = a.ScheduleId,
+                
+            }).ToList();
 
+            return result;
+        }
         private bool ValidateModel(Appointment appointment, ModelStateDictionary modelState)
         {
             if (appointment.Start > appointment.End)

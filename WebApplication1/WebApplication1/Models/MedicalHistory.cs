@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApplication1.Models
 {
     public class MedicalHistory
     {
+        public MedicalHistory()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         
         [ForeignKey("Patient")]
         public string Id { get; set; }

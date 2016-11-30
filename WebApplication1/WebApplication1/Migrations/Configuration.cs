@@ -284,8 +284,8 @@ namespace WebApplication1.Migrations
                 Id = Guid.NewGuid().ToString(),
                 Description = "Probni appointment, vjerovatno ce ostati do kraja :)",
                 Title = "Proba",
-                Start = new DateTime(2016, 11, 29, 14, 0, 0),
-                End = new DateTime(2016, 11, 29, 15, 0, 0),
+                Start = new DateTime(2016, 12, 2, 14, 0, 0),
+                End = new DateTime(2016, 12, 2, 15, 0, 0),
             };
 
             var patient2 = new Patient

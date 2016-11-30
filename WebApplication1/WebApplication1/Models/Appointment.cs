@@ -7,6 +7,10 @@ namespace WebApplication1.Models
 {
     public class Appointment : IModificationHistory, ISchedulerEvent
     {
+        public Appointment()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         [Required]
         public string Id { get; set; }
 

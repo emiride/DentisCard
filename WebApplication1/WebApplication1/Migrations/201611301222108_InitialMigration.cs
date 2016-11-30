@@ -112,7 +112,7 @@ namespace WebApplication1.Migrations
                 "dbo.MedicalRecords",
                 c => new
                     {
-                        Id = c.Int(nullable: false, identity: true),
+                        Id = c.String(nullable: false, maxLength: 128),
                         Description = c.String(nullable: false, maxLength: 3000),
                         DateCreated = c.DateTime(nullable: false),
                         DateModified = c.DateTime(),
@@ -164,7 +164,7 @@ namespace WebApplication1.Migrations
                 c => new
                     {
                         Tooth_Id = c.Int(nullable: false),
-                        MedicalRecord_Id = c.Int(nullable: false),
+                        MedicalRecord_Id = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.Tooth_Id, t.MedicalRecord_Id })
                 .ForeignKey("dbo.Teeth", t => t.Tooth_Id, cascadeDelete: true)

@@ -7,8 +7,12 @@ namespace WebApplication1.Models
 {
     public class MedicalRecord : IModificationHistory
     {
+        public MedicalRecord()
+        {
+            Id = Guid.NewGuid().ToString();
+        }
         [Required]
-        public  int Id { get; set; }
+        public string Id { get; set; }
 
         [Required]
         [StringLength(3000, ErrorMessage = "Description must be less than 3000 letters")]
