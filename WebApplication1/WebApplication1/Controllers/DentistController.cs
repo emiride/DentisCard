@@ -59,7 +59,17 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var currentDentistId = User.Identity.GetUserId();
+            var dentists = db.Dentists;
+            var dentist = new Dentist();
+            foreach(var d in dentists)
+            {
+                if(d.Id == currentDentistId)
+                {
+                    dentist = d;
+                }
+            }
+            return View(dentist);
         }
 
         // GET: Patients
