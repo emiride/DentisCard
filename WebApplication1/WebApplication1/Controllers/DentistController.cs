@@ -311,6 +311,13 @@ namespace WebApplication1.Controllers
         }
 
         // POST: /Dentist/Register
+        [Authorize (Roles = Role.Dentist)]
+        public ActionResult PatientProfile()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

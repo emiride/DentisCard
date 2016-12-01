@@ -2,6 +2,7 @@
 @using WebApplication1.Models
 @model IEnumerable<WebApplication1.Models.Patient>
 
+
 @{
     ViewBag.Title = "My Patients";
 }
@@ -59,10 +60,10 @@
             {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
+                    @Html.ActionLink(Html.DisplayFor( modelItem => item.FirstName).ToHtmlString(),"PatientProfile", new { id =item.Id })
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.LastName).ToHtmlString(), "PatientProfile", new { id = item.Id })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateOfBirth)
@@ -71,6 +72,7 @@
                     @Html.DisplayFor(modelItem => item.DateCreated)
                 </td>
                 <td style="color:#335381">
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString()+"'s Profile", "PatientProfile", new { id = item.Id }) |
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
