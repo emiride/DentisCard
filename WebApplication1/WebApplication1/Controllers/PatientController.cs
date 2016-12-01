@@ -4,11 +4,22 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using System.Data.Entity;
+using System.Net;
+using System.Threading.Tasks;
+using WebApplication1.ViewModels.Dentist;
+using System.Data;
 
 namespace WebApplication1.Controllers
 {
     public class PatientController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         // GET: Patient
         public ActionResult Index()
         {
@@ -31,6 +42,32 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = Role.Patient)]
         public ActionResult MyDentist()
         {
+            return View();
+        }
+
+        [Authorize(Roles = Role.Patient)]
+        public ActionResult MedicalHistory(string sortOrder, string searchString)
+        {
+            List<MedicalHistory> historyList = new List<MedicalHistory>();
+
+            var medicalHistory = db.MedicalHistories;
+            foreach (var note in medicalHistory)
+            {
+                historyList.Add(note);
+            }
+
+            /* TODO sorting
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LNameSortParm = String.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.BDateSortParm = sortOrder == "BDate" ? "Bdate_desc" : "BDate";
+            */
+            var patientOrder = from s in historyList
+                               select s;
+            /*
+             * TODO print medical history nicely
+            */
+
             return View();
         }
     }

@@ -340,7 +340,7 @@ namespace WebApplication1.Migrations
             var patient3 = new Patient
             {
 
-                UserName = "Sexy Yusuf",
+                UserName = "Samir Yusuf",
                 PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
                 FirstName = "Sami",
                 LastName = "Yusuf",
@@ -351,6 +351,7 @@ namespace WebApplication1.Migrations
                 SecurityStamp = "fakjhdfiasndgsakjfalfjsadasdamsoa",
                 Email = "syusuf@gmail.com",
                 PhoneNumber = "0699/064-064",
+                EmailConfirmed = true,
                 MedicalHistory = new MedicalHistory
                 {
                     

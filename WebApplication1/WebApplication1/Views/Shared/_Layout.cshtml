@@ -39,7 +39,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <!-- <li>@Html.ActionLink("Home", "Index", "Home")</li> --> <!--DentisC<d>ard is serving as a Home link-->
+                    <!-- <li>@Html.ActionLink("Home", "Index", "Home")</li> --> <!--DentisCard is serving as a Home link-->
                     
                     @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
                     {
@@ -53,6 +53,7 @@
                         <li>@Html.ActionLink("My Profile", "Index", "Patient")</li>
                         <li>@Html.ActionLink("Arrange Appointment", "ArrangeAppointment", "Patient")</li>
                         <li>@Html.ActionLink("My Dentist", "MyDentist", "Patient")</li>
+                        <li>@Html.ActionLink("Medical History", "MedicalHistory", "Patient")</li>
                     }
 
                     @if (ViewContext.HttpContext.User.IsInRole("Admin"))

@@ -1,0 +1,79 @@
+﻿@model WebApplication1.Models.Patient
+
+@{
+    ViewBag.Title = "MedicalHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>MedicalHistory</h2>
+
+
+@using (@Html.BeginForm("MedicalHistory", "Patient", FormMethod.Get))
+{
+    @*HTML helper way of input for search
+        @Html.TextBox("searchString",null, new {id = "custom-search-input", @class = "form-control input"});*@
+
+    <div class="container" style="padding-left:0px; padding-right:0px">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="custom-search-input">
+                    <div class="input-group">
+                        <input type="text" id="searchString" name="searchString" class="form-control input" placeholder="Search first and last name..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div style="overflow-x:auto;">
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>
+                    @* @Html.ActionLink("First Name", "GetPatients", new { sortOrder = ViewBag.NameSortParm })
+    </th>
+    <th>
+        @Html.ActionLink("Last Name", "GetPatients", new { sortOrder = ViewBag.LNameSortParm })
+    </th>
+    <th>
+        @Html.ActionLink("Date of birth", "GetPatients", new { sortOrder = ViewBag.BDateSortParm })
+    </th>
+    <th>
+        @Html.ActionLink("Date Created", "GetPatients", new { sortOrder = ViewBag.DateSortParm })
+    </th>
+    <th>
+                    *@</th>
+                        </tr>
+                    </thead>
+
+                   @*  @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOfBirth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+              </td>
+                        </tr>
+                    }
+                *@
+                </table>
+            </div>

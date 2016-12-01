@@ -5,5 +5,173 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<head>
+    <link href="~/Content/css/CustomLeftNavbar.css" rel="stylesheet" />
+    <link href="~/Content/css/CustomProfile.css" rel="stylesheet" />
+</head>
 
+<!--Dodat i namjesten ovaj dio za profil informacije, kad se vratim sa odmora ili eventualno malo tamo povezem s tim da ce mozda trebati pomoc od emira u vezi kupljenja informacija-->
+<div class="container my-custom-container">
+    <div class="profile-head">
+        <div class="col-md- col-sm-4 col-xs-12">
+            <img src="http://www.newlifefamilychiropractic.net/wp-content/uploads/2014/07/300x300.gif" class="img-responsive" />
+            <h6>
+                User Name
+            </h6>
+        </div>
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <h5>User Name</h5>
+            <p>Dentist </p>
+            <ul>
+
+                <li><span class="glyphicon glyphicon-briefcase"></span> 5 years</li>
+                <li><span class="glyphicon glyphicon-map-marker"></span> BiH</li>
+                <li><span class="glyphicon glyphicon-home"></span> Ilidza.</li>
+                <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">387612345678</a></li>
+                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">dentisCard@gmail.com</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <span class="glyphicon glyphicon-folder-close">
+                                </span>Content
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="">Articles</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                <span class="glyphicon glyphicon-th">
+                                </span>Modules
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        @Html.ActionLink("My Schedule", "MySchedule", "Dentist")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        @Html.ActionLink("My Patients", "MyPatients", "Dentist")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-bell"></span><a href="">Requests</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                <span class="glyphicon glyphicon-file">
+                                </span>Reports
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                        @Html.ActionLink("Draft", "Draft", "Dentist")
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span>
+                                        @Html.ActionLink("Notes", "Notes", "Dentist")
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <span class="glyphicon glyphicon-user">
+                                </span>Account
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-cog"></span><a>Edit account</a>
+
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-qrcode"></span>
+                                        @Html.ActionLink("Change Password", "ChangePassword", "Manage")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-off"></span><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9">
+            <div class="well">
+                <h1>
+                    Content will be displayed here
+                </h1>
+
+            </div>
+        </div>
+    </div>
+</div>
