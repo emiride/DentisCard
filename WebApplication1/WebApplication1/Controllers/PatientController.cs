@@ -70,5 +70,12 @@ namespace WebApplication1.Controllers
 
             return View();
         }
+
+        [Authorize(Roles = Role.Patient)]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+
     }
 }

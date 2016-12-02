@@ -371,5 +371,10 @@ namespace WebApplication1.Controllers
             base.Dispose(disposing);
         }
 
+        [Authorize (Roles = Role.Dentist)]
+        public ActionResult EditMyProfile()
+        {
+            return View();
+        }
     }
 }

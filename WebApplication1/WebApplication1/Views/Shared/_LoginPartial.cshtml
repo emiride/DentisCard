@@ -17,7 +17,18 @@
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-cog"></span></a>
             <ul class="dropdown-menu">
-                <li>@Html.ActionLink("Edit profile", "Edit", "Admin")</li>
+                @if (ViewContext.HttpContext.User.IsInRole("Patient"))
+                {
+                <li>@Html.ActionLink("Edit profile", "Edit", "Patient")</li>
+                }
+                @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
+                {
+                    <li>@Html.ActionLink("Edit profile", "EditMyProfile", "Dentist")</li>
+                }
+                @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                {
+                    <li>@Html.ActionLink("Edit profile", "Edit", "Admin")</li>
+                }
                 <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
             </ul>
         </li>
