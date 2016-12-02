@@ -30,6 +30,8 @@ namespace WebApplication1.Models
         [Display(Name = "Address")]
         public string Address { get; set; }
 
+        public byte[] UserPhoto { get; set; }
+
         public EmploymentStatus? EmploymentStatus { get; set; } //This value is nullable
 
         public DateTime DateCreated { get; set; }

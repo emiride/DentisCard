@@ -374,7 +374,31 @@ namespace WebApplication1.Controllers
         [Authorize (Roles = Role.Dentist)]
         public ActionResult EditMyProfile()
         {
-            return View();
+            var currentDentistId = User.Identity.GetUserId();
+            var dentists = db.Dentists;
+            var CurrentDentist = new Dentist();
+            foreach (var d in dentists)
+            {
+                if (d.Id == currentDentistId)
+                {
+                    CurrentDentist = d;
+                }
+            }
+            return View(CurrentDentist);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMyProfile([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place, UserPhoto")] Dentist CurrentDentist)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(CurrentDentist).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", CurrentDentist.Id);
+            return View(CurrentDentist);
+        }
+
     }
 }
