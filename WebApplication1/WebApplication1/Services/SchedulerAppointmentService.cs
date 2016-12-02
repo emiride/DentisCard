@@ -1,7 +1,9 @@
 ﻿using Kendo.Mvc.UI;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 
@@ -28,33 +30,45 @@ namespace WebApplication1.Services
 
         public void Insert(Appointment appointment, ModelStateDictionary modelState)
         {
-            if (ValidateModel(appointment,modelState))
-            {
-                if (!UpdateDatabase)
-                {
-                    var first = GetAll().OrderByDescending(e => e.Id).FirstOrDefault();
-                    var id = (first != null) ? first.Id : "0";
+            if (!ValidateModel(appointment, modelState)) return;
 
-                    appointment.Id = id + 1;
-                    GetAll().ToList().Insert(0, appointment);
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(appointment.Title))
-                    {
-                        appointment.Title = "";
-                    }
-                    
-                }
-                
-            }
+            var scheduleId = HttpContext.Current.User.Identity.GetUserId();
+            appointment.Id = Guid.NewGuid().ToString();
+            appointment.ScheduleId = scheduleId;
+
+            db.Appointments.Add(appointment);
+            db.SaveChanges();
         }
 
-       
 
         public void Update(Appointment appointment, ModelStateDictionary modelState)
         {
-            throw new NotImplementedException();
+            //if (ValidateModel(appointment, modelState))
+            //{
+            //    if (!UpdateDatabase)
+            //    {
+            //        var first = GetAll().OrderByDescending(e => e.Id).FirstOrDefault();
+            //        var id = (first != null) ? first.TaskID : 0;
+
+            //        appointment.Id = id + 1;
+
+            //        GetAll().Insert(0, appointment);
+            //    }
+            //    else
+            //    {
+            //        if (string.IsNullOrEmpty(task.Title))
+            //        {
+            //            task.Title = "";
+            //        }
+
+            //        var entity = task.ToEntity();
+
+            //        db.Tasks.Add(entity);
+            //        db.SaveChanges();
+
+            //        task.TaskID = entity.TaskID;
+            //    }
+            //}
         }
 
         public virtual IQueryable<Appointment> GetAll()
@@ -85,6 +99,7 @@ namespace WebApplication1.Services
         
         public List<Appointment> GetList()
         {
+            var scheduleId = HttpContext.Current.User.Identity.GetUserId();
             var result = db.Appointments.ToList().Select(a => new Appointment
             {
                 Id = a.Id,
@@ -100,7 +115,7 @@ namespace WebApplication1.Services
                 Recurrence = a.Recurrence,
                 ScheduleId = a.ScheduleId,
                 
-            }).ToList();
+            }).Where(a => a.ScheduleId == scheduleId).ToList();
 
             return result;
         }

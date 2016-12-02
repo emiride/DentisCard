@@ -1,6 +1,7 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using System.Web.Mvc;
+using WebApplication1.Models;
 using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
@@ -21,8 +22,15 @@ namespace WebApplication1.Controllers
         }
         public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request)
         {
-
+            
             return Json(appointmentService.GetList().ToDataSourceResult(request), JsonRequestBehavior.AllowGet); 
+        }
+
+        public virtual JsonResult Create([DataSourceRequest] DataSourceRequest request, Appointment appointment)
+        {
+            appointmentService.Insert(appointment, ModelState);
+
+            return Json(new[] {appointment}.ToDataSourceResult(request, ModelState));
         }
 
         protected override void Dispose(bool disposing)

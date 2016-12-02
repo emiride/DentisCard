@@ -288,6 +288,8 @@ namespace WebApplication1.Migrations
                 End = new DateTime(2016, 12, 2, 15, 0, 0),
             };
 
+            
+
             var patient2 = new Patient
             {
 
@@ -359,8 +361,16 @@ namespace WebApplication1.Migrations
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord31 }
                 }
             };
+            var appointment2 = new Appointment
+            {
+                PatientId = patient3.Id,
+                Id = Guid.NewGuid().ToString(),
+                Description = "Probni appointment za Damira, vjerovatno ce ostati do kraja :)",
+                Title = "Proba",
+                Start = new DateTime(2016, 12, 2, 14, 0, 0),
+                End = new DateTime(2016, 12, 2, 15, 0, 0),
+            };
 
-            
             var dentist = new Dentist
             {
                 FirstName = "Emir",
@@ -400,7 +410,11 @@ namespace WebApplication1.Migrations
                 DateCreated = DateTime.Now,
                 EmailConfirmed = true,
                 SecurityStamp = "fafgsddggggb",
-                Patients = new List<Patient>() { patient3}
+                Patients = new List<Patient>() { patient3},
+                Schedule = new Schedule
+                {
+                    Appointments = new List<Appointment>() { appointment2}
+                }
             };
 
             var admin = new Admin
