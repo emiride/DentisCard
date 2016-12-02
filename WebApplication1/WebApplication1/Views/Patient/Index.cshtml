@@ -16,23 +16,24 @@
         <div class="col-md- col-sm-4 col-xs-12">
             <img src="http://www.newlifefamilychiropractic.net/wp-content/uploads/2014/07/300x300.gif" class="img-responsive" />
             <h6>
-                User Name
-            </h6>
-        </div>
+            @Html.DisplayFor(d => d.FirstName)
+            @Html.DisplayFor(d => d.LastName)
+        </h6>
+    </div>
+    <div class="col-md-5 col-sm-5 col-xs-12">
+        <h5>
+        @Html.DisplayFor(d => d.FirstName)
+        @Html.DisplayFor(d => d.LastName)
+    </h5>
+        <p>Dentist </p>
+        <ul>
+            <li><span class="glyphicon glyphicon-gift"></span>@Html.DisplayFor(model => model.DateOfBirth)</li>
+            <li><span class="glyphicon glyphicon-home"></span>@Html.DisplayFor(model => model.Address)</li>
+            <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">061123456789</a></li>
+            <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">@Html.DisplayFor(model => model.Email)</a></li>
 
-        <div class="col-md-5 col-sm-5 col-xs-12">
-            <h5>User Name</h5>
-            <p>Dentist </p>
-            <ul>
-
-                <li><span class="glyphicon glyphicon-briefcase"></span> 5 years</li>
-                <li><span class="glyphicon glyphicon-map-marker"></span> BiH</li>
-                <li><span class="glyphicon glyphicon-home"></span> Ilidza.</li>
-                <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">387612345678</a></li>
-                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">dentisCard@gmail.com</a></li>
-
-            </ul>
-        </div>
+        </ul>
+    </div>
 
     </div>
 </div>
@@ -53,7 +54,7 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseOne" class="panel-collapse collapse in">
+                    <div id="collapseOne" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
@@ -80,54 +81,27 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-calendar"></span>
-                                        @Html.ActionLink("My Schedule", "MySchedule", "Dentist")
+                                        @Html.ActionLink("Arrange appointment", "ArrangeAppointment", "Patient")
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-user"></span>
-                                        @Html.ActionLink("My Patients", "MyPatients", "Dentist")
+                                        @Html.ActionLink("My Dentist", "MyDentist", "Patient")
                                     </td>
                                 </tr>
+
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-bell"></span><a href="">Requests</a>
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        @Html.ActionLink("Medical history", "MedicalHistory", "Patient")
                                     </td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
-                                <span class="glyphicon glyphicon-file">
-                                </span>Reports
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="collapseFour" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-list-alt"></span>
-                                        @Html.ActionLink("Draft", "Draft", "Dentist")
-
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <span class="glyphicon glyphicon-tasks"></span>
-                                        @Html.ActionLink("Notes", "Notes", "Dentist")
-                                    </td>
-                                </tr>
-
-                            </table>
-                        </div>
-                    </div>
-                </div>
+               
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -137,12 +111,13 @@
                             </a>
                         </h4>
                     </div>
-                    <div id="collapseThree" class="panel-collapse collapse">
+                    <div id="collapseThree" class="panel-collapse collapse in">
                         <div class="panel-body">
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-cog"></span><a>Edit account</a>
+                                        <span class="glyphicon glyphicon-cog"></span>
+                                        @Html.ActionLink("Edit profile", "Edit", "Patient")
 
                                     </td>
                                 </tr>

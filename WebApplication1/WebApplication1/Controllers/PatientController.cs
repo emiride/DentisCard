@@ -23,7 +23,17 @@ namespace WebApplication1.Controllers
         // GET: Patient
         public ActionResult Index()
         {
-            return View();
+            var currentPatientId = User.Identity.GetUserId();
+            var patients = db.Patients;
+            var patient = new Patient();
+            foreach (var p in patients)
+            {
+                if (p.Id == currentPatientId)
+                {
+                    patient = p;
+                }
+            }
+            return View(patient);
         }
 
         public ActionResult FindDoctor()
@@ -74,7 +84,32 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = Role.Patient)]
         public ActionResult Edit()
         {
-            return View();
+            var currentPatientId = User.Identity.GetUserId();
+            var patients = db.Patients;
+            var CurrentPatient = new Patient();
+            foreach (var d in patients)
+            {
+                if (d.Id == currentPatientId)
+                {
+                    CurrentPatient = d;
+                }
+            }
+            return View(CurrentPatient);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place")] Patient patient)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(patient).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", patient.Id);
+            return View(patient);
         }
 
     }

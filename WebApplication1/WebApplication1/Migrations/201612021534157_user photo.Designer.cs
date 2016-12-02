@@ -7,13 +7,13 @@ namespace WebApplication1.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class UserPhoto : IMigrationMetadata
+    public sealed partial class userphoto : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserPhoto));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(userphoto));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612021351293_User Photo"; }
+            get { return "201612021534157_user photo"; }
         }
         
         string IMigrationMetadata.Source

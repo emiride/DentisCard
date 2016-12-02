@@ -3,7 +3,7 @@ namespace WebApplication1.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialMigration : DbMigration
+    public partial class userphoto : DbMigration
     {
         public override void Up()
         {
@@ -16,6 +16,7 @@ namespace WebApplication1.Migrations
                         LastName = c.String(nullable: false, maxLength: 50),
                         DateOfBirth = c.DateTime(),
                         Address = c.String(),
+                        UserPhoto = c.Binary(),
                         EmploymentStatus = c.Int(),
                         DateCreated = c.DateTime(nullable: false),
                         DateModified = c.DateTime(),
