@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.ViewModels;
 using WebApplication1.ViewModels.Dentist;
 
 namespace WebApplication1.Controllers
@@ -269,7 +270,7 @@ namespace WebApplication1.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", patient.Id);
+            
             return View(patient);
         }   
 
@@ -312,9 +313,37 @@ namespace WebApplication1.Controllers
 
         // POST: /Dentist/Register
         [Authorize (Roles = Role.Dentist)]
-        public ActionResult PatientProfile()
-        {
-            return View();
+        public ActionResult PatientProfile(string id){
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient patient = db.Patients.Find(id);
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+
+            MedicalHistory medicalHistory = db.MedicalHistories.Find(id);
+            if (medicalHistory == null)
+            {
+                return HttpNotFound();
+            }
+
+            MedicalRecord medicalRecord = db.MedicalRecords.Find(id);
+            if (medicalRecord == null)
+            {
+                return HttpNotFound();
+            }
+
+            Tooth Teeth = db.Teeth.Find(id);
+            
+                /*TODO*/
+
+                /*PatientProfile patientProfile = new PatientProfile { Patient = patient, MedicalHistory = medicalHistory };
+
+                return View(patientProfile);*/
+                return View();
         }
 
 
@@ -399,6 +428,7 @@ namespace WebApplication1.Controllers
             ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", CurrentDentist.Id);
             return View(CurrentDentist);
         }
+        
 
     }
 }

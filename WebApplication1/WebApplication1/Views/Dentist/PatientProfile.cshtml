@@ -1,5 +1,5 @@
-﻿@model WebApplication1.Models.Patient
-@*@model WebApplication1.Models.MedicalRecord*@
+﻿@model WebApplication1.ViewModels.PatientProfile
+@* @model WebApplication1.Models.MedicalRecord *@
 @*Taking informations from patient and medical record, how? two models or ??  *@
 @{
     ViewBag.Title = "PatientProfile";
@@ -17,30 +17,25 @@
         <div class="col-md- col-sm-4 col-xs-12">
             <img src="http://www.newlifefamilychiropractic.net/wp-content/uploads/2014/07/300x300.gif" class="img-responsive" />
             <h6>
-                @* Purpose ?
-                    @Html.DisplayFor(d => d.FirstName)
-                    @Html.DisplayFor(d => d.LastName)
-                *@
+                    @Html.DisplayFor(d => d.Patient.FirstName)
+                    @Html.DisplayFor(d => d.Patient.LastName)
             </h6>
         </div>
 
         <div class="col-md-5 col-sm-5 col-xs-12">
-            <h5>@Html.DisplayFor(d => d.FirstName) @Html.DisplayFor(d => d.LastName) TODO: Database not fetching </h5>
-            <p>Dentist </p>
+            <h5>@Html.DisplayFor(d => d.Patient.FirstName) @Html.DisplayFor(d => d.Patient.LastName) </h5>
+            <p>Patient </p>
             <ul>
-                <li><span class="glyphicon glyphicon-gift"></span>@*@Html.DisplayFor(model => model.DateOfBirth)*@Birth Date</li>
-                <li><span class="glyphicon glyphicon-home"></span>@*@Html.DisplayFor(model => model.Address)*@Patient Address</li>
-                <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">Patient Phone number</a></li>
-                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">@*@Html.DisplayFor(model => model.Email)*@Patient Email</a></li>
+                <li><span class="glyphicon glyphicon-gift"></span>@Html.DisplayFor(model => model.Patient.DateOfBirth)Birth Date</li>
+                <li><span class="glyphicon glyphicon-home"></span>@Html.DisplayFor(model => model.Patient.Address) Patient Address</li>
+                <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">@Html.DisplayFor(model => model.Patient.PhoneNumber) </a></li>
+                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">@Html.DisplayFor(model => model.Patient.Email)</a></li>
 
             </ul>
         </div>
 
     </div>
 </div>
-
-
-
 
 <div class="container">
     <div class="row">
@@ -125,13 +120,13 @@
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-calendar"></span>
-                                        @*@Html.ActionLink("My Schedule", "MySchedule", "Dentist")*@
+                                        @Html.ActionLink("My Schedule", "MySchedule", "Dentist")
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         <span class="glyphicon glyphicon-user"></span>
-                                        @*@Html.ActionLink("My Patients", "MyPatients", "Dentist")*@
+                                        @Html.ActionLink("My Patients", "MyPatients", "Dentist")
                                     </td>
                                 </tr>
                                 <tr>

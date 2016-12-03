@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,19 +18,32 @@ namespace WebApplication1.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Admin
-        public ActionResult Index(string id)
+        public ActionResult Index()
         {
+            /*
             var viewModel = new DentistIndexData();
             viewModel.Dentists = db.Dentists.Include(i => i.Patients);
 
             if (id != "")
             {
                 ViewBag.DentistId = id;
-                viewModel.Patients = viewModel.Dentists.Single(i => i.Id == id).Patients;
+                /*viewModel.Patients = viewModel.Dentists.Single(i => i.Id == id).Patients;
             }
 
             //var patients = db.Patients;
             return View(viewModel);
+            */
+            var currentAdminId = User.Identity.GetUserId();
+            var admins = db.Admins;
+            var admin = new Admin();
+            foreach (var d in admins)
+            {
+                if (d.Id == currentAdminId)
+                {
+                    admin = d;
+                }
+            }
+            return View(admin);
         }
 
         // GET: Admin/Details/5

@@ -1,89 +1,175 @@
-﻿
-@model WebApplication1.ViewModels.Dentist.DentistIndexData
-
+﻿@model WebApplication1.Models.Admin
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Home Page";
 }
 
-<h2>Index</h2>
+<head>
+    <link href="~/Content/css/CustomLeftNavbar.css" rel="stylesheet" />
+    <link href="~/Content/css/CustomProfile.css" rel="stylesheet" />
+</head>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="container my-custom-container">
+    <div class="profile-head">
+        <div class="col-md- col-sm-4 col-xs-12">
+            <img src="~/Content/Images/DSC00261.JPG" class="img-responsive" />
+            <h6>
+                @Html.DisplayFor(d => d.FirstName)
+                @Html.DisplayFor(d => d.LastName)
+            </h6>
+        </div>
+
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <h5>@Html.DisplayFor(d => d.FirstName) @Html.DisplayFor(d => d.LastName)</h5>
+            <p>Dentist </p>
+            <ul>
+                <li><span class="glyphicon glyphicon-gift"></span>@Html.DisplayFor(model => model.DateOfBirth)</li>
+                <li><span class="glyphicon glyphicon-home"></span>@Html.DisplayFor(model => model.Address)</li>
+                <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">061123456789</a></li>
+                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">@Html.DisplayFor(model => model.Email)</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>
 
 
 
-<table class="table">
-    <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Date Created</th>
-        <th>Address</th>
-        <th>Patients</th>
-        <th>First Name</th>
-    </tr>
-    @foreach (var item in Model.Dentists)
-    {
-        string selectedRow = "";
-        if (item.Id == ViewBag.DentistId)
-        {
-            selectedRow = "success";
-        }
-        <tr class="@selectedRow">
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreated)
-            </td>
-            <td>
-                @Html.ActionLink("Select", "Index", new { id = item.Id }) |
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
-        </tr>
 
-    }
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <span class="glyphicon glyphicon-folder-close">
+                                </span>Content
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="">Articles</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                <span class="glyphicon glyphicon-th">
+                                </span>Modules
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        @Html.ActionLink("My Schedule", "MySchedule", "Dentist")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-user"></span>
+                                        @Html.ActionLink("My Patients", "MyPatients", "Dentist")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-bell"></span><a href="">Requests</a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+                                <span class="glyphicon glyphicon-file">
+                                </span>Reports
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                        @Html.ActionLink("Draft", "Draft", "Dentist")
 
-@if (Model.Patients != null)
-{
-    <h3>Courses Taught by Selected Instructor</h3>
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>Number</th>
-            <th>Title</th>
-            <th>Department</th>
-        </tr>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-tasks"></span>
+                                        @Html.ActionLink("Notes", "Notes", "Dentist")
+                                    </td>
+                                </tr>
 
-        @foreach (var item in Model.Patients)
-        {
-            string selectedRow = "";
-            if (item.Id == ViewBag.DentistId)
-            {
-                selectedRow = "success";
-            }
-            <tr class="@selectedRow">
-                <td>
-                    @Html.ActionLink("Select", "Index", new { courseID = item.Id })
-                </td>
-                <td>
-                    @item.Id
-                </td>
-                <td>
-                    @item.FirstName
-                </td>
-                <td>
-                    @item.LastName
-                </td>
-            </tr>
-        }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                                <span class="glyphicon glyphicon-user">
+                                </span>Account
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-cog"></span>
+                                        @Html.ActionLink("Edit account", "EditMyProfile", "Dentist")
 
-    </table>
-}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-qrcode"></span>
+                                        @Html.ActionLink("Change Password", "ChangePassword", "Manage")
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="glyphicon glyphicon-off"></span><a href="javascript:document.getElementById('logoutForm').submit()">Log out</a>
+
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-sm-9 col-md-9">
+            <div class="well">
+                <h1>
+                    Content will be displayed here
+                </h1>
+
+            </div>
+        </div>
+    </div>
+</div>
