@@ -262,33 +262,31 @@ namespace WebApplication1.Controllers
         // POST: Dentist/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place")] Patient patient)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(patient).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            
-            return View(patient);
-        }   
-
-        // GET: Dentist/Delete/5
-        public ActionResult Delete(string id)
+        public ActionResult EditPatients(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            var PatientToUpdate = db.Patients.Find(id);
+            if (TryUpdateModel(PatientToUpdate, "",
+               new string[] { "FirstName", "LastName", "DateOfBirth", "Address", "EmploymentStatus", "Email", "PhoneNumber", "UserName"}))
             {
-                return HttpNotFound();
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("MyPatients");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
             }
-            return View(patient);
+            return View(PatientToUpdate);
         }
 
         // POST: Dentist/Delete/5
@@ -457,10 +455,6 @@ namespace WebApplication1.Controllers
             }
             return View(dentistToUpdate);
         }
-
-
-       
-       
 
     }
 }
