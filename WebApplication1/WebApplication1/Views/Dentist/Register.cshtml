@@ -22,7 +22,7 @@
     <div class="container">
         <link href="~/Content/css/CustomLogin.css" rel="stylesheet" />
         <div class="row">
-            <form method="post" class="form-signin mg-btm">
+            <form method="post" class="form-signin mg-btm" enctype="multipart/form-data">
                 <h3 class="heading-desc">
 
                     Register to DentisCard
@@ -45,7 +45,7 @@
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Password" })
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password" })
-
+                    
                     <span class="clearfix"></span>
                 </div>
                 <div class="login-footer">

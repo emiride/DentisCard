@@ -81,9 +81,9 @@ namespace WebApplication1.Controllers
             var user = UserManager.FindByEmail(model.Email);
             var result = await SignInManager.PasswordSignInAsync(user.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
-            {//kaze da je objek null, ja preptppostavljam da je to zato sto je ova metoda asinhrona
+            {
                 case SignInStatus.Success:
-                    //oke oke kontam, oni tamo mozda nisu imali pa su morali, let's try
+                   
                     var roles = UserManager.GetRoles(user.Id);
                     
 

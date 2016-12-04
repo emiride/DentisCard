@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -13,6 +14,7 @@ using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
 using WebApplication1.ViewModels.Dentist;
+
 
 namespace WebApplication1.Controllers
 {
@@ -305,13 +307,13 @@ namespace WebApplication1.Controllers
             return RedirectToAction("MyPatients");
         }
 
-        [AllowAnonymous]
-        public ActionResult Register()
+        [Authorize(Roles = Role.Dentist)]
+        public ActionResult PatientProfile()
         {
             return View();
         }
 
-        // POST: /Dentist/Register
+        
         [Authorize (Roles = Role.Dentist)]
         public ActionResult PatientProfile(string id){
             if (id == null)
@@ -347,6 +349,13 @@ namespace WebApplication1.Controllers
         }
 
 
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -367,7 +376,6 @@ namespace WebApplication1.Controllers
                 {
                     await UserManager.AddToRoleAsync(user.Id, Role.Dentist);
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -382,6 +390,11 @@ namespace WebApplication1.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
+
+
+       
 
         private void AddErrors(IdentityResult result)
         {
@@ -400,6 +413,7 @@ namespace WebApplication1.Controllers
             base.Dispose(disposing);
         }
 
+        //za prikazivanje podataka nakon klika na "edit profile" za dentist
         [Authorize (Roles = Role.Dentist)]
         public ActionResult EditMyProfile()
         {
@@ -415,20 +429,38 @@ namespace WebApplication1.Controllers
             }
             return View(CurrentDentist);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult EditMyProfile([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place, UserPhoto")] Dentist CurrentDentist)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(CurrentDentist).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", CurrentDentist.Id);
-            return View(CurrentDentist);
-        }
         
+        //asinhrona metoda za spremanje podataka u bazu nakon editovanja
+        [HttpPost, ActionName("EditMyProfile")]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditMyProfile(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var dentistToUpdate = db.Dentists.Find(id);
+            if (TryUpdateModel(dentistToUpdate, "",
+               new string[] {  "FirstName", "LastName", "DateOfBirth", "Address", "EmploymentStatus", "Email", "PhoneNumber", "UserName", "UserPhoto" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(dentistToUpdate);
+        }
+
+
+       
+       
 
     }
 }

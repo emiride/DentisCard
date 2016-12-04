@@ -81,6 +81,8 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+
+        //Edit method for Patient editig his/her profile
         [Authorize(Roles = Role.Patient)]
         public ActionResult Edit()
         {
@@ -98,18 +100,32 @@ namespace WebApplication1.Controllers
         }
 
 
-        [HttpPost]
+
+        //Edit for patient asinhrona metoda
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,DateOfBirth,Address,EmploymentStatus,DateCreated,DateModified,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName,Place")] Patient patient)
+        public ActionResult Edit(string id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(patient).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", patient.Id);
-            return View(patient);
+            var PatientToUpdate = db.Dentists.Find(id);
+            if (TryUpdateModel(PatientToUpdate, "",
+               new string[] { "FirstName", "LastName", "DateOfBirth", "Address", "EmploymentStatus", "Email", "PhoneNumber", "UserName", "UserPhoto" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(PatientToUpdate);
         }
 
     }
