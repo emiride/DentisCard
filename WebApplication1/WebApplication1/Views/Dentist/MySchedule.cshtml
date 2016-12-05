@@ -19,27 +19,6 @@
           views.DayView();
           views.MonthView();
       })
-      //.Resources(resource =>
-      //{
-      //    resource.Add(a => a.Id)
-      //    .Title("Owner")
-      //      //set the field which contains the text of the resource
-      //      .DataTextField("Text")
-      //      //set the field which contains the value of the resource
-      //      .DataValueField("Value")
-      //      //set the field which contains the color of the resource
-      //      .DataColorField("Color")
-      //      //set local data
-      //      .BindTo(new[] {
-      //          new {
-      //              Text = "Alex", //text of the resource instance
-      //              Value = 1, //Identifier of the resource instance, use that value to assign an event to this instance.
-      //              Color = "#ff7663" //Used as the background of events assigned to this resource.
-      //          } ,
-      //          new { Text = "Bob", Value = 2, Color = "#3a8bd8" } ,
-      //          new { Text = "Charlie", Value = 3, Color = "#3ba96a" }
-      //      });
-      //})
       .DataSource(d => d
           .Model(m =>
           {
@@ -49,5 +28,8 @@
           })
           .Read("Read", "Scheduler")
           .Create("Create", "Scheduler")
+          .Update("Update", "Scheduler")
+          .Destroy("Destroy", "Scheduler")
+          
 
       ))

@@ -200,9 +200,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IModificationHistory.cs" />
-    <Compile Include="Migrations\201612021534157_user photo.cs" />
-    <Compile Include="Migrations\201612021534157_user photo.Designer.cs">
-      <DependentUpon>201612021534157_user photo.cs</DependentUpon>
+    <Compile Include="Migrations\201612050951541_InitialMigration.cs" />
+    <Compile Include="Migrations\201612050951541_InitialMigration.Designer.cs">
+      <DependentUpon>201612050951541_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -820,8 +820,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612021534157_user photo.resx">
-      <DependentUpon>201612021534157_user photo.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612050951541_InitialMigration.resx">
+      <DependentUpon>201612050951541_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

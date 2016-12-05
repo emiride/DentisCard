@@ -3,7 +3,7 @@ namespace WebApplication1.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class userphoto : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -191,8 +191,6 @@ namespace WebApplication1.Migrations
                         Id = c.String(nullable: false, maxLength: 128),
                         Admin_Id = c.String(maxLength: 128),
                         Place = c.String(),
-                        PatientId = c.String(),
-                        ScheduleId = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Id)

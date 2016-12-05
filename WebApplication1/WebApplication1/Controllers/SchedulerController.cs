@@ -33,6 +33,36 @@ namespace WebApplication1.Controllers
             return Json(new[] {appointment}.ToDataSourceResult(request, ModelState));
         }
 
+        public virtual JsonResult Update([DataSourceRequest] DataSourceRequest request, Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                appointmentService.Update(appointment, ModelState);
+            }
+
+            return Json(new[] { appointment }.ToDataSourceResult(request, ModelState));
+        }
+
+        public virtual JsonResult Destroy([DataSourceRequest] DataSourceRequest request, Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                appointmentService.Delete(appointment, ModelState);
+            }
+
+            return Json(new[] { appointment }.ToDataSourceResult(request, ModelState));
+        }
+
+        public virtual JsonResult RequestAppointment([DataSourceRequest] DataSourceRequest request, Appointment appointment)
+        {
+            if (ModelState.IsValid)
+            {
+                appointmentService.RequestAppointment(appointment, ModelState);
+            }
+
+            return Json(new[] { appointment }.ToDataSourceResult(request, ModelState));
+        }
+
         protected override void Dispose(bool disposing)
         {
             appointmentService.Dispose();

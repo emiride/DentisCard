@@ -5,14 +5,12 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using WebApplication1.ViewModels;
 using WebApplication1.ViewModels.Dentist;
 
 
@@ -92,8 +90,8 @@ namespace WebApplication1.Controllers
             }
 
             //Sorting
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.LNameSortParm = String.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LNameSortParm = string.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
             ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
             ViewBag.BDateSortParm = sortOrder == "BDate" ? "Bdate_desc" : "BDate";
 
@@ -239,7 +237,6 @@ namespace WebApplication1.Controllers
                 return RedirectToAction("MyPatients");
             }
 
-            //ViewBag.Id = new SelectList(db.Schedules, "Id", "Id", dentist.Id);
             return View(patient);
         }
 

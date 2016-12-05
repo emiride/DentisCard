@@ -1,8 +1,34 @@
-﻿
+﻿@using Kendo.Mvc.UI
+@using WebApplication1.Models
+
 @{
     ViewBag.Title = "ArrangeAppointment";
 }
 
-<h2>ArrangeAppointment</h2>
-<h4>Ubacio samo view da testiram</h4>
+<h2>Arrange Appointment</h2>
+
+
+@(Html.Kendo().Scheduler<Appointment>()
+      .Name("scheduler")
+      .Date(DateTime.Now)
+      .StartTime(new DateTime(2013, 6, 13, 7, 00, 00))
+      .Height(600)
+      .Views(views =>
+      {
+          views.WeekView();
+          views.DayView();
+          views.MonthView();
+      })
+      .DataSource(d => d
+          .Model(m =>
+          {
+              m.Id(f => f.Id);
+              m.Field(f => f.Title).DefaultValue("No Title");
+              m.Field(f => f.Description).DefaultValue("No Description");
+          })
+          .Read("Read", "Scheduler")
+          .Create("RequestAppointment", "Scheduler")
+
+
+      ))
 
