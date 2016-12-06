@@ -6,7 +6,6 @@
 }
 
 <h2>MySchedule</h2>
-<p>My schedule is still in progress, it will be soon InsaAllah!</p>
 
 @(Html.Kendo().Scheduler<Appointment>()
       .Name("scheduler")
@@ -25,6 +24,7 @@
               m.Id(f => f.Id);
               m.Field(f => f.Title).DefaultValue("No Title");
               m.Field(f => f.Description).DefaultValue("No Description");
+              m.Field(f => f.IsAccepted).DefaultValue(true);
           })
           .Read("Read", "Scheduler")
           .Create("Create", "Scheduler")

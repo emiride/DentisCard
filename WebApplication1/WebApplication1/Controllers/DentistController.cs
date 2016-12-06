@@ -134,26 +134,8 @@ namespace WebApplication1.Controllers
 
         public ActionResult MySchedule()
         {
-            Schedule schedule = new Schedule();
-            schedule.Appointments = new List<Appointment>
-            {
-                new Appointment() {
-                Title = "Fast and furious 6",
-                Start = new DateTime(2013,6,13,17,00,00),
-                End= new DateTime(2013,6,13,18,30,00)
-            },
-            new Appointment() {
-                Title= "The Internship",
-                Start= new DateTime(2013,6,13,14,00,00),
-                End= new DateTime(2013,6,13,15,30,00)
-            },
-            new Appointment() {
-                Title = "The Perks of Being a Wallflower",
-                Start =  new DateTime(2013,6,13,16,00,00),
-                End =  new DateTime(2013,6,13,17,30,00)
-            }
-            };
-            return View(schedule.Appointments);
+            
+            return View();
         }
 
         public ActionResult Notes()

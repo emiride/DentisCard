@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using WebApplication1.Models
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,7 +24,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
+                <!--WTF is this? EMIR-->
+                @if (ViewContext.HttpContext.User.IsInRole(Role.Dentist))
                 {
                     @Html.ActionLink("DentisCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
@@ -41,14 +43,14 @@
                 <ul class="nav navbar-nav">
                     <!-- <li>@Html.ActionLink("Home", "Index", "Home")</li> --> <!--DentisCard is serving as a Home link-->
                     
-                    @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
+                    @if (ViewContext.HttpContext.User.IsInRole(Role.Dentist))
                     {
                         <li>@Html.ActionLink("My Profile", "Index", "Dentist")</li>
                         <li>@Html.ActionLink("My Patients", "MyPatients", "Dentist")</li>
                         <li>@Html.ActionLink("My Schedule", "MySchedule", "Dentist")</li>
                     }
 
-                    @if (ViewContext.HttpContext.User.IsInRole("Patient"))
+                    @if (ViewContext.HttpContext.User.IsInRole(Role.Patient))
                     {
                         <li>@Html.ActionLink("My Profile", "Index", "Patient")</li>
                         <li>@Html.ActionLink("Arrange Appointment", "ArrangeAppointment", "Patient")</li>
@@ -56,7 +58,7 @@
                         <li>@Html.ActionLink("Medical History", "MedicalHistory", "Patient")</li>
                     }
 
-                    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                    @if (ViewContext.HttpContext.User.IsInRole(Role.Admin))
                     {
                         <li>@Html.ActionLink("My Profile", "Index", "Admin")</li>
                         <li class="dropdown">

@@ -280,15 +280,32 @@ namespace WebApplication1.Migrations
 
             var appointment = new Appointment
             {
-                PatientId = patient.Id,
                 Id = Guid.NewGuid().ToString(),
-                Description = "Probni appointment, vjerovatno ce ostati do kraja :)",
-                Title = "Proba",
+                Description = "Emire pomozi, boli me sestica",
+                Title = "Treba mi izvaditi zub",
                 Start = new DateTime(2016, 12, 2, 14, 0, 0),
                 End = new DateTime(2016, 12, 2, 15, 0, 0),
+                IsAccepted = true
+            };
+            var appointment2 = new Appointment
+            {
+                Id = Guid.NewGuid().ToString(),
+                Description = "Damire pomozi, dodje mi da se ubijem, ja ne znam ko sam",
+                Title = "Treba me roknuti",
+                Start = new DateTime(2016, 12, 3, 15, 0, 0),
+                End = new DateTime(2016, 12, 3, 16, 0, 0),
+                IsAccepted = false
+            };
+            var appointment3 = new Appointment
+            {
+                Id = Guid.NewGuid().ToString(),
+                Description = "Boli me sestica sutra",
+                Title = "Nemam pojma sta hocu",
+                Start = new DateTime(2016, 12, 1, 15, 0, 0),
+                End = new DateTime(2016, 12, 1, 17, 0, 0),
+                IsAccepted = false
             };
 
-            
 
             var patient2 = new Patient
             {
@@ -303,13 +320,14 @@ namespace WebApplication1.Migrations
                 EmploymentStatus = EmploymentStatus.Student,
                 Email = "jusufk12@gmail.com",
                 PhoneNumber = "062/064-064",
+                SecurityStamp = "f1f65sadfafjsadasdamsoa",
                 MedicalHistory = new MedicalHistory
                 {
                     PatientId = patient.Id,
                     Note = "Patient's teeth are very good, but since he is awesome looking, he is ready to get married.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord11, medicalRecord12 }
                 },
-                Appointments = new List<Appointment>() { appointment }
+                Appointments = new List<Appointment>() { appointment, appointment3 }
                 
             };
 
@@ -339,6 +357,8 @@ namespace WebApplication1.Migrations
                 Teeth = new List<Tooth>() { upRight3, upRight31, downRight3 }
             };
 
+            
+
             var patient3 = new Patient
             {
 
@@ -359,17 +379,11 @@ namespace WebApplication1.Migrations
                     
                     Note = "Patient's teeth are excellent, he can perform good on stage.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord31 }
-                }
+                },
+                Appointments = new List<Appointment>() { appointment2 }
             };
-            var appointment2 = new Appointment
-            {
-                PatientId = patient3.Id,
-                Id = Guid.NewGuid().ToString(),
-                Description = "Probni appointment za Damira, vjerovatno ce ostati do kraja :)",
-                Title = "Proba",
-                Start = new DateTime(2016, 12, 2, 14, 0, 0),
-                End = new DateTime(2016, 12, 2, 15, 0, 0),
-            };
+
+            
 
             var dentist = new Dentist
             {
@@ -389,7 +403,7 @@ namespace WebApplication1.Migrations
                 Patients = new List<Patient>() { patient, patient2 },
                 Schedule = new Schedule
                 {
-                    Appointments = new List<Appointment>() { appointment}
+                    Appointments = new List<Appointment>() { appointment, appointment3}
                 }
                 
             };

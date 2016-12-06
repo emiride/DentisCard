@@ -26,7 +26,7 @@ namespace WebApplication1.Models
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
         public bool IsAllDay { get; set; }
-        //public bool IsAccepted { get; set; }
+        public bool IsAccepted { get; set; }
         public string Recurrence { get; set; }
         public string RecurrenceRule { get; set; }
         public string RecurrenceException { get; set; }

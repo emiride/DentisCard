@@ -1,4 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
+@using WebApplication1.Models
+@model IEnumerable<Appointment>
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -9,11 +11,25 @@
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Manage"})
         </li>
+        @if (ViewContext.HttpContext.User.IsInRole("Dentist"))
+        {
+            <li class ="dropdown">
+                <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-calendar"></span></a>
+                <ul class="dropdown-menu">
+                    
+                    @*@foreach (var item in Model)
+                    {
+                        <li>@Html.DisplayFor(modelItem => item.Title)</li>
+                    }*@
+
+
+                </ul>
+            </li>
+        }
+            <li>
+                <a href="@Url.Action("Inbox", "Message")"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a>
+            </li>
        
-        <li>
-            <a href="@Url.Action("Inbox", "Message")"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-            </a>
-        </li>
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle"><span class="glyphicon glyphicon-cog"></span></a>
             <ul class="dropdown-menu">

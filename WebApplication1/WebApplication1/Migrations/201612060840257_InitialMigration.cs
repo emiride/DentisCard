@@ -72,6 +72,7 @@ namespace WebApplication1.Migrations
                         Start = c.DateTime(nullable: false),
                         End = c.DateTime(nullable: false),
                         IsAllDay = c.Boolean(nullable: false),
+                        IsAccepted = c.Boolean(nullable: false),
                         Recurrence = c.String(),
                         RecurrenceRule = c.String(),
                         RecurrenceException = c.String(),

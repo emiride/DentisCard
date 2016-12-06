@@ -12,13 +12,7 @@ namespace WebApplication1.Services
 {
     public class SchedulerAppointmentService : ISchedulerEventService<Appointment>
     {
-        private static bool UpdateDatabase = false;
-        private ApplicationDbContext db;
-
-        public SchedulerAppointmentService()
-        {
-            db = new ApplicationDbContext();
-        }
+        private ApplicationDbContext db = new ApplicationDbContext();
 
         public void Dispose()
         {
@@ -32,6 +26,7 @@ namespace WebApplication1.Services
             var scheduleId = HttpContext.Current.User.Identity.GetUserId();
             appointment.Id = Guid.NewGuid().ToString();
             appointment.ScheduleId = scheduleId;
+            appointment.IsAccepted = true;
 
             db.Appointments.Add(appointment);
             db.SaveChanges();
@@ -49,6 +44,7 @@ namespace WebApplication1.Services
                 target.Title = appointment.Title;
                 target.Start = appointment.Start;
                 target.End = appointment.End;
+                target.IsAccepted = appointment.IsAccepted;
                 target.StartTimezone = appointment.StartTimezone;
                 target.EndTimezone = appointment.EndTimezone;
                 target.Description = appointment.Description;
@@ -63,10 +59,27 @@ namespace WebApplication1.Services
             db.SaveChanges();
 
         }
-
+        /*This function is intended to be used just by Patient*/
         internal void RequestAppointment(Appointment appointment, ModelStateDictionary modelState)
         {
-            //TODO
+            if (!ValidateModel(appointment, modelState)) return;
+            
+            var patientId = HttpContext.Current.User.Identity.GetUserId();
+            appointment.Id = Guid.NewGuid().ToString();
+            appointment.PatientId = patientId;
+            appointment.IsAccepted = false;
+
+            var patient = db.Patients.FirstOrDefault(p => p.Id == patientId);
+            var scheduleId = "";
+            if (patient != null)
+            {
+                scheduleId = patient.DentistId;
+            }
+
+            appointment.ScheduleId = scheduleId;
+
+            db.Appointments.Add(appointment);
+            db.SaveChanges();
         }
 
         public void Delete(Appointment appointment, ModelStateDictionary modelState)
@@ -95,6 +108,7 @@ namespace WebApplication1.Services
                     EndTimezone = a.EndTimezone,
                     Description = a.Description,
                     IsAllDay = a.IsAllDay,
+                    IsAccepted = a.IsAccepted,
                     RecurrenceRule = a.RecurrenceRule,
                     RecurrenceException = a.RecurrenceException,
                     Recurrence = a.Recurrence,
@@ -107,10 +121,10 @@ namespace WebApplication1.Services
                 });
             return result;
         }
-        
+
         public List<Appointment> GetList()
         {
-            List<Appointment> result = new List<Appointment>();
+            var result = new List<Appointment>();
 
             if (HttpContext.Current.User.IsInRole(Role.Dentist))
             {
@@ -125,6 +139,7 @@ namespace WebApplication1.Services
                     EndTimezone = a.EndTimezone,
                     Description = a.Description,
                     IsAllDay = a.IsAllDay,
+                    IsAccepted = a.IsAccepted,
                     RecurrenceRule = a.RecurrenceRule,
                     RecurrenceException = a.RecurrenceException,
                     Recurrence = a.Recurrence,
@@ -133,11 +148,12 @@ namespace WebApplication1.Services
 
                 }).Where(a => a.ScheduleId == scheduleId).ToList();
             }
-            /*Don't try to understand this -_- :P */
+
             else if (HttpContext.Current.User.IsInRole(Role.Patient))
             {
                 var patientId = HttpContext.Current.User.Identity.GetUserId();
-                var patient = db.Patients.FirstOrDefault(p => p.Id == patientId);
+                var patients = db.Patients;
+                var patient = patients.Find(patientId);
                 var scheduleId = "";
                 if (patient != null)
                 {
@@ -154,17 +170,82 @@ namespace WebApplication1.Services
                     EndTimezone = a.EndTimezone,
                     Description = a.Description,
                     IsAllDay = a.IsAllDay,
+                    IsAccepted = a.IsAccepted,
                     RecurrenceRule = a.RecurrenceRule,
                     RecurrenceException = a.RecurrenceException,
                     Recurrence = a.Recurrence,
                     ScheduleId = a.ScheduleId,
-                    PatientId = a.PatientId
+                    PatientId = a.PatientId,
+
 
                 }).Where(a => a.ScheduleId == scheduleId).ToList();
             }
 
             return result;
         }
+        public List<Appointment> GetListSafe()
+        {
+            var result = new List<Appointment>();
+
+            if (HttpContext.Current.User.IsInRole(Role.Dentist))
+            {
+                var scheduleId = HttpContext.Current.User.Identity.GetUserId();
+                result = db.Appointments.ToList().Select(a => new Appointment
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Start = a.Start,
+                    End = a.End,
+                    StartTimezone = a.StartTimezone,
+                    EndTimezone = a.EndTimezone,
+                    Description = a.Description,
+                    IsAllDay = a.IsAllDay,
+                    IsAccepted = a.IsAccepted,
+                    RecurrenceRule = a.RecurrenceRule,
+                    RecurrenceException = a.RecurrenceException,
+                    Recurrence = a.Recurrence,
+                    ScheduleId = a.ScheduleId,
+                    PatientId = a.PatientId
+
+                }).Where(a => a.ScheduleId == scheduleId && a.IsAccepted).ToList();
+            }
+            
+            else if (HttpContext.Current.User.IsInRole(Role.Patient))
+            {
+                var patientId = HttpContext.Current.User.Identity.GetUserId();
+                var patients = db.Patients;
+                var patient = patients.Find(patientId);
+                var scheduleId = "";
+                if (patient != null)
+                {
+                    scheduleId = patient.DentistId;
+                }
+
+                result = db.Appointments.ToList().Select(a => new Appointment
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    Start = a.Start,
+                    End = a.End,
+                    StartTimezone = a.StartTimezone,
+                    EndTimezone = a.EndTimezone,
+                    Description = a.Description,
+                    IsAllDay = a.IsAllDay,
+                    IsAccepted = a.IsAccepted,
+                    RecurrenceRule = a.RecurrenceRule,
+                    RecurrenceException = a.RecurrenceException,
+                    Recurrence = a.Recurrence,
+                    ScheduleId = a.ScheduleId,
+                    PatientId = a.PatientId,
+
+
+                }).Where(a => a.ScheduleId == scheduleId).ToList();
+            }
+
+            return result;
+        }
+
+
         private bool ValidateModel(Appointment appointment, ModelStateDictionary modelState)
         {
             if (appointment.Start > appointment.End)

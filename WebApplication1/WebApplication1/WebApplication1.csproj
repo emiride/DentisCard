@@ -200,9 +200,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IModificationHistory.cs" />
-    <Compile Include="Migrations\201612050951541_InitialMigration.cs" />
-    <Compile Include="Migrations\201612050951541_InitialMigration.Designer.cs">
-      <DependentUpon>201612050951541_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201612060840257_InitialMigration.cs" />
+    <Compile Include="Migrations\201612060840257_InitialMigration.Designer.cs">
+      <DependentUpon>201612060840257_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -809,6 +809,7 @@
     <Folder Include="Content\kendo\Uniform\" />
     <Folder Include="Scripts\kendo\cultures\" />
     <Folder Include="Scripts\kendo\messages\" />
+    <Folder Include="Views\Notification\" />
     <Folder Include="Views\Scheduler\" />
   </ItemGroup>
   <ItemGroup>
@@ -820,8 +821,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612050951541_InitialMigration.resx">
-      <DependentUpon>201612050951541_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201612060840257_InitialMigration.resx">
+      <DependentUpon>201612060840257_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

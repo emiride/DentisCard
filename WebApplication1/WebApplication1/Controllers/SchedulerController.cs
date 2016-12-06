@@ -1,5 +1,6 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
+using System.Linq;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.Services;
@@ -10,20 +11,24 @@ namespace WebApplication1.Controllers
     {
         private readonly SchedulerAppointmentService appointmentService;
 
+
+
         public SchedulerController()
         {
             appointmentService = new SchedulerAppointmentService();
         }
 
-        // GET: Scheduler
-        public ActionResult Index()
+        //todo
+        public PartialViewResult AppointmentRequests()
         {
-            return View();
+            var requestedAppointments = appointmentService.GetList().Where(a => a.IsAccepted == false).ToList();
+            return PartialView("~/Views/Shared/_LoginPartial.cshtml", requestedAppointments);
         }
+
         public virtual JsonResult Read([DataSourceRequest] DataSourceRequest request)
         {
             
-            return Json(appointmentService.GetList().ToDataSourceResult(request), JsonRequestBehavior.AllowGet); 
+            return Json(appointmentService.GetListSafe().ToDataSourceResult(request), JsonRequestBehavior.AllowGet); 
         }
 
         public virtual JsonResult Create([DataSourceRequest] DataSourceRequest request, Appointment appointment)
