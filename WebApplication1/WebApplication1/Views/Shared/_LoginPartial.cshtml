@@ -1,6 +1,4 @@
 ﻿@using Microsoft.AspNet.Identity
-@using WebApplication1.Models
-@model IEnumerable<Appointment>
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))

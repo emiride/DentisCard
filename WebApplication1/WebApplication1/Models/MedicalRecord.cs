@@ -27,6 +27,8 @@ namespace WebApplication1.Models
         [DataType(DataType.Currency)]//This Data Annotation is in case we decide to use Internationalization later on (http://bitly.com/2fDF7L9)
         [Display(Name = "Bill")]
         public double Bill { get; set; }
+
+        public string MedicalHistoryId { get; set; }
         
         //Relations
         public MedicalHistory MedicalHistory { get; set; }

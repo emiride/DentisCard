@@ -249,7 +249,8 @@ namespace WebApplication1.Migrations
                 
                 {
                     Note = "Patient's teeth are just awesome and he is ready to get married.",
-                    MedicalRecords = new List<MedicalRecord>() { medicalRecord01, medicalRecord02 }
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord01, medicalRecord02 },
+                    Teeth = new List<Tooth>() { downLeft, upLeft}
                 }
             };
 
@@ -325,7 +326,8 @@ namespace WebApplication1.Migrations
                 {
                     PatientId = patient.Id,
                     Note = "Patient's teeth are very good, but since he is awesome looking, he is ready to get married.",
-                    MedicalRecords = new List<MedicalRecord>() { medicalRecord11, medicalRecord12 }
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord11, medicalRecord12 },
+                    Teeth = new List<Tooth>() { downRight2, upRight2}
                 },
                 Appointments = new List<Appointment>() { appointment, appointment3 }
                 
@@ -378,8 +380,10 @@ namespace WebApplication1.Migrations
                 {
                     
                     Note = "Patient's teeth are excellent, he can perform good on stage.",
-                    MedicalRecords = new List<MedicalRecord>() { medicalRecord31 }
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord31 },
+                    Teeth = new List<Tooth>() { upRight3, upRight31, downRight3 }
                 },
+                
                 Appointments = new List<Appointment>() { appointment2 }
             };
 

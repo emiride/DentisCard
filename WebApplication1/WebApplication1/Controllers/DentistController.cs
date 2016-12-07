@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.ViewModels;
 using WebApplication1.ViewModels.Dentist;
 
 
@@ -284,45 +285,57 @@ namespace WebApplication1.Controllers
             return RedirectToAction("MyPatients");
         }
 
-        [Authorize(Roles = Role.Dentist)]
-        public ActionResult PatientProfile()
-        {
-            return View();
-        }
+        //[Authorize(Roles = Role.Dentist)]
+        //public ActionResult PatientProfile()
+        //{
+        //    return View();
+        //}
 
         
         [Authorize (Roles = Role.Dentist)]
         public ActionResult PatientProfile(string id){
+
+            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
-            {
-                return HttpNotFound();
-            }
+            var patient = db.Patients.Find(id);
 
-            MedicalHistory medicalHistory = db.MedicalHistories.Find(id);
-            if (medicalHistory == null)
-            {
-                return HttpNotFound();
-            }
+            var medicalHistory = db.MedicalHistories.Find(id);
 
-            MedicalRecord medicalRecord = db.MedicalRecords.Find(id);
-            if (medicalRecord == null)
-            {
-                return HttpNotFound();
-            }
+            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
 
-            Tooth Teeth = db.Teeth.Find(id);
+            var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
+
+            patientProfile.Patient = patient;
+            patientProfile.MedicalHistory = medicalHistory;
+            patientProfile.MedicalRecords = medicalRecords;
+            patientProfile.Teeth = teeth;
+            
+
+
+            //MedicalHistory medicalHistory = db.MedicalHistories.Find(id);
+            //if (medicalHistory == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            //MedicalRecord medicalRecord = db.MedicalRecords.Find(id);
+            //if (medicalRecord == null)
+            //{
+            //    return HttpNotFound();
+            //}
+
+            //Tooth Teeth = db.Teeth.Find(id);
             
                 /*TODO*/
 
                 /*PatientProfile patientProfile = new PatientProfile { Patient = patient, MedicalHistory = medicalHistory };
 
                 return View(patientProfile);*/
-                return View();
+                return View(patientProfile);
         }
 
 

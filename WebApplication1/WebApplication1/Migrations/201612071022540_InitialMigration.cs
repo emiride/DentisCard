@@ -119,11 +119,11 @@ namespace WebApplication1.Migrations
                         DateCreated = c.DateTime(nullable: false),
                         DateModified = c.DateTime(),
                         Bill = c.Double(nullable: false),
-                        MedicalHistory_Id = c.String(maxLength: 128),
+                        MedicalHistoryId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.MedicalHistories", t => t.MedicalHistory_Id)
-                .Index(t => t.MedicalHistory_Id);
+                .ForeignKey("dbo.MedicalHistories", t => t.MedicalHistoryId)
+                .Index(t => t.MedicalHistoryId);
             
             CreateTable(
                 "dbo.Teeth",
@@ -132,11 +132,11 @@ namespace WebApplication1.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         ToothPosition = c.Int(nullable: false),
                         ToothState = c.Int(nullable: false),
-                        MedicalHistory_Id = c.String(maxLength: 128),
+                        MedicalHistoryId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.MedicalHistories", t => t.MedicalHistory_Id)
-                .Index(t => t.MedicalHistory_Id);
+                .ForeignKey("dbo.MedicalHistories", t => t.MedicalHistoryId)
+                .Index(t => t.MedicalHistoryId);
             
             CreateTable(
                 "dbo.AspNetUserRoles",
@@ -228,8 +228,8 @@ namespace WebApplication1.Migrations
             DropForeignKey("dbo.MedicalHistories", "Id", "dbo.Patient");
             DropForeignKey("dbo.ToothMedicalRecords", "MedicalRecord_Id", "dbo.MedicalRecords");
             DropForeignKey("dbo.ToothMedicalRecords", "Tooth_Id", "dbo.Teeth");
-            DropForeignKey("dbo.Teeth", "MedicalHistory_Id", "dbo.MedicalHistories");
-            DropForeignKey("dbo.MedicalRecords", "MedicalHistory_Id", "dbo.MedicalHistories");
+            DropForeignKey("dbo.Teeth", "MedicalHistoryId", "dbo.MedicalHistories");
+            DropForeignKey("dbo.MedicalRecords", "MedicalHistoryId", "dbo.MedicalHistories");
             DropForeignKey("dbo.Schedules", "Id", "dbo.Dentist");
             DropForeignKey("dbo.Appointments", "ScheduleId", "dbo.Schedules");
             DropForeignKey("dbo.Appointments", "PatientId", "dbo.Patient");
@@ -243,8 +243,8 @@ namespace WebApplication1.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
-            DropIndex("dbo.Teeth", new[] { "MedicalHistory_Id" });
-            DropIndex("dbo.MedicalRecords", new[] { "MedicalHistory_Id" });
+            DropIndex("dbo.Teeth", new[] { "MedicalHistoryId" });
+            DropIndex("dbo.MedicalRecords", new[] { "MedicalHistoryId" });
             DropIndex("dbo.MedicalHistories", new[] { "Id" });
             DropIndex("dbo.Schedules", new[] { "Id" });
             DropIndex("dbo.Appointments", new[] { "PatientId" });

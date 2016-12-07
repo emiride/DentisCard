@@ -6,7 +6,7 @@ using WebApplication1.Models;
 
 namespace WebApplication1.ViewModels
 {
-    public class PatientProfile
+    public class PatientProfileViewModel
     {
         public Patient Patient { get; set; }
         public MedicalHistory MedicalHistory { get; set; }
