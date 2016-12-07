@@ -296,7 +296,7 @@ namespace WebApplication1.Controllers
         public ActionResult PatientProfile(string id){
 
             PatientProfileViewModel patientProfile = new PatientProfileViewModel();
-
+            //ovdje redom pravim kverije na bazu i ona mi vraca podatke, te podatke spremim i na kraju proslijedim u view
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -309,11 +309,12 @@ namespace WebApplication1.Controllers
 
             var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
 
+            //sve njih, strpamo u ovaj viewmodel koji smo prethodno napravili
             patientProfile.Patient = patient;
             patientProfile.MedicalHistory = medicalHistory;
             patientProfile.MedicalRecords = medicalRecords;
             patientProfile.Teeth = teeth;
-            
+
 
 
             //MedicalHistory medicalHistory = db.MedicalHistories.Find(id);
@@ -329,13 +330,15 @@ namespace WebApplication1.Controllers
             //}
 
             //Tooth Teeth = db.Teeth.Find(id);
-            
-                /*TODO*/
 
-                /*PatientProfile patientProfile = new PatientProfile { Patient = patient, MedicalHistory = medicalHistory };
+            /*TODO*/
 
-                return View(patientProfile);*/
-                return View(patientProfile);
+            /*PatientProfile patientProfile = new PatientProfile { Patient = patient, MedicalHistory = medicalHistory };
+
+            return View(patientProfile);*/
+
+            //i na kraju posaljemo taj viewmodel u view    
+            return View(patientProfile);
         }
 
 

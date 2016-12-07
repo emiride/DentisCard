@@ -1,5 +1,5 @@
 ﻿@model WebApplication1.ViewModels.PatientProfileViewModel
-
+@* @model WebApplication1.Models.MedicalRecord *@
 @{
     ViewBag.Title = "PatientProfile";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -16,11 +16,10 @@
         <div class="col-md- col-sm-4 col-xs-12">
             <img src="http://www.newlifefamilychiropractic.net/wp-content/uploads/2014/07/300x300.gif" class="img-responsive" />
             <h6>
-                    @Html.DisplayFor(d => d.Patient.FirstName)
-                    @Html.DisplayFor(d => d.Patient.LastName)
+                @Html.DisplayFor(d => d.Patient.FirstName)
+                @Html.DisplayFor(d => d.Patient.LastName)
             </h6>
         </div>
-
         <div class="col-md-5 col-sm-5 col-xs-12">
             <h5>@Html.DisplayFor(d => d.Patient.FirstName) @Html.DisplayFor(d => d.Patient.LastName) </h5>
             <p>Patient </p>
@@ -29,7 +28,6 @@
                 <li><span class="glyphicon glyphicon-home"></span>@Html.DisplayFor(model => model.Patient.Address) </li>
                 <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">@Html.DisplayFor(model => model.Patient.PhoneNumber) </a></li>
                 <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">@Html.DisplayFor(model => model.Patient.Email)</a></li>
-
             </ul>
         </div>
 
@@ -45,6 +43,39 @@
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
                                 <span class="glyphicon glyphicon-folder-close">
+                                </span>Patient's Medical Records
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        <div class="form-horizontal">
+                                            <h4>List all medical records</h4>
+                                            <hr />
+                                            <ul>
+                                                @foreach (var item in Model.MedicalRecords)
+                                                {
+                                                    @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()
+                                                    @Html.DisplayFor(modelItem => item.Description).ToHtmlString()
+                                                    @Html.DisplayFor(modelItem => item.Bill)
+                                                    <hr />
+                                                }
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                <span class="glyphicon glyphicon-folder-close">
                                 </span>Add Medical Record
                             </a>
                         </h4>
@@ -55,48 +86,30 @@
                                 <tr>
                                     <td>
                                         <div class="form-horizontal">
-                                            <h4>Add record dummy fields</h4>
+                                            <h4>Add new record</h4>
                                             <hr />
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                            @Html.HiddenFor(model => model.Patient.Id)
+                                            @using (Html.BeginForm())
+                                            {
+                                                @Html.AntiForgeryToken()
 
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.Patient.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.Patient.FirstName, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Patient.FirstName, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
+                                                <div class="form-horizontal">
+                                                    <hr />
+                                                    @Html.AntiForgeryToken()
+                                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                                    <div class="main">
+                                                        @Html.TextBoxFor(m => m.MedicalRecords, new { @class = "form-control", @placeholder = "Date Created" })
+                                                        @Html.TextBoxFor(m => m.MedicalRecords, new { @class = "form-control", @placeholder = "Description" })
+                                                        @Html.TextBoxFor(m => m.MedicalRecords, new { @class = "form-control", @placeholder = "Bill" })
 
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.Patient.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.Patient.LastName, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Patient.LastName, "", new { @class = "text-danger" })
+                                                        <span class="clearfix"></span>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-md-offset-2 col-md-10">
+                                                            <input type="submit" value="Create" class="btn btn-default" />
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.Patient.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.Patient.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Patient.DateOfBirth, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                @Html.LabelFor(model => model.Patient.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-                                                <div class="col-md-10">
-                                                    @Html.EditorFor(model => model.Patient.Address, new { htmlAttributes = new { @class = "form-control" } })
-                                                    @Html.ValidationMessageFor(model => model.Patient.Address, "", new { @class = "text-danger" })
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <div class="col-md-offset-2 col-md-10">
-                                                    <input type="submit" value="Save" class="btn btn-default" />
-                                                </div>
-                                            </div>
+                                            }
                                         </div>
                                     </td>
                                 </tr>

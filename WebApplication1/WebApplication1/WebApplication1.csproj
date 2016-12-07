@@ -782,6 +782,11 @@
     <Content Include="Views\Dentist\PatientProfile.cshtml" />
     <Content Include="Views\Patient\Edit.cshtml" />
     <Content Include="Views\Dentist\EditMyProfile.cshtml" />
+    <Content Include="Views\MedicalRecords\Create.cshtml" />
+    <Content Include="Views\MedicalRecords\Delete.cshtml" />
+    <Content Include="Views\MedicalRecords\Details.cshtml" />
+    <Content Include="Views\MedicalRecords\Edit.cshtml" />
+    <Content Include="Views\MedicalRecords\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
