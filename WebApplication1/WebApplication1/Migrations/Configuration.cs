@@ -207,30 +207,183 @@ namespace WebApplication1.Migrations
 
             var passwordHasher = new PasswordHasher();
 
-            var downLeft = new Tooth
+            var upLeft1 = new Tooth
             {
-                ToothPosition = ToothPosition.dl3,
-                ToothState = ToothState.NoTooth
+                ToothPosition = ToothPosition.gl1,
+                ToothState = ToothState.H
             };
-
-            var upLeft = new Tooth
+            var upLeft2 = new Tooth
+            {
+                ToothPosition = ToothPosition.gl2,
+                ToothState = ToothState.H
+            };
+            var upLeft3 = new Tooth
+            {
+                ToothPosition = ToothPosition.gl3,
+                ToothState = ToothState.C2
+            };
+            var upLeft4 = new Tooth
+            {
+                ToothPosition = ToothPosition.gl4,
+                ToothState = ToothState.H
+            };
+            var upLeft5 = new Tooth
+            {
+                ToothPosition = ToothPosition.gl5,
+                ToothState = ToothState.C1
+            };
+            var upLeft6 = new Tooth
             {
                 ToothPosition = ToothPosition.gl6,
-                ToothState = ToothState.Caries1
+                ToothState = ToothState.H
+            };
+            var upLeft7 = new Tooth
+            {
+                ToothPosition = ToothPosition.gl7,
+                ToothState = ToothState.H
+            };
+            var upLeft8 = new Tooth
+            {
+                ToothPosition = ToothPosition.gl8,
+                ToothState = ToothState.C1
+            };
+            var upRight1 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd1,
+                ToothState = ToothState.Cu
+            };
+            var upRight2 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd2,
+                ToothState = ToothState.H
+            };
+            var upRight3 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd3,
+                ToothState = ToothState.H
+            };
+            var upRight4 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd4,
+                ToothState = ToothState.C1
+            };
+            var upRight5 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd5,
+                ToothState = ToothState.No
+            };
+            var upRight6 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd6,
+                ToothState = ToothState.CC3
+            };
+            var upRight7 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd7,
+                ToothState = ToothState.H
+            };
+            var upRight8 = new Tooth
+            {
+                ToothPosition = ToothPosition.gd8,
+                ToothState = ToothState.H
+            };
+
+
+
+            var downLeft1 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl1,
+                ToothState = ToothState.H
+            };
+            var downLeft2 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl2,
+                ToothState = ToothState.H
+            };
+            var downLeft3 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl3,
+                ToothState = ToothState.C2
+            };
+            var downLeft4 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl4,
+                ToothState = ToothState.H
+            };
+            var downLeft5 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl5,
+                ToothState = ToothState.C1
+            };
+            var downLeft6 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl6,
+                ToothState = ToothState.H
+            };
+            var downLeft7 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl7,
+                ToothState = ToothState.H
+            };
+            var downLeft8 = new Tooth
+            {
+                ToothPosition = ToothPosition.dl8,
+                ToothState = ToothState.C1
+            };
+            var downRight1 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd1,
+                ToothState = ToothState.Cu
+            };
+            var downRight2 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd2,
+                ToothState = ToothState.H
+            };
+            var downRight3 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd3,
+                ToothState = ToothState.H
+            };
+            var downRight4 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd4,
+                ToothState = ToothState.C1
+            };
+            var downRight5 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd5,
+                ToothState = ToothState.No
+            };
+            var downRight6 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd6,
+                ToothState = ToothState.CC3
+            };
+            var downRight7 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd7,
+                ToothState = ToothState.H
+            };
+            var downRight8 = new Tooth
+            {
+                ToothPosition = ToothPosition.dd8,
+                ToothState = ToothState.H
             };
 
             var medicalRecord01 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Vadjena trica donja lijeva",
-                Teeth = new List<Tooth>() { downLeft }
+                Teeth = new List<Tooth>() { upRight1 }
             };
             var medicalRecord02 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Radjena krunica gornje lijeve sestice",
-                Teeth = new List<Tooth>() { upLeft }
+                Teeth = new List<Tooth>() { upLeft1 }
             };
+
             var patient = new Patient
             {
 
@@ -246,37 +399,41 @@ namespace WebApplication1.Migrations
                 PhoneNumber = "062/064-064",
                 SecurityStamp = "dcvfgdve",
                 MedicalHistory = new MedicalHistory
-                
+
                 {
                     Note = "Patient's teeth are just awesome and he is ready to get married.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord01, medicalRecord02 },
-                    Teeth = new List<Tooth>() { downLeft, upLeft}
+                    Teeth = new List<Tooth>() {upLeft1, upLeft2, upLeft3, upLeft4, upLeft5, upLeft6, upLeft7, upLeft8,
+                    upRight1, upRight2, upRight3, upRight4, upRight5, upRight6, upRight7, upRight8, downLeft1, downLeft2, downLeft3
+                    , downLeft4, downLeft5, downLeft6, downLeft7, downLeft8, downRight1, downRight2, downRight3, downRight4, downRight5
+                    , downRight6, downRight7, downRight8}
                 }
             };
 
-            var downRight2 = new Tooth
+
+            var downRight222 = new Tooth
             {
                 ToothPosition = ToothPosition.dd3,
-                ToothState = ToothState.NoTooth
+                ToothState = ToothState.No
             };
 
-            var upRight2 = new Tooth
+            var upRight222 = new Tooth
             {
                 ToothPosition = ToothPosition.gd5,
-                ToothState = ToothState.Caries1
+                ToothState = ToothState.C1
             };
 
             var medicalRecord11 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Vadjena trica donja desna",
-                Teeth = new List<Tooth>() { downRight2 }
+                Teeth = new List<Tooth>() { downRight222 }
             };
             var medicalRecord12 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Zalivena gornja desna petica",
-                Teeth = new List<Tooth>() { upRight2 }
+                Teeth = new List<Tooth>() { upRight222 }
             };
 
             var appointment = new Appointment
@@ -327,36 +484,36 @@ namespace WebApplication1.Migrations
                     PatientId = patient.Id,
                     Note = "Patient's teeth are very good, but since he is awesome looking, he is ready to get married.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord11, medicalRecord12 },
-                    Teeth = new List<Tooth>() { downRight2, upRight2}
+                    Teeth = new List<Tooth>() { downRight222, upRight222}
                 },
                 Appointments = new List<Appointment>() { appointment, appointment3 }
                 
             };
 
             //samac
-            var upRight3 = new Tooth
+            var upRight33 = new Tooth
             {
                 ToothPosition = ToothPosition.gd2,
-                ToothState = ToothState.Caries1
+                ToothState = ToothState.C1
             };
 
             var upRight31 = new Tooth
             {
                 ToothPosition = ToothPosition.gd1,
-                ToothState = ToothState.Healthy
+                ToothState = ToothState.H
             };
 
-            var downRight3 = new Tooth
+            var downRight33 = new Tooth
             {
                 ToothPosition = ToothPosition.dd3,
-                ToothState = ToothState.Healthy
+                ToothState = ToothState.H
             };
 
             var medicalRecord31 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Zalivena gornja desna dvica",
-                Teeth = new List<Tooth>() { upRight3, upRight31, downRight3 }
+                Teeth = new List<Tooth>() { upRight33, upRight31, downRight33 }
             };
 
             
@@ -381,7 +538,7 @@ namespace WebApplication1.Migrations
                     
                     Note = "Patient's teeth are excellent, he can perform good on stage.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord31 },
-                    Teeth = new List<Tooth>() { upRight3, upRight31, downRight3 }
+                    Teeth = new List<Tooth>() { upRight33, upRight31, downRight3 }
                 },
                 
                 Appointments = new List<Appointment>() { appointment2 }

@@ -363,6 +363,7 @@ namespace WebApplication1.Controllers
                     UserName = model.FirstName,
                     Email = model.Email,
                     DateCreated = DateTime.Now
+
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
