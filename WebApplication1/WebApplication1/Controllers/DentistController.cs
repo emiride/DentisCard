@@ -10,6 +10,7 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using WebApplication1.Enumerations;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
 using WebApplication1.ViewModels.Dentist;
@@ -18,7 +19,7 @@ using WebApplication1.ViewModels.Dentist;
 namespace WebApplication1.Controllers
 {
     [Authorize(Roles = Role.Dentist)]
-    public class DentistController : Controller
+    public class DentistController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         public ApplicationUserManager ApplicationUserManager { get; set; }
@@ -212,6 +213,25 @@ namespace WebApplication1.Controllers
                 patient.PasswordHash = passwordHasher.HashPassword("P@ssw0rd");
                 patient.UserName = patient.Email;
                 patient.DentistId = dentistId;
+
+                //creating default values for teeth
+                var positions = Enum.GetValues(typeof(ToothPosition)).Cast<ToothPosition>().ToList();
+                var teeth = new List<Tooth>();
+
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    teeth.Add(new Tooth
+                    {
+                        ToothPosition = positions[i],
+                        ToothState = ToothState.H,
+                    });
+                }
+                patient.MedicalHistory = new MedicalHistory
+                {
+                    Teeth = teeth,
+                    //PatientId = patient.Id,
+                    
+                };
                 db.Patients.Add(patient);
                 db.SaveChanges();
                 UserManager.AddToRole(patient.Id, Role.Patient);

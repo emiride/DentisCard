@@ -7,13 +7,12 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using WebApplication1.ViewModels.Dentist;
 
 
 namespace WebApplication1.Controllers
 {
     [Authorize (Roles = Role.Admin)]
-    public class AdminController : Controller
+    public class AdminController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 

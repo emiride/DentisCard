@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -12,7 +11,7 @@ using WebApplication1.ViewModels.Account;
 namespace WebApplication1.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

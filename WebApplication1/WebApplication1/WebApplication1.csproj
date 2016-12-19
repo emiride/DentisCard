@@ -187,6 +187,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DentistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -831,6 +832,7 @@
     <Folder Include="Content\kendo\Uniform\" />
     <Folder Include="Scripts\kendo\cultures\" />
     <Folder Include="Scripts\kendo\messages\" />
+    <Folder Include="Views\Base\" />
     <Folder Include="Views\Scheduler\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,9 +1,8 @@
 ﻿using System.Web.Mvc;
-using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
 
         public ActionResult Index()

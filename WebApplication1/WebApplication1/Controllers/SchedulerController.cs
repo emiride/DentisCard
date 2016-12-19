@@ -7,7 +7,7 @@ using WebApplication1.Services;
 
 namespace WebApplication1.Controllers
 {
-    public class SchedulerController : Controller
+    public class SchedulerController : BaseController
     {
         private readonly SchedulerAppointmentService appointmentService;
 

@@ -1,22 +1,15 @@
-﻿using System;
+﻿using Kendo.Mvc.Extensions;
+using Microsoft.AspNet.Identity;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
-using System.Web;
+using System.Net;
 using System.Web.Mvc;
 using WebApplication1.Models;
-using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System.Data.Entity;
-using System.Net;
-using System.Threading.Tasks;
-using WebApplication1.ViewModels.Dentist;
-using System.Data;
 
 namespace WebApplication1.Controllers
 {
-    public class PatientController : Controller
+    public class PatientController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
