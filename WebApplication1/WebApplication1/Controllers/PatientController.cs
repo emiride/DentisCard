@@ -46,7 +46,29 @@ namespace WebApplication1.Controllers
         [Authorize(Roles = Role.Patient)]
         public ActionResult MyDentist()
         {
-            return View();
+            var CurrentPatientId = User.Identity.GetUserId();
+            var CurrentPatient = new Patient();
+            var patients = db.Patients;
+            foreach (var p in patients)
+            {
+                if (p.Id == CurrentPatientId)
+                {
+                    CurrentPatient = p;
+                }
+            }
+
+
+            var den = CurrentPatient.DentistId;
+            var PatientDentist = new Dentist();
+            var dentists = db.Dentists;
+            foreach(var d in dentists)
+            {
+                if (d.Id == den)
+                {
+                    PatientDentist = d;
+                }
+            }
+            return View(PatientDentist);
         }
 
         [Authorize(Roles = Role.Patient)]
