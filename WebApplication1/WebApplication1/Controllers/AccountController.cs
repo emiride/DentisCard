@@ -1,12 +1,15 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.ViewModels.Account;
+using WebApplication1.Enumerations;
 
 namespace WebApplication1.Controllers
 {
@@ -173,9 +176,29 @@ namespace WebApplication1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var teeth = new List<Tooth>();
+            var positions = Enum.GetValues(typeof(ToothPosition)).Cast<ToothPosition>().ToList();
+            for (int i = 0; i < positions.Count; i++)
+            {
+                teeth.Add(new Tooth
+                {
+                    ToothPosition = positions[i],
+                    ToothState = ToothState.H,
+                });
+            }
+
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { Email = model.Email };
+                var user = new Patient {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    UserName = model.FirstName,
+                    Email = model.Email,
+                    MedicalHistory = new MedicalHistory { Teeth = teeth },
+                    DateCreated = DateTime.Now
+                };
+             
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

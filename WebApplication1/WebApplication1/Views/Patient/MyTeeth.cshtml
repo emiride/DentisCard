@@ -1,0 +1,483 @@
+﻿@model WebApplication1.ViewModels.PatientProfileViewModel
+@using WebApplication1.Enumerations
+@{
+    ViewBag.Title = "MyTeeth";
+}
+<head>
+    <link href="~/Content/css/TeethImages.css" rel="stylesheet" />
+</head>
+
+<h2>MyTeeth</h2>
+
+<div class="col-sm-9 col-md-9">
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-6 col-md-6">
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl8)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd8.png" alt="Gornja lijeva osmica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl7)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure>
+                            <span><img src="~/Content/Images/teeth/gd7.png" alt="Gornja lijeva sedmica" width="40" height="100" /></span>
+                        </figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl6)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure> <span><img src="~/Content/Images/teeth/gd6.png" alt="Gornja lijeva sestica" width="40" height="100" /></span> </figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl5)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure> <span><img src="~/Content/Images/teeth/gd5.png" alt="Gornja lijeva petica" width="40" height="100" /> </span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl4)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd4.png" alt="Gornja lijeva cetvorka" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl3)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd3.png" alt="Gornja lijeva trica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+
+                    </div>
+                }
+            }
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl2)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure> <span><img src="~/Content/Images/teeth/gd2.png" alt="Gornja lijeva dvica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.gl1)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd1.png" alt="Gornji lijevi kec" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+        </div>
+
+
+        <div class="col-sm-6 col-md-6">
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gd1)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+
+                        <figure> <span><img src="~/Content/Images/teeth/gd1.png" alt="Gornji desni kec" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gd2)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure> <span><img src="~/Content/Images/teeth/gd2.png" alt="Gornja desna dvica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gd3)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd3.png" alt="Gornja desna trica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gd4)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd4.png" alt="Gornja desna cetvorka" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+
+                }
+            }
+
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gd5)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd5.png" alt="Gornja desna petica" width="40" height="100" /> </span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gd6)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd6.png" alt="Gornja desna sestica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gd7)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure><span><img src="~/Content/Images/teeth/gd7.png" alt="Gornja desna sedmica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.gl8)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head">
+                        <figure> <span><img src="~/Content/Images/teeth/gd8.png" alt="Gornja desna osmica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+<div class="col-sm-9 col-md-9">
+    <div class="col-sm-12 col-md-12">
+        <div class="col-sm-6 col-md-6">
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl8)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d8.png" alt="Donja lijeva osmica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl7)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure>
+                            <span><img src="~/Content/Images/teeth/d7.png" alt="Donja lijeva sedmica" width="40" height="100" /></span>
+                        </figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl6)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure> <span><img src="~/Content/Images/teeth/d6.png" alt="Donja lijeva sestica" width="40" height="100" /></span> </figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl5)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure> <span><img src="~/Content/Images/teeth/d5.png" alt="Donja lijeva petica" width="40" height="100" /> </span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl4)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d4.png" alt="Donja lijeva cetvorka" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl3)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d3.png" alt="Donja lijeva trica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+
+                    </div>
+                }
+            }
+
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl2)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure> <span><img src="~/Content/Images/teeth/d2.png" alt="Donja lijeva dvica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+
+                    </div>
+                }
+            }
+            @foreach (var item in Model.Teeth)
+            {
+                if (item.ToothPosition == ToothPosition.dl1)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d1.png" alt="Donji lijevi kec" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+        </div>
+
+
+        <div class="col-sm-6 col-md-6">
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd1)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+
+                        <figure> <span><img src="~/Content/Images/teeth/d1.png" alt="Donji desni kec" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd2)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure> <span><img src="~/Content/Images/teeth/d2.png" alt="Donja desna dvica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd3)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d3.png" alt="Donja desna trica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd4)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d4.png" alt="Donja desna cetvorka" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+
+                }
+            }
+
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd5)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d5.png" alt="Donja desna petica" width="40" height="100" /> </span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd6)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d6.png" alt="Donja desna sestica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd7)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure><span><img src="~/Content/Images/teeth/d7.png" alt="Donja desna sedmica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+            @foreach (var item1 in Model.Teeth)
+            {
+                if (item1.ToothPosition == ToothPosition.dd8)
+                {
+                    <div class="col-sm-1 col-md-1 teeth-head downTeeth">
+                        <figure> <span><img src="~/Content/Images/teeth/d8.png" alt="Donja desna osmica" width="40" height="100" /></span></figure>
+                        <figcaption>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
+                            <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
+                        </figcaption>
+                    </div>
+                }
+            }
+
+        </div>
+    </div>
+</div>
+
+
+

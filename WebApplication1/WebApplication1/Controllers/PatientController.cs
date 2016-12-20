@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using WebApplication1.Models;
+using WebApplication1.ViewModels;
 
 namespace WebApplication1.Controllers
 {
@@ -74,6 +75,25 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize(Roles = Role.Patient)]
+        public ActionResult MyTeeth()
+        {
+            var currentPatientId = User.Identity.GetUserId();
+            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+
+            var patient = db.Patients.Find(currentPatientId);
+            var medicalHistory = db.MedicalHistories.Find(currentPatientId);
+            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == currentPatientId).ToList();
+            var teeth = db.Teeth.Where(m => m.MedicalHistoryId == currentPatientId).ToList();
+
+            patientProfile.Patient = patient;
+            patientProfile.MedicalHistory = medicalHistory;
+            patientProfile.MedicalRecords = medicalRecords;
+            patientProfile.Teeth = teeth;
+            return View(patientProfile);
+
+        }
+       
 
         //Edit method for Patient editig his/her profile
         [Authorize(Roles = Role.Patient)]
@@ -103,7 +123,7 @@ namespace WebApplication1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var PatientToUpdate = db.Dentists.Find(id);
+            var PatientToUpdate = db.Patients.Find(id);
             if (TryUpdateModel(PatientToUpdate, "",
                new string[] { "FirstName", "LastName", "DateOfBirth", "Address", "EmploymentStatus", "Email", "PhoneNumber", "UserName", "UserPhoto" }))
             {
@@ -121,5 +141,6 @@ namespace WebApplication1.Controllers
             return View(PatientToUpdate);
         }
 
+        
     }
 }

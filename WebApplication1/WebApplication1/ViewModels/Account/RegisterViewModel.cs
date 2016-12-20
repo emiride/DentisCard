@@ -5,6 +5,18 @@ namespace WebApplication1.ViewModels.Account
     public class RegisterViewModel
     {
         [Required]
+        [Display(Name = "First Name")]
+        [StringLength(50)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        [StringLength(50)]
+        public string LastName { get; set; }
+
+        public string UserName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -15,7 +27,6 @@ namespace WebApplication1.ViewModels.Account
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
