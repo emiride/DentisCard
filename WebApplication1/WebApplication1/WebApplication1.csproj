@@ -806,6 +806,8 @@
     <Content Include="Views\MedicalRecords\Edit.cshtml" />
     <Content Include="Views\MedicalRecords\Index.cshtml" />
     <Content Include="Views\Patient\MyTeeth.cshtml" />
+    <Content Include="Views\Patient\PickDentist.cshtml" />
+    <Content Include="Views\Patient\SeeDentistProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

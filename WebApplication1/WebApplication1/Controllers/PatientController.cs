@@ -163,6 +163,86 @@ namespace WebApplication1.Controllers
             return View(PatientToUpdate);
         }
 
-        
+
+        public ActionResult ChooseDentist(string id)
+        {
+            var CurrentUserId = User.Identity.GetUserId();
+            var CurrentPatient = new Patient();
+            var patients = db.Patients;
+            foreach(var p in patients)
+            {
+                if (p.Id == CurrentUserId)
+                {
+                    CurrentPatient = p;
+                }
+            }
+            if (ModelState.IsValid)
+            {
+                Dentist ChoosenDentist = db.Dentists.Find(id);
+                var DentistId = ChoosenDentist.Id;
+                CurrentPatient.DentistId = DentistId;
+                db.SaveChanges();
+
+                return RedirectToAction("Index");
+            }
+            return View();
+
+        }
+        public ActionResult PickDentist(string sortOrder, string searchString)
+        {
+            List<Dentist> dentistsList = new List<Dentist>();
+            var dentists = db.Dentists;
+            foreach (var i in dentists)
+            {
+                dentistsList.Add(i);
+            }
+            //Sorting
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LNameSortParm = string.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.BDateSortParm = sortOrder == "BDate" ? "Bdate_desc" : "BDate";
+
+            var patientOrder = from s in dentistsList
+                               select s;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                patientOrder = patientOrder.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.FirstName);
+                    break;
+                case "LName":
+                    patientOrder = patientOrder.OrderBy(s => s.LastName);
+                    break;
+                case "LName_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    patientOrder = patientOrder.OrderBy(s => s.DateCreated);
+                    break;
+                case "date_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.DateCreated);
+                    break;
+                case "BDate":
+                    patientOrder = patientOrder.OrderBy(s => s.DateOfBirth);
+                    break;
+                case "Bdate_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.DateOfBirth);
+                    break;
+                default:
+                    patientOrder = patientOrder.OrderBy(s => s.FirstName);
+                    break;
+            }
+
+            return View(patientOrder);
+        }
+
+        public ActionResult SeeDentistProfile(string id)
+        {
+            Dentist ChoosenDentist = db.Dentists.Find(id);
+            return View(ChoosenDentist);
+        }
     }
 }

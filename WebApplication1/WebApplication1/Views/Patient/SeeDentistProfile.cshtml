@@ -1,0 +1,36 @@
+﻿@model WebApplication1.Models.Dentist
+@{
+    ViewBag.Title = "MyDentist";
+}
+<head>
+    <link href="~/Content/css/CustomLeftNavbar.css" rel="stylesheet" />
+    <link href="~/Content/css/CustomProfile.css" rel="stylesheet" />
+</head>
+
+
+<div class="container my-custom-container">
+    <div class="profile-head">
+        <div class="col-md- col-sm-4 col-xs-12">
+            <img src="http://www.newlifefamilychiropractic.net/wp-content/uploads/2014/07/300x300.gif" class="img-responsive" />
+            <h6>
+                @Html.DisplayFor(d => d.FirstName)
+                @Html.DisplayFor(d => d.LastName)
+            </h6>
+        </div>
+        <div class="col-md-5 col-sm-5 col-xs-12">
+            <h5>
+                @Html.DisplayFor(d => d.FirstName)
+                @Html.DisplayFor(d => d.LastName)
+            </h5>
+            <p>Dentist </p>
+            <ul>
+                <li><span class="glyphicon glyphicon-gift"></span>@Html.DisplayFor(model => model.DateOfBirth)</li>
+                <li><span class="glyphicon glyphicon-home"></span>@Html.DisplayFor(model => model.Address)</li>
+                <li><span class="glyphicon glyphicon-phone"></span> <a href="#" title="call">061123456789</a></li>
+                <li><span class="glyphicon glyphicon-envelope"></span><a href="#" title="mail">@Html.DisplayFor(model => model.Email)</a></li>
+
+            </ul>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,90 @@
+﻿
+@model IEnumerable<WebApplication1.Models.Dentist>
+
+
+
+<h1>Please choose your dentist!</h1>
+
+@using (@Html.BeginForm("PickDentist", "Patient", FormMethod.Get))
+{
+    @*HTML helper way of input for search
+        @Html.TextBox("searchString",null, new {id = "custom-search-input", @class = "form-control input"});*@
+
+    <div class="container" style="padding-left:0px; padding-right:0px">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="custom-search-input">
+                    <div class="input-group">
+                        <input type="text" id="searchString" name="searchString" class="form-control input" placeholder="Search first and last name..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div style="overflow-x:auto;">
+    <table class="table">
+        <thead class="thead-inverse">
+            <tr>
+                <th>
+                    @Html.ActionLink("First Name", "MyPatients", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Last Name", "MyPatients", new { sortOrder = ViewBag.LNameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Date of birth", "MyPatients", new { sortOrder = ViewBag.BDateSortParm })
+                </th>
+               
+                <th>
+                    @Html.ActionLink("Phone Number", "MyPatients", new { sortOrder = ViewBag.DateSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Address", "MyPatients", new { sortOrder = ViewBag.DateSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Email", "MyPatients", new { sortOrder = ViewBag.DateSortParm })
+                </th>
+                <th>
+                    Dentist profile
+                </th>
+                <th style="color:#335381"></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString(), "ChooseDentist", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.LastName).ToHtmlString(), "ChooseDentist", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfBirth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td style="color:#335381">
+                    @Html.ActionLink("See " + Html.DisplayFor(modelItem => item.FirstName).ToHtmlString() + "'s profile", "SeeDentistProfile", new { id = item.Id }) |
+                    @Html.ActionLink("Choose Dentist", "ChooseDentist", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
