@@ -1,9 +1,14 @@
 ﻿using Kendo.Mvc.Extensions;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
+using System.Threading;
+using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using WebApplication1.ViewModels;
@@ -13,6 +18,44 @@ namespace WebApplication1.Controllers
     public class PatientController : BaseController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        public ApplicationUserManager ApplicationUserManager { get; set; }
+        public ApplicationSignInManager ApplicationSignInManager { get; set; }
+
+        public PatientController()
+        {
+
+        }
+
+        public PatientController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        {
+            UserManager = userManager;
+            SignInManager = signInManager;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return ApplicationUserManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                ApplicationUserManager = value;
+            }
+        }
+
+        public ApplicationSignInManager SignInManager
+        {
+            get
+            {
+                return ApplicationSignInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            }
+            private set
+            {
+                ApplicationSignInManager = value;
+            }
+        }
+
 
         // GET: Patient
         public ActionResult Index()
@@ -28,11 +71,6 @@ namespace WebApplication1.Controllers
                 }
             }
             return View(patient);
-        }
-
-        public ActionResult FindDoctor()
-        {
-            return View();
         }
 
         //Allowed just for Patient user
@@ -115,10 +153,10 @@ namespace WebApplication1.Controllers
             return View(patientProfile);
 
         }
-       
+
 
         //Edit method for Patient editig his/her profile
-        [Authorize(Roles = Role.Patient)]
+        [Authorize(Roles = Role.User+","+Role.Patient)]
         public ActionResult Edit()
         {
             var currentPatientId = User.Identity.GetUserId();
@@ -139,6 +177,7 @@ namespace WebApplication1.Controllers
         //Edit for patient asinhrona metoda
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.User + "," + Role.Patient)]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -163,7 +202,7 @@ namespace WebApplication1.Controllers
             return View(PatientToUpdate);
         }
 
-
+        [Authorize(Roles = Role.User)]
         public ActionResult ChooseDentist(string id)
         {
             var CurrentUserId = User.Identity.GetUserId();
@@ -176,18 +215,25 @@ namespace WebApplication1.Controllers
                     CurrentPatient = p;
                 }
             }
+            UserManager.RemoveFromRole(CurrentUserId, Role.User);
+            db.SaveChanges();
             if (ModelState.IsValid)
             {
                 Dentist ChoosenDentist = db.Dentists.Find(id);
                 var DentistId = ChoosenDentist.Id;
                 CurrentPatient.DentistId = DentistId;
+                UserManager.AddToRole(CurrentUserId, Role.Patient);              
                 db.SaveChanges();
-
-                return RedirectToAction("Index");
+                var user = UserManager.FindById(User.Identity.GetUserId());
+                SignInManager.SignIn(user, false, false);
+                return RedirectToAction("Index", "Patient");
             }
-            return View();
 
+            return View();
         }
+
+
+        [Authorize(Roles = Role.User)]
         public ActionResult PickDentist(string sortOrder, string searchString)
         {
             List<Dentist> dentistsList = new List<Dentist>();

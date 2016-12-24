@@ -102,6 +102,10 @@ namespace WebApplication1.Controllers
                     {
                         return RedirectToAction("Index", "Patient");
                     }
+                    else if (roles.Contains("User"))
+                    {
+                        return RedirectToAction("PickDentist", "Patient");
+                    }
                     else
                     {
                         return RedirectToLocal(returnUrl);
@@ -202,7 +206,7 @@ namespace WebApplication1.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await UserManager.AddToRoleAsync(user.Id, Role.Patient);
+                    await UserManager.AddToRoleAsync(user.Id, Role.User);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

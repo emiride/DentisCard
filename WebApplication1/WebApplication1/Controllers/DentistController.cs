@@ -244,6 +244,7 @@ namespace WebApplication1.Controllers
         }
 
         // GET: Dentist/Edit/5
+        [Authorize(Roles = Role.Dentist)]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -264,6 +265,7 @@ namespace WebApplication1.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Dentist)]
         public ActionResult EditPatients(string id)
         {
             if (id == null)
@@ -447,6 +449,7 @@ namespace WebApplication1.Controllers
         //asinhrona metoda za spremanje podataka u bazu nakon editovanja
         [HttpPost, ActionName("EditMyProfile")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = Role.Dentist)]
         public ActionResult EditMyProfile(string id)
         {
             if (id == null)

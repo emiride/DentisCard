@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!--WTF is this? EMIR-->
-                @if (ViewContext.HttpContext.User.IsInRole(Role.Dentist))
+                @if (ViewContext.HttpContext.User.IsInRole(Role.Dentist) )
                 {
                     @Html.ActionLink("DentisCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
@@ -36,6 +36,10 @@
                 @if (ViewContext.HttpContext.User.IsInRole("Admin"))
                 {
                      @Html.ActionLink("DentisCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                }
+                @if (ViewContext.HttpContext.User.IsInRole("User"))
+                {
+                    @Html.ActionLink("DentisCard", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                 }
                
             </div>
@@ -56,6 +60,12 @@
                         <li>@Html.ActionLink("Arrange Appointment", "ArrangeAppointment", "Patient")</li>
                         <li>@Html.ActionLink("My Dentist", "MyDentist", "Patient")</li>
                         <li>@Html.ActionLink("Medical History", "MedicalHistory", "Patient")</li>
+                    }
+                    @if (ViewContext.HttpContext.User.IsInRole(Role.User))
+                    {
+                        <li>@Html.ActionLink("My Profile", "Index", "Patient")</li>
+                        <li>@Html.ActionLink("Find Dentist", "PickDentist", "Patient")</li>
+                        <li>@Html.ActionLink("Edit profile", "Edit", "Patient")</li>
                     }
 
                     @if (ViewContext.HttpContext.User.IsInRole(Role.Admin))
