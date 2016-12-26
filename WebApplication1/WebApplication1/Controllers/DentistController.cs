@@ -290,6 +290,19 @@ namespace WebApplication1.Controllers
             }
             return View(PatientToUpdate);
         }
+        public ActionResult Delete(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Patient patient = db.Patients.Find(id);
+            if (patient == null)
+            {
+                return HttpNotFound();
+            }
+            return View(patient);
+        }
 
         // POST: Dentist/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -314,6 +327,53 @@ namespace WebApplication1.Controllers
         //}
 
         
+        public ActionResult MedicalRecord(string id)
+        {
+            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+
+
+            var patient = db.Patients.Find(id);
+            var medicalHistory = db.MedicalHistories.Find(id);
+            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
+            var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
+            var currentPatient = db.Patients.Find(id);
+
+            patientProfile.Patient = patient;
+            patientProfile.MedicalHistory = medicalHistory;
+            patientProfile.MedicalRecords = medicalRecords;
+            patientProfile.Teeth = teeth;
+           
+            return View(patientProfile);
+        }
+
+        [HttpPost, ActionName("MedicalRecord")]
+        [ValidateAntiForgeryToken]
+        public ActionResult InsertMedicalRecord(string id, PatientProfileViewModel model)
+        {
+           
+            var p = db.Patients.Find(id);
+         
+            var downRight8 = new Tooth
+            {
+                ToothPosition = ToothPosition.gl1,
+                ToothState = ToothState.CC2
+            };
+            var medicalRecord01 = new MedicalRecord
+            {
+                DateCreated = DateTime.Now,
+                Description = model.MedicalRecord.Description,
+                Teeth = new List<Tooth>() { downRight8 },
+                Bill = model.MedicalRecord.Bill
+            };
+            if (ModelState.IsValid) { 
+            var MedicalRecords = new List<MedicalRecord>() { medicalRecord01 };
+            p.MedicalHistory.MedicalRecords =MedicalRecords;      
+            db.SaveChanges();
+            return RedirectToAction("MyPatients");
+            }
+            return View();
+        }
+
         [Authorize (Roles = Role.Dentist)]
         public ActionResult PatientProfile(string id){
 

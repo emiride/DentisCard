@@ -8,6 +8,8 @@ namespace WebApplication1.ViewModels
 {
     public class PatientProfileViewModel
     {
+        public MedicalRecord MedicalRecord { get; set; }
+        public Tooth Tooth { get; set; }
         public Patient Patient { get; set; }
         public MedicalHistory MedicalHistory { get; set; }
         public IEnumerable<MedicalRecord> MedicalRecords { get; set; }

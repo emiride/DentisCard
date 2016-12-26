@@ -1,0 +1,36 @@
+﻿@model WebApplication1.ViewModels.PatientProfileViewModel
+@{
+    ViewBag.Title = "MedicalRecord";
+}
+
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Insert medical record</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MedicalRecord.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.MedicalRecord.Description, new { style="width: 80%; max-width: 100%;", @class = "form-control"  })
+                @Html.ValidationMessageFor(model => model.MedicalRecord.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.MedicalRecord.Bill, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MedicalRecord.Bill, new { @class = "form-control", @type = "number", @step="any", @min = "0", @placeholder = "KM" })
+                @Html.ValidationMessageFor(model => model.MedicalRecord.Bill, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" onclick="location.href='@Url.Action("Create", "InsertMedicalRecord")'" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
