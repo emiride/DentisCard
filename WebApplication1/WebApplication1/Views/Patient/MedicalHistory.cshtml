@@ -1,4 +1,5 @@
-﻿@model WebApplication1.Models.Patient
+﻿@model WebApplication1.ViewModels.PatientProfileViewModel
+@using WebApplication1.Enumerations
 
 @{
     ViewBag.Title = "MedicalHistory";
@@ -7,73 +8,39 @@
 
 <h2>MedicalHistory</h2>
 
-
-@using (@Html.BeginForm("MedicalHistory", "Patient", FormMethod.Get))
-{
-    @*HTML helper way of input for search
-        @Html.TextBox("searchString",null, new {id = "custom-search-input", @class = "form-control input"});*@
-
-    <div class="container" style="padding-left:0px; padding-right:0px">
-        <div class="row">
-            <div class="col-md-3">
-                <div id="custom-search-input">
-                    <div class="input-group">
-                        <input type="text" id="searchString" name="searchString" class="form-control input" placeholder="Search first and last name..." />
-                        <span class="input-group-btn">
-                            <button class="btn btn-info btn" type="button">
-                                <i class="glyphicon glyphicon-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-}
-
-<div style="overflow-x:auto;">
+<div class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">@Html.LabelFor(model => model.Patient.FirstName, htmlAttributes: new { @class = "control-label" })</div>
+    <!-- Table -->
     <table class="table">
-        <thead class="thead-inverse">
+        <thead>
             <tr>
-                <th>
-                    @* @Html.ActionLink("First Name", "GetPatients", new { sortOrder = ViewBag.NameSortParm })
-    </th>
-    <th>
-        @Html.ActionLink("Last Name", "GetPatients", new { sortOrder = ViewBag.LNameSortParm })
-    </th>
-    <th>
-        @Html.ActionLink("Date of birth", "GetPatients", new { sortOrder = ViewBag.BDateSortParm })
-    </th>
-    <th>
-        @Html.ActionLink("Date Created", "GetPatients", new { sortOrder = ViewBag.DateSortParm })
-    </th>
-    <th>
-                    *@</th>
-                        </tr>
-                    </thead>
+                <th>#</th>
+                <th>@Html.LabelFor(model => model.MedicalRecord.Description, htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                <th>@Html.LabelFor(model => model.MedicalRecord.DateCreated, htmlAttributes: new { @class = "control-label col-md-2" })</th>
+                <th> @Html.LabelFor(model => model.MedicalRecord.Bill, htmlAttributes: new { @class = "control-label col-md-2" })</th>
+            </tr>
+        </thead>
+        <tbody>
 
-                   @*  @foreach (var item in Model)
-    {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateOfBirth)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DateCreated)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-              </td>
-                        </tr>
-                    }
-                *@
-                </table>
-            </div>
+            @foreach (var item in Model.MedicalRecords)
+            {
+                int num = 1;
+
+                <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateCreated)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bill)
+                    </td>
+                </tr>
+                num = num + 1;
+            }
+        </tbody>
+    </table>
+</div>

@@ -834,6 +834,7 @@
     <Folder Include="Scripts\kendo\cultures\" />
     <Folder Include="Scripts\kendo\messages\" />
     <Folder Include="Views\Base\" />
+    <Folder Include="Views\PatientProfileViewModel\" />
     <Folder Include="Views\Scheduler\" />
   </ItemGroup>
   <ItemGroup>

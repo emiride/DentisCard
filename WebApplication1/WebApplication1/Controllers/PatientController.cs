@@ -110,29 +110,27 @@ namespace WebApplication1.Controllers
         }
 
         [Authorize(Roles = Role.Patient)]
-        public ActionResult MedicalHistory(string sortOrder, string searchString)
+        public ActionResult MedicalHistory()
         {
-            List<MedicalHistory> historyList = new List<MedicalHistory>();
-
-            var medicalHistory = db.MedicalHistories;
-            foreach (var note in medicalHistory)
+            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+            var id = User.Identity.GetUserId();
+            if (id == null)
             {
-                historyList.Add(note);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            var patient = db.Patients.Find(id);
 
-            /* TODO sorting
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewBag.LNameSortParm = String.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
-            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
-            ViewBag.BDateSortParm = sortOrder == "BDate" ? "Bdate_desc" : "BDate";
-            */
-            var patientOrder = from s in historyList
-                               select s;
-            /*
-             * TODO print medical history nicely
-            */
+            var medicalHistory = db.MedicalHistories.Find(id);
 
-            return View();
+            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();         
+            var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
+           
+            patientProfile.Patient = patient;
+            patientProfile.MedicalHistory = medicalHistory;
+            patientProfile.MedicalRecords = medicalRecords;
+            patientProfile.Teeth = teeth; 
+
+            return View(patientProfile);
         }
 
         [Authorize(Roles = Role.Patient)]

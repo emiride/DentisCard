@@ -1,7 +1,28 @@
 ﻿
 @model IEnumerable<WebApplication1.Models.Dentist>
 
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
 
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #7dbcdc;
+            color: white;
+        }
+    </style>
+</head>
 
 <h1>Please choose your dentist!</h1>
 
@@ -31,7 +52,7 @@
 <div style="overflow-x:auto;">
     <table class="table">
         <thead class="thead-inverse">
-            <tr>
+            <tr style="font-family: ‘Arial Black’, Gadget, sans-serif;">
                 <th>
                     @Html.ActionLink("First Name", "MyPatients", new { sortOrder = ViewBag.NameSortParm })
                 </th>
@@ -62,10 +83,10 @@
             {
             <tr>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString(), "ChooseDentist", new { id = item.Id })
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString(), "ChooseDentist", new { id = item.Id }, new { @style= "font-family: 'Tahoma'; font-size: 16px;" })
                 </td>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.LastName).ToHtmlString(), "ChooseDentist", new { id = item.Id })
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.LastName).ToHtmlString(), "ChooseDentist", new { id = item.Id }, new { @style = "font-family: 'Tahoma'; font-size: 16px;" })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateOfBirth)
@@ -79,9 +100,9 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td style="color:#335381">
-                    @Html.ActionLink("See " + Html.DisplayFor(modelItem => item.FirstName).ToHtmlString() + "'s profile", "SeeDentistProfile", new { id = item.Id }) |
-                    @Html.ActionLink("Choose Dentist", "ChooseDentist", new { id = item.Id })
+                <td style="color:#335381; float:right">
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString() + "'s profile", "SeeDentistProfile", new { id = item.Id }, new { @class = "btn btn-info " }) 
+                    @Html.ActionLink("Choose Dentist", "ChooseDentist", new { id = item.Id }, new { @class = "btn btn-primary " })
                 </td>
             </tr>
         }

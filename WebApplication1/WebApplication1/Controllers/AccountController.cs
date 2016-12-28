@@ -201,8 +201,7 @@ namespace WebApplication1.Controllers
                     MedicalHistory = new MedicalHistory { Teeth = teeth },
                     DateCreated = DateTime.Now
                 };
-             
-
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -324,7 +323,9 @@ namespace WebApplication1.Controllers
         }
 
         //
-        // POST: /Account/ExternalLogin
+        // POST: /Account/External
+
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]

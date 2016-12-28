@@ -352,19 +352,36 @@ namespace WebApplication1.Controllers
         {
            
             var p = db.Patients.Find(id);
-         
-            var downRight8 = new Tooth
+            var PozicijaZuba = model.Tooth.ToothPosition;
+            var StanjeZuba = model.Tooth.ToothState;
+            var zub = new Tooth
             {
-                ToothPosition = ToothPosition.gl1,
-                ToothState = ToothState.CC2
+                ToothPosition = PozicijaZuba,
+                ToothState = StanjeZuba
             };
+
             var medicalRecord01 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = model.MedicalRecord.Description,
-                Teeth = new List<Tooth>() { downRight8 },
-                Bill = model.MedicalRecord.Bill
+                Bill = model.MedicalRecord.Bill,
+                Teeth = new List<Tooth>() { zub }
+                
             };
+           
+            
+            var history = db.MedicalHistories.Find(id);
+            var zubi = history.Teeth;
+
+            foreach (var i in zubi)
+            {
+                if (i.ToothPosition==PozicijaZuba)
+                {
+                    i.ToothState= StanjeZuba;
+                    
+                }
+            }
+
             if (ModelState.IsValid) { 
             var MedicalRecords = new List<MedicalRecord>() { medicalRecord01 };
             p.MedicalHistory.MedicalRecords =MedicalRecords;      
@@ -468,10 +485,6 @@ namespace WebApplication1.Controllers
         }
 
 
-
-
-       
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -534,6 +547,7 @@ namespace WebApplication1.Controllers
             }
             return View(dentistToUpdate);
         }
+
 
     }
 }
