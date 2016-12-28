@@ -292,8 +292,6 @@
     <Content Include="Content\Images\lg-logo.png" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\map_icon_3.png" />
-    <Content Include="Content\Images\mobile.jpg" />
-    <Content Include="Content\Images\phone_mockup.jpg" />
     <Content Include="Content\Images\play-btn.png" />
     <Content Include="Content\Images\reviews_bg.jpg" />
     <Content Include="Content\Images\right-arrow-hover.png" />
