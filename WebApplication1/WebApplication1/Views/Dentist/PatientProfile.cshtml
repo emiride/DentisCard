@@ -115,7 +115,7 @@
 
                                                 <div class="form-horizontal">
                                                     <hr />
-                                                    @Html.AntiForgeryToken()
+                                                  
                                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                                     <div class="main">
                                                         @Html.TextBoxFor(m => m.MedicalRecord.Description, new { @class = "form-control", @placeholder = "Description" })
@@ -128,8 +128,7 @@
                                                     <div class="form-group">
                                                         <div class="col-md-offset-2 col-md-10">
                                                                
-                                                                @Html.ActionLink("Insert", "InsertMedicalRecord2", new { @class = "btn btn-success" })
-                                                            
+                                                            <input type="submit" value="Create" onclick="location.href='@Url.Action("Create", "InsertMedicalRecord2")'" class="btn btn-primary" />                                                            
                                                         </div>
                                                     </div>
                                                 </div>

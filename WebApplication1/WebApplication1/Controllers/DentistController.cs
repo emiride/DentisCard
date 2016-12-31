@@ -326,14 +326,60 @@ namespace WebApplication1.Controllers
         //    return View();
         //}
 
-        [HttpPost]
+
+        [Authorize(Roles = Role.Dentist)]
+        [HttpPost, ActionName("PatientProfile")]
         [ValidateAntiForgeryToken]
         public ActionResult InsertMedicalRecord2(string id, PatientProfileViewModel model)
         {
-           
+            var p = db.Patients.Find(id);
+            var PozicijaZuba = model.Tooth.ToothPosition;
+            var StanjeZuba = model.Tooth.ToothState;
+
+
+            var medicalRecord02 = new MedicalRecord
+            {
+                DateCreated = DateTime.Now,
+                Description = model.MedicalRecord.Description,
+                Bill = model.MedicalRecord.Bill,
+                ToothPosition = PozicijaZuba,
+                ToothState = StanjeZuba
+
+            };
+
+
+            var history = db.MedicalHistories.Find(id);
+            var zubi = history.Teeth;
+
+            foreach (var i in zubi)
+            {
+                if (i.ToothPosition == PozicijaZuba)
+                {
+                    i.ToothState = StanjeZuba;
+
+                }
+            }
+
+            if (ModelState.IsValid)
+            {
+                var MedicalRecords = new List<MedicalRecord>() { medicalRecord02 };
+                p.MedicalHistory.MedicalRecords = MedicalRecords;
+                db.SaveChanges();
+                return RedirectToAction("PatientProfile");
+            }
+
             return View();
         }
 
+
+        [Authorize(Roles = Role.Dentist)]
+        public ActionResult MedicalRecord()
+        {
+            return View();
+        }
+
+
+        [Authorize(Roles = Role.Dentist)]
         [HttpPost, ActionName("MedicalRecord")]
         [ValidateAntiForgeryToken]
         public ActionResult InsertMedicalRecord(string id, PatientProfileViewModel model)
@@ -376,6 +422,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+        [Authorize(Roles = Role.Dentist)]
         public ActionResult ListAllMedicalRecords(string id, PatientProfileViewModel model)
         {
             PatientProfileViewModel patientProfile = new PatientProfileViewModel();
