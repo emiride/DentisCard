@@ -52,41 +52,41 @@
                     <div id="collapseOne" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-                                    <td>
-                                        <div class="form-horizontal">
-                                            
-                                            <ul>
-                                                @foreach (var item in Model.MedicalRecords)
-                                                {
-                                                    <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Date</span>
-                                                    <br>
-                                                    <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
-                                                    <br>
-                                                    <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Description</span>
-                                                    <br>
-                                                    <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>                                                    
-                                                    <br>
-                                                    <br>
-                                                    <span style="color: black;font-family: Tahoma, Geneva, sans-serif;">Position</span>
-                                                    <span style="color: black; float:right; font-family: Tahoma, Geneva, sans-serif;">State</span>
-                                                    <br>
-                                                    <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>                                                  
-                                                    <span style="float: right; color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
-                                                    <br>
-                                                    <br>
-                                                    <span style="float: right; color:blue; font-size:medium;"> @Html.DisplayFor(modelItem => item.Bill)</span>
-                                                    <hr />
-                                                                          
-                                                }
-                                                
-                                                @Html.ActionLink("List all medical records", "ListAllMedicalRecords", new { id = Model.Patient.Id }, new { @class = "btn btn-success" })
-                                                    
-                                                
+                                <td>
+                                    <div class="form-horizontal">
+
+                                        <ul>
+                                            @foreach (var item in Model.MedicalRecords)
+                                            {
+                                                <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Date</span>
+                                                <br>
+                                                <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
+                                                <br>
+                                                <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Description</span>
+                                                <br>
+                                                <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>
+                                                <br>
+                                                <br>
+                                                <span style="color: black;font-family: Tahoma, Geneva, sans-serif;">Position</span>
+                                                <span style="color: black; float:right; font-family: Tahoma, Geneva, sans-serif;">State</span>
+                                                <br>
+                                                <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>
+                                                <span style="float: right; color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
+                                                <br>
+                                                <br>
+                                                <span style="float: right; color:blue; font-size:medium;"> @Html.DisplayFor(modelItem => item.Bill)</span>
+                                                <hr />
+
+                                            }
+
+                                            @Html.ActionLink("List all medical records", "ListAllMedicalRecords", new { id = Model.Patient.Id }, new { @class = "btn btn-success" })
 
 
-                                            </ul>
-                                        </div>
-                                    </td>
+
+
+                                        </ul>
+                                    </div>
+                                </td>
                                 </tr>
                             </table>
                         </div>
@@ -107,15 +107,12 @@
                                 <tr>
                                     <td>
                                         <div class="form-horizontal">
-                                            <h4>Add new record</h4>
-                                            <hr />
+                                           
                                             @using (Html.BeginForm(FormMethod.Post))
                                             {
                                                 @Html.AntiForgeryToken()
 
-                                                <div class="form-horizontal">
-                                                    <hr />
-                                                  
+                                                <div class="form-horizontal">                                                
                                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                                     <div class="main">
                                                         @Html.TextBoxFor(m => m.MedicalRecord.Description, new { @class = "form-control", @placeholder = "Description" })
@@ -125,11 +122,8 @@
 
                                                         <span class="clearfix"></span>
                                                     </div>
-                                                    <div class="form-group">
-                                                        <div class="col-md-offset-2 col-md-10">
-                                                               
-                                                            <input type="submit" value="Create" onclick="location.href='@Url.Action("Create", "InsertMedicalRecord2")'" class="btn btn-primary" />                                                            
-                                                        </div>
+                                                    <div class="col-md-offset-2 col-md-10" style="padding-top: 10px; ">
+                                                        <input type="submit" value="Insert" onclick="location.href='@Url.Action("Create", "InsertMedicalRecord2")'" class="btn btn-primary" />
                                                     </div>
                                                 </div>
                                             }
@@ -250,7 +244,13 @@
                         if (item.ToothPosition == ToothPosition.gl8)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd8.png" alt="Gornja lijeva osmica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd8.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -264,7 +264,11 @@
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
                                 <figure>
-                                    <span><img src="~/Content/Images/teeth/gd7.png" alt="Gornja lijeva sedmica" width="40" height="100" /></span>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id, position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd7.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
                                 </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
@@ -280,7 +284,13 @@
                         if (item.ToothPosition == ToothPosition.gl6)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure> <span><img src="~/Content/Images/teeth/gd6.png" alt="Gornja lijeva sestica" width="40" height="100" /></span> </figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd6.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -293,7 +303,13 @@
                         if (item.ToothPosition == ToothPosition.gl5)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure> <span><img src="~/Content/Images/teeth/gd5.png" alt="Gornja lijeva petica" width="40" height="100" /> </span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd5.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -308,7 +324,13 @@
                         if (item.ToothPosition == ToothPosition.gl4)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd4.png" alt="Gornja lijeva cetvorka" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd4.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -321,7 +343,13 @@
                         if (item.ToothPosition == ToothPosition.gl3)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd3.png" alt="Gornja lijeva trica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd3.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -336,7 +364,13 @@
                         if (item.ToothPosition == ToothPosition.gl2)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure> <span><img src="~/Content/Images/teeth/gd2.png" alt="Gornja lijeva dvica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd2.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -350,7 +384,13 @@
                         if (item.ToothPosition == ToothPosition.gl1)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd1.png" alt="Gornji lijevi kec" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd1.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -368,7 +408,13 @@
                 {
                             <div class="col-sm-1 col-md-1 teeth-head">
 
-                                <figure> <span><img src="~/Content/Images/teeth/gd1.png" alt="Gornji desni kec" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd1.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -381,7 +427,13 @@
                 if (item1.ToothPosition == ToothPosition.gd2)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure> <span><img src="~/Content/Images/teeth/gd2.png" alt="Gornja desna dvica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd2.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -395,7 +447,13 @@
                 if (item1.ToothPosition == ToothPosition.gd3)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd3.png" alt="Gornja desna trica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd3.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -408,7 +466,13 @@
                 if (item1.ToothPosition == ToothPosition.gd4)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd4.png" alt="Gornja desna cetvorka" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd4.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -423,7 +487,13 @@
                 if (item1.ToothPosition == ToothPosition.gd5)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd5.png" alt="Gornja desna petica" width="40" height="100" /> </span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd5.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -436,7 +506,13 @@
                 if (item1.ToothPosition == ToothPosition.gd6)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd6.png" alt="Gornja desna sestica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd6.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -450,7 +526,13 @@
                 if (item1.ToothPosition == ToothPosition.gd7)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure><span><img src="~/Content/Images/teeth/gd7.png" alt="Gornja desna sedmica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd7.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -461,9 +543,15 @@
                     @foreach (var item1 in Model.Teeth)
                     {
                         if (item1.ToothPosition == ToothPosition.gd8)
-                        {                          
+                        {
                             <div class="col-sm-1 col-md-1 teeth-head">
-                                <figure> <span><img src="~/Content/Images/teeth/gd8.png" alt="Gornja desna osmica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/gd8.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -471,7 +559,7 @@
                             </div>
                         }
                     }
-                    
+
                 </div>
             </div>
         </div>
@@ -484,7 +572,13 @@
                         if (item.ToothPosition == ToothPosition.dl8)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d8.png" alt="Donja lijeva osmica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d8.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -498,7 +592,11 @@
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
                                 <figure>
-                                    <span><img src="~/Content/Images/teeth/d7.png" alt="Donja lijeva sedmica" width="40" height="100" /></span>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d7.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
                                 </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
@@ -514,7 +612,13 @@
                         if (item.ToothPosition == ToothPosition.dl6)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure> <span><img src="~/Content/Images/teeth/d6.png" alt="Donja lijeva sestica" width="40" height="100" /></span> </figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d6.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -527,7 +631,13 @@
                         if (item.ToothPosition == ToothPosition.dl5)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure> <span><img src="~/Content/Images/teeth/d5.png" alt="Donja lijeva petica" width="40" height="100" /> </span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d5.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -542,7 +652,13 @@
                         if (item.ToothPosition == ToothPosition.dl4)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d4.png" alt="Donja lijeva cetvorka" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d4.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -555,7 +671,13 @@
                         if (item.ToothPosition == ToothPosition.dl3)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d3.png" alt="Donja lijeva trica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d3.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -570,7 +692,13 @@
                         if (item.ToothPosition == ToothPosition.dl2)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure> <span><img src="~/Content/Images/teeth/d2.png" alt="Donja lijeva dvica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d2.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -584,7 +712,13 @@
                         if (item.ToothPosition == ToothPosition.dl1)
                         {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d1.png" alt="Donji lijevi kec" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d1.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item.ToothPosition).ToHtmlString()</span>
@@ -602,7 +736,13 @@
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
 
-                                <figure> <span><img src="~/Content/Images/teeth/d1.png" alt="Donji desni kec" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d1.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -615,7 +755,13 @@
                 if (item1.ToothPosition == ToothPosition.dd2)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure> <span><img src="~/Content/Images/teeth/d2.png" alt="Donja desna dvica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d2.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -629,7 +775,13 @@
                 if (item1.ToothPosition == ToothPosition.dd3)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d3.png" alt="Donja desna trica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d3.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -643,7 +795,13 @@
                 if (item1.ToothPosition == ToothPosition.dd4)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d4.png" alt="Donja desna cetvorka" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d4.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -658,7 +816,13 @@
                 if (item1.ToothPosition == ToothPosition.dd5)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d5.png" alt="Donja desna petica" width="40" height="100" /> </span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d5.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -671,7 +835,13 @@
                 if (item1.ToothPosition == ToothPosition.dd6)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d6.png" alt="Donja desna sestica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d6.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -685,7 +855,13 @@
                 if (item1.ToothPosition == ToothPosition.dd7)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure><span><img src="~/Content/Images/teeth/d7.png" alt="Donja desna sedmica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d7.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>
@@ -698,7 +874,13 @@
                 if (item1.ToothPosition == ToothPosition.dd8)
                 {
                             <div class="col-sm-1 col-md-1 teeth-head downTeeth">
-                                <figure> <span><img src="~/Content/Images/teeth/d8.png" alt="Donja desna osmica" width="40" height="100" /></span></figure>
+                                <figure>
+                                    <span>
+                                        <a href="@Url.Action("ToothMedicalrecord", new { id = Model.Patient.Id,  position = item1.ToothPosition })">
+                                            <img src="@Url.Content("~/Content/Images/teeth/d8.png")" alt="Gornja lijeva osmica" width="40" height="100" />
+                                        </a>
+                                    </span>
+                                </figure>
                                 <figcaption>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothState).ToHtmlString()</span>
                                     <span> @Html.DisplayFor(modelItem => item1.ToothPosition).ToHtmlString()</span>

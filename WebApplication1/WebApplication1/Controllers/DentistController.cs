@@ -502,6 +502,29 @@ namespace WebApplication1.Controllers
         }
 
 
+        [Authorize(Roles = Role.Dentist)]       
+        public ActionResult ToothMedicalRecord(string id, ToothPosition position)
+        {
+            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+           
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ToothPosition newPosition = position;
+            var patient = db.Patients.Find(id);
+
+            var medicalHistory = db.MedicalHistories.Find(id);
+
+            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
+            var ToothMedicalRecord = medicalRecords.Where(m => m.ToothPosition == newPosition);
+
+            patientProfile.Patient = patient;
+            patientProfile.MedicalHistory = medicalHistory;
+            patientProfile.MedicalRecords = ToothMedicalRecord;
+
+            return View(patientProfile);          
+        }
         [AllowAnonymous]
         public ActionResult Register()
         {

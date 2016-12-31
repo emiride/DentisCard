@@ -1,32 +1,60 @@
 ﻿@model WebApplication1.ViewModels.PatientProfileViewModel
 @using WebApplication1.Enumerations
+
 <h2 style="color:black; font-family:Arial, Helvetica, sans-serif;">List of all medical records</h2>
 <hr />
 <ul>
     @foreach (var item in Model.MedicalRecords)
     {
-        <span style="color: black; font-family: Tahoma, Geneva, sans-serif; font-size:larger;">Date</span>
+        <span style="color:black; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
         <br>
-        <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
-                        <br>
-                        <span style="color: black; font-family: Tahoma, Geneva, sans-serif;font-size:larger;">Description</span>
-                                                    <br>
-                                                    <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>
-                                                    <br>
-                                                    <br>
-                                                    <span style="color: black;font-family: Tahoma, Geneva, sans-serif;font-size:larger;">Position</span>
-                                                    <br>
-                                                    <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>
-                                                    <br>
-                                                    <span style="color: black;  font-family: Tahoma, Geneva, sans-serif;font-size:larger;">State</span>
-                                                    <br>
-                                                    <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
-                                                    <br>
-                                                    <br>
-                                                    <span style="float: right; color:blue; font-size:medium;"> @Html.DisplayFor(modelItem => item.Bill)</span>
-                                                    <hr />
-
-
-
+        <pre style="background-color: #05A9CF;">               
+        <span style="color: white; padding-top: 5px; padding-bottom: 5px; float:left; font-family: Tahoma, Geneva, sans-serif; font-size:x-large;">Description</span>             
+        <pre style="background-color:white;"> <br>
+        <span style="color:black; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size: 20px;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>            
+         </pre> 
+        <span style="color:white; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:x-large;">Position: @Html.DisplayFor(modelItem => item.ToothPosition)</span>      
+        <span style="color:white; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:x-large;">State: @Html.DisplayFor(modelItem => item.ToothState)</span><span style="float: right; color:black; font-size:x-large;"> @Html.DisplayFor(modelItem => item.Bill)</span>
+            </pre>
     }
 </ul>
+
+
+
+
+
+
+
+@*
+    <h2 style="color:black; font-family:Arial, Helvetica, sans-serif;">List of all medical records</h2>
+    <hr />
+    <ul>
+        @foreach (var item in Model.MedicalRecords)
+        {
+            <span style="color: black; font-family: Tahoma, Geneva, sans-serif; font-size:larger;">Date</span>
+            <br>
+            <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
+                            <br>
+                            <span style="color: black; font-family: Tahoma, Geneva, sans-serif;font-size:larger;">Description</span>
+                                                        <br>
+                                                        <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>
+                                                        <br>
+                                                        <br>
+                                                        <span style="color: black;font-family: Tahoma, Geneva, sans-serif;font-size:larger;">Position</span>
+                                                        <br>
+                                                        <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>
+                                                        <br>
+                                                        <span style="color: black;  font-family: Tahoma, Geneva, sans-serif;font-size:larger;">State</span>
+                                                        <br>
+                                                        <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
+                                                        <br>
+                                                        <br>
+                                                        <span style="float: right; color:blue; font-size:medium;"> @Html.DisplayFor(modelItem => item.Bill)</span>
+                                                        <hr />
+
+
+
+        }
+    </ul>
+*@
+

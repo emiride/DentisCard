@@ -823,6 +823,7 @@
     <Content Include="Views\Patient\SeeDentistProfile.cshtml" />
     <Content Include="Views\Dentist\MedicalRecord.cshtml" />
     <Content Include="Views\Dentist\ListAllMedicalRecords.cshtml" />
+    <Content Include="Views\Dentist\ToothMedicalRecord.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
