@@ -326,24 +326,12 @@ namespace WebApplication1.Controllers
         //    return View();
         //}
 
-        
-        public ActionResult MedicalRecord(string id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult InsertMedicalRecord2(string id, PatientProfileViewModel model)
         {
-            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
-
-
-            var patient = db.Patients.Find(id);
-            var medicalHistory = db.MedicalHistories.Find(id);
-            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
-            var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
-            var currentPatient = db.Patients.Find(id);
-
-            patientProfile.Patient = patient;
-            patientProfile.MedicalHistory = medicalHistory;
-            patientProfile.MedicalRecords = medicalRecords;
-            patientProfile.Teeth = teeth;
            
-            return View(patientProfile);
+            return View();
         }
 
         [HttpPost, ActionName("MedicalRecord")]
@@ -354,22 +342,19 @@ namespace WebApplication1.Controllers
             var p = db.Patients.Find(id);
             var PozicijaZuba = model.Tooth.ToothPosition;
             var StanjeZuba = model.Tooth.ToothState;
-            var zub = new Tooth
-            {
-                ToothPosition = PozicijaZuba,
-                ToothState = StanjeZuba
-            };
-
-            var medicalRecord01 = new MedicalRecord
+           
+          
+            var medicalRecord02 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = model.MedicalRecord.Description,
                 Bill = model.MedicalRecord.Bill,
-                Teeth = new List<Tooth>() { zub }
-                
+                ToothPosition = PozicijaZuba,
+                ToothState= StanjeZuba
+
             };
-           
-            
+
+          
             var history = db.MedicalHistories.Find(id);
             var zubi = history.Teeth;
 
@@ -383,12 +368,37 @@ namespace WebApplication1.Controllers
             }
 
             if (ModelState.IsValid) { 
-            var MedicalRecords = new List<MedicalRecord>() { medicalRecord01 };
+            var MedicalRecords = new List<MedicalRecord>() { medicalRecord02 };
             p.MedicalHistory.MedicalRecords =MedicalRecords;      
             db.SaveChanges();
             return RedirectToAction("MyPatients");
             }
             return View();
+        }
+
+        public ActionResult ListAllMedicalRecords(string id, PatientProfileViewModel model)
+        {
+            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+            //ovdje redom pravim kverije na bazu i ona mi vraca podatke, te podatke spremim i na kraju proslijedim u view
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var patient = db.Patients.Find(id);
+
+            var medicalHistory = db.MedicalHistories.Find(id);
+
+            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
+
+            var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
+
+
+            //sve njih, strpamo u ovaj viewmodel koji smo prethodno napravili
+            patientProfile.Patient = patient;
+            patientProfile.MedicalHistory = medicalHistory;
+            patientProfile.MedicalRecords = medicalRecords;
+            patientProfile.Teeth = teeth;
+            return View(patientProfile);
         }
 
         [Authorize (Roles = Role.Dentist)]
@@ -408,10 +418,14 @@ namespace WebApplication1.Controllers
 
             var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
 
+            var lastTwoRecords = medicalRecords.OrderByDescending(p => p.DateCreated).Take(2);
+            var lastRecord = medicalRecords.OrderByDescending(p => p.DateCreated).Take(1);
+
             //sve njih, strpamo u ovaj viewmodel koji smo prethodno napravili
             patientProfile.Patient = patient;
             patientProfile.MedicalHistory = medicalHistory;
-            patientProfile.MedicalRecords = medicalRecords;
+            patientProfile.MedicalRecords = lastTwoRecords;
+            patientProfile.MedicalRecords1 = lastRecord;
             patientProfile.Teeth = teeth;
 
 

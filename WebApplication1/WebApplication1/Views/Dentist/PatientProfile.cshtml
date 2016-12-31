@@ -52,23 +52,38 @@
                     <div id="collapseOne" class="panel-collapse collapse">
                         <div class="panel-body">
                             <table class="table">
-                                <tr>
                                     <td>
                                         <div class="form-horizontal">
-                                            <h4>List all medical records</h4>
-                                            <hr />
+                                            
                                             <ul>
                                                 @foreach (var item in Model.MedicalRecords)
                                                 {
-                                                    <span> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
+                                                    <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Date</span>
                                                     <br>
-                                                    <span> @Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>
+                                                    <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
                                                     <br>
-                                                    <span> @Html.DisplayFor(modelItem => item.Bill)</span>
+                                                    <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Description</span>
+                                                    <br>
+                                                    <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>                                                    
+                                                    <br>
+                                                    <br>
+                                                    <span style="color: black;font-family: Tahoma, Geneva, sans-serif;">Position</span>
+                                                    <span style="color: black; float:right; font-family: Tahoma, Geneva, sans-serif;">State</span>
+                                                    <br>
+                                                    <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>                                                  
+                                                    <span style="float: right; color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
+                                                    <br>
+                                                    <br>
+                                                    <span style="float: right; color:blue; font-size:medium;"> @Html.DisplayFor(modelItem => item.Bill)</span>
                                                     <hr />
-                                     
-
+                                                                          
                                                 }
+                                                
+                                                @Html.ActionLink("List all medical records", "ListAllMedicalRecords", new { id = Model.Patient.Id }, new { @class = "btn btn-success" })
+                                                    
+                                                
+
+
                                             </ul>
                                         </div>
                                     </td>
@@ -94,7 +109,7 @@
                                         <div class="form-horizontal">
                                             <h4>Add new record</h4>
                                             <hr />
-                                            @using (Html.BeginForm())
+                                            @using (Html.BeginForm(FormMethod.Post))
                                             {
                                                 @Html.AntiForgeryToken()
 
@@ -103,15 +118,18 @@
                                                     @Html.AntiForgeryToken()
                                                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                                                     <div class="main">
-                                                        @Html.TextBoxFor(m => m.MedicalRecords, new { @class = "form-control", @placeholder = "Date Created" })
-                                                        @Html.TextBoxFor(m => m.MedicalRecords, new { @class = "form-control", @placeholder = "Description" })
-                                                        @Html.TextBoxFor(m => m.MedicalRecords, new { @class = "form-control", @placeholder = "Bill" })
+                                                        @Html.TextBoxFor(m => m.MedicalRecord.Description, new { @class = "form-control", @placeholder = "Description" })
+                                                        @Html.EnumDropDownListFor(m => m.Tooth.ToothPosition, new { @class = "form-control", @placeholder = "Tooth Position" })
+                                                        @Html.EnumDropDownListFor(m => m.Tooth.ToothState, new { @class = "form-control", @placeholder = "Tooth State" })
+                                                        @Html.TextBoxFor(m => m.MedicalRecord.Bill, new { @class = "form-control", @placeholder = "Bill" })
 
                                                         <span class="clearfix"></span>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-md-offset-2 col-md-10">
-                                                            <input type="submit" value="Create" class="btn btn-default" />
+                                                               
+                                                                @Html.ActionLink("Insert", "InsertMedicalRecord2", new { @class = "btn btn-success" })
+                                                            
                                                         </div>
                                                     </div>
                                                 </div>
@@ -442,9 +460,9 @@
                         }
                     }
                     @foreach (var item1 in Model.Teeth)
-            {
-                if (item1.ToothPosition == ToothPosition.gl8)
-                {
+                    {
+                        if (item1.ToothPosition == ToothPosition.gd8)
+                        {                          
                             <div class="col-sm-1 col-md-1 teeth-head">
                                 <figure> <span><img src="~/Content/Images/teeth/gd8.png" alt="Gornja desna osmica" width="40" height="100" /></span></figure>
                                 <figcaption>

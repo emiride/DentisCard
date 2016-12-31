@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WebApplication1.Interfaces;
+using WebApplication1.Enumerations;
 
 namespace WebApplication1.Models
 {
@@ -28,11 +29,17 @@ namespace WebApplication1.Models
         [Display(Name = "Bill")]
         public double Bill { get; set; }
 
+        public ToothPosition ToothPosition { get; set; }
+        public ToothState ToothState { get; set; }
+
+
+
         public string MedicalHistoryId { get; set; }
         
         //Relations
         public MedicalHistory MedicalHistory { get; set; }
-        public ICollection<Tooth> Teeth { get; set; }
+        
+        
         
     }
 }

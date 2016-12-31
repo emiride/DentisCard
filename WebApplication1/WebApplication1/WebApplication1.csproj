@@ -205,6 +205,22 @@
     <Compile Include="Migrations\201612071022540_InitialMigration.Designer.cs">
       <DependentUpon>201612071022540_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612292027268_migracija.cs" />
+    <Compile Include="Migrations\201612292027268_migracija.Designer.cs">
+      <DependentUpon>201612292027268_migracija.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612301814578_migracija2.cs" />
+    <Compile Include="Migrations\201612301814578_migracija2.Designer.cs">
+      <DependentUpon>201612301814578_migracija2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612301823324_migracija3.cs" />
+    <Compile Include="Migrations\201612301823324_migracija3.Designer.cs">
+      <DependentUpon>201612301823324_migracija3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201612301833370_mog.cs" />
+    <Compile Include="Migrations\201612301833370_mog.Designer.cs">
+      <DependentUpon>201612301833370_mog.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -806,6 +822,7 @@
     <Content Include="Views\Patient\PickDentist.cshtml" />
     <Content Include="Views\Patient\SeeDentistProfile.cshtml" />
     <Content Include="Views\Dentist\MedicalRecord.cshtml" />
+    <Content Include="Views\Dentist\ListAllMedicalRecords.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -848,6 +865,18 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612071022540_InitialMigration.resx">
       <DependentUpon>201612071022540_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612292027268_migracija.resx">
+      <DependentUpon>201612292027268_migracija.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612301814578_migracija2.resx">
+      <DependentUpon>201612301814578_migracija2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612301823324_migracija3.resx">
+      <DependentUpon>201612301823324_migracija3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612301833370_mog.resx">
+      <DependentUpon>201612301833370_mog.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

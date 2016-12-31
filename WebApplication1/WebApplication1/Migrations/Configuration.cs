@@ -371,17 +371,25 @@ namespace WebApplication1.Migrations
                 ToothState = ToothState.H
             };
 
+
+           
+           
+
             var medicalRecord01 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Vadjena trica donja lijeva",
-                Teeth = new List<Tooth>() { upRight1 }
+                ToothPosition = ToothPosition.dd3,
+                ToothState = ToothState.CC1
+
             };
             var medicalRecord02 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Radjena krunica gornje lijeve sestice",
-                Teeth = new List<Tooth>() { upLeft1 }
+                ToothPosition = ToothPosition.dd7,
+                ToothState = ToothState.Cu
+
             };
 
             var patient = new Patient
@@ -426,14 +434,14 @@ namespace WebApplication1.Migrations
             var medicalRecord11 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
-                Description = "Vadjena trica donja desna",
-                Teeth = new List<Tooth>() { downRight222 }
+                Description = "Vadjena trica donja desna"
+                
             };
             var medicalRecord12 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
-                Description = "Zalivena gornja desna petica",
-                Teeth = new List<Tooth>() { upRight222 }
+                Description = "Zalivena gornja desna petica"
+                
             };
 
             var appointment = new Appointment
@@ -508,12 +516,16 @@ namespace WebApplication1.Migrations
                 ToothPosition = ToothPosition.dd3,
                 ToothState = ToothState.H
             };
+           
+
 
             var medicalRecord31 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
                 Description = "Zalivena gornja desna dvica",
-                Teeth = new List<Tooth>() { upRight33, upRight31, downRight33 }
+                ToothPosition = ToothPosition.dd8,
+                ToothState = ToothState.H
+                
             };
 
             
