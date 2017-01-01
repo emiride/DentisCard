@@ -1,7 +1,15 @@
 ﻿@model WebApplication1.ViewModels.PatientProfileViewModel
 @using WebApplication1.Enumerations
+<div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-12">
+        <h2 style="color:black; font-family:Arial, Helvetica, sans-serif;">List of all medical records</h2>
+    </div>
 
-<h2 style="color:black; font-family:Arial, Helvetica, sans-serif;">List of all medical records</h2>
+    <div class="col-lg-6 col-sm-12">
+        <p style="float:right; margin-top: 20px;">@Html.ActionLink("Insert new medical record", "MedicalRecord", new { id = Model.Patient.Id }, new { @class = "btn btn-success " })</p>
+    </div>
+</div>
+
 <hr />
 <ul>
     @foreach (var item in Model.MedicalRecords)
@@ -23,38 +31,4 @@
 
 
 
-
-
-@*
-    <h2 style="color:black; font-family:Arial, Helvetica, sans-serif;">List of all medical records</h2>
-    <hr />
-    <ul>
-        @foreach (var item in Model.MedicalRecords)
-        {
-            <span style="color: black; font-family: Tahoma, Geneva, sans-serif; font-size:larger;">Date</span>
-            <br>
-            <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
-                            <br>
-                            <span style="color: black; font-family: Tahoma, Geneva, sans-serif;font-size:larger;">Description</span>
-                                                        <br>
-                                                        <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>
-                                                        <br>
-                                                        <br>
-                                                        <span style="color: black;font-family: Tahoma, Geneva, sans-serif;font-size:larger;">Position</span>
-                                                        <br>
-                                                        <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>
-                                                        <br>
-                                                        <span style="color: black;  font-family: Tahoma, Geneva, sans-serif;font-size:larger;">State</span>
-                                                        <br>
-                                                        <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
-                                                        <br>
-                                                        <br>
-                                                        <span style="float: right; color:blue; font-size:medium;"> @Html.DisplayFor(modelItem => item.Bill)</span>
-                                                        <hr />
-
-
-
-        }
-    </ul>
-*@
 

@@ -53,25 +53,24 @@
                         <div class="panel-body">
                             <table class="table">
                                 <td>
-                                    <div class="form-horizontal">
+                                    <div class="form-horizontal" ">
 
                                         <ul>
                                             @foreach (var item in Model.MedicalRecords)
                                             {
-                                                <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Date</span>
-                                                <br>
-                                                <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
-                                                <br>
-                                                <span style="color: black; font-family: Tahoma, Geneva, sans-serif;">Description</span>
-                                                <br>
-                                                <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>
+                                                
+                                                <span style="color:black; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> Date: @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
                                                 <br>
                                                 <br>
-                                                <span style="color: black;font-family: Tahoma, Geneva, sans-serif;">Position</span>
-                                                <span style="color: black; float:right; font-family: Tahoma, Geneva, sans-serif;">State</span>
+                                                <span style="color: black; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;">Description:</span>                                              
+                                                <span style="color: black; font-size: larger; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>
                                                 <br>
-                                                <span style="color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>
-                                                <span style="float: right; color:red; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:large;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
+                                                <br>
+                                                <span style="color: black; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;">Position</span>
+                                                <span style="color: black;  font-size:large; float:right; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;">State</span>
+                                                <br>
+                                                <span style="color:black; font-size:larger; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;"> @Html.DisplayFor(modelItem => item.ToothPosition)</span>
+                                                <span style="float: right; color:black; font-size:larger; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;"> @Html.DisplayFor(modelItem => item.ToothState)</span>
                                                 <br>
                                                 <br>
                                                 <span style="float: right; color:blue; font-size:medium;"> @Html.DisplayFor(modelItem => item.Bill)</span>
@@ -79,13 +78,11 @@
 
                                             }
 
-                                            @Html.ActionLink("List all medical records", "ListAllMedicalRecords", new { id = Model.Patient.Id }, new { @class = "btn btn-success" })
-
-
-
-
                                         </ul>
                                     </div>
+                                    @Html.ActionLink("List all medical records", "ListAllMedicalRecords", new { id = Model.Patient.Id }, new { @class = "btn btn-success" })
+
+
                                 </td>
                                 </tr>
                             </table>

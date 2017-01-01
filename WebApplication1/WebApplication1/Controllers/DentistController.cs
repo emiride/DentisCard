@@ -435,8 +435,8 @@ namespace WebApplication1.Controllers
 
             var medicalHistory = db.MedicalHistories.Find(id);
 
-            var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
-
+            var AllmedicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
+            var medicalRecords = AllmedicalRecords.OrderByDescending(p => p.DateCreated);
             var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
 
 
