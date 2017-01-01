@@ -374,15 +374,16 @@ namespace WebApplication1.Migrations
 
            
            
+            //kicked out
+            //var medicalRecord01 = new MedicalRecord
+            //{
+            //    DateCreated = DateTime.Now,
+            //    Description = "Vadjena trica donja lijeva",
+            //    ToothPosition = ToothPosition.dd3,
+            //    ToothState = ToothState.CC1
 
-            var medicalRecord01 = new MedicalRecord
-            {
-                DateCreated = DateTime.Now,
-                Description = "Vadjena trica donja lijeva",
-                ToothPosition = ToothPosition.dd3,
-                ToothState = ToothState.CC1
+            //};
 
-            };
             var medicalRecord02 = new MedicalRecord
             {
                 DateCreated = DateTime.Now,
@@ -410,7 +411,7 @@ namespace WebApplication1.Migrations
 
                 {
                     Note = "Patient's teeth are just awesome and he is ready to get married.",
-                    MedicalRecords = new List<MedicalRecord>() { medicalRecord01, medicalRecord02 },
+                    MedicalRecords = new List<MedicalRecord>() { medicalRecord02 },
                     Teeth = new List<Tooth>() {upLeft1, upLeft2, upLeft3, upLeft4, upLeft5, upLeft6, upLeft7, upLeft8,
                     upRight1, upRight2, upRight3, upRight4, upRight5, upRight6, upRight7, upRight8, downLeft1, downLeft2, downLeft3
                     , downLeft4, downLeft5, downLeft6, downLeft7, downLeft8, downRight1, downRight2, downRight3, downRight4, downRight5
@@ -419,11 +420,11 @@ namespace WebApplication1.Migrations
             };
 
 
-            var downRight222 = new Tooth
-            {
-                ToothPosition = ToothPosition.dd3,
-                ToothState = ToothState.No
-            };
+            //var downRight222 = new Tooth
+            //{
+            //    ToothPosition = ToothPosition.dd3,
+            //    ToothState = ToothState.No
+            //};
 
             var upRight222 = new Tooth
             {
@@ -492,7 +493,7 @@ namespace WebApplication1.Migrations
                     PatientId = patient.Id,
                     Note = "Patient's teeth are very good, but since he is awesome looking, he is ready to get married.",
                     MedicalRecords = new List<MedicalRecord>() { medicalRecord11, medicalRecord12 },
-                    Teeth = new List<Tooth>() { downRight222, upRight222}
+                    Teeth = new List<Tooth>() { upRight222}
                 },
                 Appointments = new List<Appointment>() { appointment, appointment3 }
                 
