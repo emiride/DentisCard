@@ -220,7 +220,7 @@ namespace WebApplication1.Migrations
             var upLeft3 = new Tooth
             {
                 ToothPosition = ToothPosition.gl3,
-                ToothState = ToothState.C2
+                ToothState = ToothState.H
             };
             var upLeft4 = new Tooth
             {
@@ -230,7 +230,7 @@ namespace WebApplication1.Migrations
             var upLeft5 = new Tooth
             {
                 ToothPosition = ToothPosition.gl5,
-                ToothState = ToothState.C1
+                ToothState = ToothState.H
             };
             var upLeft6 = new Tooth
             {
@@ -245,12 +245,12 @@ namespace WebApplication1.Migrations
             var upLeft8 = new Tooth
             {
                 ToothPosition = ToothPosition.gl8,
-                ToothState = ToothState.C1
+                ToothState = ToothState.H
             };
             var upRight1 = new Tooth
             {
                 ToothPosition = ToothPosition.gd1,
-                ToothState = ToothState.Cu
+                ToothState = ToothState.H
             };
             var upRight2 = new Tooth
             {
@@ -265,17 +265,17 @@ namespace WebApplication1.Migrations
             var upRight4 = new Tooth
             {
                 ToothPosition = ToothPosition.gd4,
-                ToothState = ToothState.C1
+                ToothState = ToothState.H
             };
             var upRight5 = new Tooth
             {
                 ToothPosition = ToothPosition.gd5,
-                ToothState = ToothState.No
+                ToothState = ToothState.H
             };
             var upRight6 = new Tooth
             {
                 ToothPosition = ToothPosition.gd6,
-                ToothState = ToothState.CC3
+                ToothState = ToothState.H
             };
             var upRight7 = new Tooth
             {
@@ -419,7 +419,30 @@ namespace WebApplication1.Migrations
                 }
             };
 
+            var patient5 = new Patient
+            {
 
+                UserName = "Mehmed",
+                PasswordHash = passwordHasher.HashPassword("P@ssw0rd"),
+                FirstName = "Meho",
+                LastName = "Mehiæ",
+                DateOfBirth = new DateTime(1987, 4, 3),
+                Address = "Brcanska 2",
+                DateCreated = DateTime.Now,
+                EmploymentStatus = EmploymentStatus.Student,
+                Email = "meho@gmail.com",
+                PhoneNumber = "062/064-064",
+                SecurityStamp = "dcvfgddwve",
+                MedicalHistory = new MedicalHistory
+
+                {
+                    Note = "Patient's teeth are just awesome and he is ready to get married..",
+                    Teeth = new List<Tooth>() {upLeft1, upLeft2, upLeft3, upLeft4, upLeft5, upLeft6, upLeft7, upLeft8,
+                    upRight1, upRight2, upRight3, upRight4, upRight5, upRight6, upRight7, upRight8, downLeft1, downLeft2, downLeft3
+                    , downLeft4, downLeft5, downLeft6, downLeft7, downLeft8, downRight1, downRight2, downRight3, downRight4, downRight5
+                    , downRight6, downRight7, downRight8}
+                }
+            };
             //var downRight222 = new Tooth
             //{
             //    ToothPosition = ToothPosition.dd3,
@@ -630,6 +653,7 @@ namespace WebApplication1.Migrations
             context.Users.AddOrUpdate(patient);
             context.Users.AddOrUpdate(patient2);
             context.Users.AddOrUpdate(patient3);
+            context.Users.AddOrUpdate(patient5);
             context.Users.AddOrUpdate(admin);
             
             //Assign Dentist role between two functions "SaveChanges()" in order to make it work
@@ -650,6 +674,7 @@ namespace WebApplication1.Migrations
             userManager2.AddToRole(patient.Id, "Patient");
             userManager2.AddToRole(patient2.Id, "Patient");
             userManager2.AddToRole(patient3.Id, "Patient");
+            userManager2.AddToRole(patient5.Id, "Patient");
             userManager3.AddToRole(admin.Id, "Admin");
 
 

@@ -1,4 +1,4 @@
-﻿@model WebApplication1.ViewModels.PatientProfileViewModel
+﻿@model WebApplication1.Models.Patient
 @using WebApplication1.Enumerations
 @{
     ViewBag.Title = "MyTeeth";
@@ -147,7 +147,7 @@
                     }
 
 
-                    @foreach (var item in Model.Teeth)
+                    @foreach (var item in Model.MedicalHistory.Teeth)
             {
                 if (item.ToothPosition == ToothPosition.gl6)
                 {

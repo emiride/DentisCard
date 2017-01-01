@@ -137,17 +137,23 @@ namespace WebApplication1.Controllers
         public ActionResult MyTeeth()
         {
             var currentPatientId = User.Identity.GetUserId();
-            PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+            //PatientProfileViewModel patientProfile = new PatientProfileViewModel();
+            Patient patientProfile = new Patient();
 
-            var patient = db.Patients.Find(currentPatientId);
+            Patient patient = db.Patients.Find(currentPatientId);
             var medicalHistory = db.MedicalHistories.Find(currentPatientId);
             var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == currentPatientId).ToList();
             var teeth = db.Teeth.Where(m => m.MedicalHistoryId == currentPatientId).ToList();
+           
 
-            patientProfile.Patient = patient;
             patientProfile.MedicalHistory = medicalHistory;
-            patientProfile.MedicalRecords = medicalRecords;
-            patientProfile.Teeth = teeth;
+            patientProfile.MedicalHistory.MedicalRecords = medicalRecords;
+            patientProfile.MedicalHistory.Teeth = teeth;
+
+            //patientProfile.Patient = patient;
+            //patientProfile.MedicalHistory = medicalHistory;
+            //patientProfile.MedicalRecords = medicalRecords;
+            //patientProfile.Teeth = teeth;
             return View(patientProfile);
 
         }
