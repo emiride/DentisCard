@@ -1,7 +1,9 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+@using WebApplication1.Enumerations
 @model WebApplication1.Models.Dentist
+
 <head>
     <link href="~/Content/css/CustomLeftNavbar.css" rel="stylesheet" />
     <link href="~/Content/css/CustomProfile.css" rel="stylesheet" />
@@ -33,6 +35,28 @@
 </div>
 
 
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #7dbcdc;
+            color: white;
+        }
+    </style>
+</head>
 
 
    <div class="container">
@@ -53,7 +77,8 @@
                             <table class="table">
                                 <tr>
                                     <td>
-                                        <span class="glyphicon glyphicon-pencil text-primary"></span><a href="">Articles</a>
+                                        <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                        @Html.ActionLink("Informations", "Index", "Home")
                                     </td>
                                 </tr>                  
                             </table>
@@ -163,11 +188,57 @@
         </div>
         <div class="col-sm-9 col-md-9">
             <div class="well">
-                <h1>
-                    Content will be displayed here
-                </h1>
+                <h3>My patients</h3>
+                    <div style="overflow-x:auto;">
+                        <table class="table" style="margin-top:15px">
+                            <thead class="thead-inverse">
+                                <tr>
+                                    <th>
+                                        @*@Html.ActionLink("First Name", "MyPatient", new { sortOrder = ViewBag.NameSortParm })*@
+                                        First Name
+                                    </th>
+                                    <th>
+                                        @*@Html.ActionLink("Last Name", "MyPatient", new { sortOrder = ViewBag.LNameSortParm })*@
+                                        Last Name
+                                    </th>
+                                    <th>
+                                        @*@Html.ActionLink("Date of birth", "MyPatient", new { sortOrder = ViewBag.BDateSortParm })*@
+                                        Date of birth
+                                    </th>
+                                    <th>
+                                        @*@Html.ActionLink("Date Created", "MyPatient", new { sortOrder = ViewBag.DateSortParm })*@
+                                        Date Created
+                                    </th>
+                                    <th style="color:#335381"></th>
+                                </tr>
+                            </thead>
 
-            </div>
+                            @foreach (var item in Model.Patients )
+            {
+                                <tr>
+                                    <td>
+                                        @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString(), "PatientProfile", new { id = item.Id }, new { @style = "text-transform:capitalize; " })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink(Html.DisplayFor(modelItem => item.LastName).ToHtmlString(), "PatientProfile", new { id = item.Id }, new { @style = "text-transform:capitalize;" })
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateOfBirth)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateCreated)
+                                    </td>
+                                    <td style="color:#335381; float:right">
+                                        @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString() + "'s Profile", "PatientProfile", new { id = item.Id }, new { @class = "btn btn-link", @style = "text-transform:capitalize;" })
+                                        
+                                    </td>
+                                </tr>
+                            }
+
+                        </table>
+                    </div>
+
+               </div>
         </div>
     </div>
 </div>

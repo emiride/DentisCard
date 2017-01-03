@@ -246,6 +246,7 @@
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewModels\DentistsListOfPatient.cs" />
     <Compile Include="ViewModels\Dentist\DentistIndexData.cs" />
     <Compile Include="ViewModels\Dentist\DentistRegisterViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
