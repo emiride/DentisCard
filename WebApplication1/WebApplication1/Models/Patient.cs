@@ -7,7 +7,9 @@ namespace WebApplication1.Models
     [Table("Patient")]
     public class Patient : ApplicationUser
     {
-        
+        public bool approve = false;
+        public double  SumBills { get; set; }
+
         //Relations
         public virtual Dentist Dentist { get; set; }
         public string DentistId { get; set; }

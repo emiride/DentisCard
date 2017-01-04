@@ -90,13 +90,15 @@
                     @Html.DisplayFor(modelItem => item.DateCreated)
                 </td>
                 <td style="color:#335381; float:right">
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString() + "'s Profile", "PatientProfile", new { id = item.Id }, new { @class = "btn btn-link", @style = "text-transform:capitalize;" } )
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString() + "'s Profile", "PatientProfile", new { id = item.Id }, new { @class = "btn btn-link", @style = "text-transform:capitalize;" })
                     @Html.ActionLink("Details", "Details", null, new { id = item.Id }, new { @class = "btn btn-default" })
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                     @Html.ActionLink("Insert Medical Record", "MedicalRecord", new { id = item.Id }, new { @class = "btn btn-primary " })
                     @Html.ActionLink("List Medical Records", "ListAllMedicalRecords", new { id = item.Id }, new { @class = "btn btn-primary " })
+                    <span id="Approve"> @Html.ActionLink(" ", "ApprovePatient", new { id = item.Id }, new { @class = "glyphicon glyphicon-ok" })</span>
                 </td>
+
             </tr>
         }
 

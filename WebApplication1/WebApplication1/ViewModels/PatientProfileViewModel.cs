@@ -15,6 +15,7 @@ namespace WebApplication1.ViewModels
         public IEnumerable<MedicalRecord> MedicalRecords { get; set; }
         public IEnumerable<MedicalRecord> MedicalRecords1 { get; set; }
         public IEnumerable<Tooth> Teeth { get; set; }
+        
     }
 
 }

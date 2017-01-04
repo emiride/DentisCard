@@ -2,24 +2,20 @@
 @using WebApplication1.Enumerations
 <h2 style="color:black; font-family:Arial, Helvetica, sans-serif;">Medical Records</h2>
 <hr />
+<span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; float:right; margin-right: 40px; padding-bottom: 10px; font-size: 20px;">TOTAL: @Html.DisplayFor(modelItem => Model.Patient.SumBills).ToHtmlString() KM</span>
+
 <ul>
     @foreach (var item in Model.MedicalRecords)
     {
-        var length = Model.MedicalRecords.Count();
-        if (item.Description.Equals(null))
-        {
-           <h3 style="color:red;">There is no medical records for @Html.DisplayFor(modelItem => item.ToothPosition)</h3>
-        }
-
         <span style="color:black; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; font-size:large;"> @Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</span>
-        <br>
-        <pre style="background-color: #05A9CF;">               
-        <span style="color: white; padding-top: 5px; padding-bottom: 5px; float:left; font-family: Tahoma, Geneva, sans-serif; font-size:x-large;">Description</span>             
-        <pre style="background-color:white;"> <br>
-        <span style="color:black; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size: 20px;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>            
+                <br>
+                <pre style="background-color: #05A9CF;">               
+                <span style="color: white; padding-top: 5px; padding-bottom: 5px; float:left; font-family: Tahoma, Geneva, sans-serif; font-size:x-large;">Description</span>             
+                <pre style="background-color:white;"> <br>
+                <span style="color:black; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size: 20px;">@Html.DisplayFor(modelItem => item.Description).ToHtmlString()</span>            
          </pre> 
-        <span style="color:white; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:x-large;">Position: @Html.DisplayFor(modelItem => item.ToothPosition)</span>      
-        <span style="color:white; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:x-large;">State: @Html.DisplayFor(modelItem => item.ToothState)</span><span style="float: right; color:black; font-size:x-large;"> @Html.DisplayFor(modelItem => item.Bill)</span>
+                <span style="color:white; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:x-large;">Position: @Html.DisplayFor(modelItem => item.ToothPosition)</span>      
+                <span style="color:white; font-size:large; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif;font-size:x-large;">State: @Html.DisplayFor(modelItem => item.ToothState)</span><span style="float: right; color:black; font-size:x-large;"> @Html.DisplayFor(modelItem => item.Bill)</span>
             </pre>
     }
 </ul>

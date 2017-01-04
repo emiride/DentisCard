@@ -60,6 +60,12 @@ namespace WebApplication1.Controllers
             }
         }
 
+
+
+
+       
+        
+
         public ActionResult Index()
         {
             var currentDentistId = User.Identity.GetUserId();
@@ -432,19 +438,28 @@ namespace WebApplication1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var patient = db.Patients.Find(id);
-
+            
             var medicalHistory = db.MedicalHistories.Find(id);
 
             var AllmedicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
             var medicalRecords = AllmedicalRecords.OrderByDescending(p => p.DateCreated);
             var teeth = db.Teeth.Where(m => m.MedicalHistoryId == id).ToList();
 
+            double bills = 0.0;
+            foreach(var item in medicalRecords)
+            {
+                if(item.Bill > 1.0)
+                {
+                    bills = bills + item.Bill;
+                }
+            }
 
             //sve njih, strpamo u ovaj viewmodel koji smo prethodno napravili
             patientProfile.Patient = patient;
             patientProfile.MedicalHistory = medicalHistory;
             patientProfile.MedicalRecords = medicalRecords;
             patientProfile.Teeth = teeth;
+            patientProfile.Patient.SumBills = bills;
             return View(patientProfile);
         }
 
@@ -518,10 +533,20 @@ namespace WebApplication1.Controllers
 
             var medicalRecords = db.MedicalRecords.Where(m => m.MedicalHistoryId == id).ToList();
             var ToothMedicalRecord = medicalRecords.Where(m => m.ToothPosition == newPosition);
+            double bills = 0.0;
+            foreach (var item in ToothMedicalRecord)
+            {
+                if (item.Bill > 1.0)
+                {
+                    bills = bills + item.Bill;
+                }
+            }
+
 
             patientProfile.Patient = patient;
             patientProfile.MedicalHistory = medicalHistory;
             patientProfile.MedicalRecords = ToothMedicalRecord;
+            patientProfile.Patient.SumBills = bills;
 
             return View(patientProfile);          
         }
@@ -632,6 +657,31 @@ namespace WebApplication1.Controllers
             return View(dentistToUpdate);
         }
 
-
+        public ActionResult ApprovePatient(string id)
+        {
+            var CurrentUserId = id;
+            var CurrentPatient = db.Patients.Find(id);
+            CurrentPatient.approve = true;
+            db.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                if (CurrentPatient.approve == true)
+                {
+                    if (CurrentPatient.approve == true)
+                    {
+                        UserManager.RemoveFromRole(CurrentUserId, Role.User);
+                        db.SaveChanges();
+                    }
+                    UserManager.AddToRole(CurrentUserId, Role.Patient);
+                    db.SaveChanges();
+                    // var user = UserManager.FindById(User.Identity.GetUserId());
+                    //SignInManager.SignIn(user, false, false);
+                    // return RedirectToAction("Index", "Patient");
+                    return RedirectToAction("MyPatients");
+                }            
+                
+            }
+            return View();
+        }
     }
 }

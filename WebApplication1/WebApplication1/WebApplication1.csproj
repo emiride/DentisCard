@@ -221,6 +221,14 @@
     <Compile Include="Migrations\201612301833370_mog.Designer.cs">
       <DependentUpon>201612301833370_mog.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701011448532_Boolian added.cs" />
+    <Compile Include="Migrations\201701011448532_Boolian added.Designer.cs">
+      <DependentUpon>201701011448532_Boolian added.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701012056113_Sum.cs" />
+    <Compile Include="Migrations\201701012056113_Sum.Designer.cs">
+      <DependentUpon>201701012056113_Sum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Appointment.cs" />
@@ -246,7 +254,6 @@
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
-    <Compile Include="ViewModels\DentistsListOfPatient.cs" />
     <Compile Include="ViewModels\Dentist\DentistIndexData.cs" />
     <Compile Include="ViewModels\Dentist\DentistRegisterViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
@@ -881,6 +888,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201612301833370_mog.resx">
       <DependentUpon>201612301833370_mog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701011448532_Boolian added.resx">
+      <DependentUpon>201701011448532_Boolian added.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701012056113_Sum.resx">
+      <DependentUpon>201701012056113_Sum.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

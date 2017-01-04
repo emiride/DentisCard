@@ -219,18 +219,14 @@ namespace WebApplication1.Controllers
                     CurrentPatient = p;
                 }
             }
-            UserManager.RemoveFromRole(CurrentUserId, Role.User);
-            db.SaveChanges();
+            
             if (ModelState.IsValid)
             {
                 Dentist ChoosenDentist = db.Dentists.Find(id);
                 var DentistId = ChoosenDentist.Id;
                 CurrentPatient.DentistId = DentistId;
-                UserManager.AddToRole(CurrentUserId, Role.Patient);              
-                db.SaveChanges();
-                var user = UserManager.FindById(User.Identity.GetUserId());
-                SignInManager.SignIn(user, false, false);
-                return RedirectToAction("Index", "Patient");
+                db.SaveChanges();              
+                return RedirectToAction("index", "Patient");          
             }
 
             return View();

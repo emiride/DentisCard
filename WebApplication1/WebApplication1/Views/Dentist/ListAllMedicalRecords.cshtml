@@ -9,6 +9,7 @@
         <p style="float:right; margin-top: 20px;">@Html.ActionLink("Insert new medical record", "MedicalRecord", new { id = Model.Patient.Id }, new { @class = "btn btn-success " })</p>
     </div>
 </div>
+ <span style="color:red; font-family: ‘Palatino Linotype’, ‘Book Antiqua’, Palatino, serif; float:right; margin-right: 40px; padding-bottom: 10px; font-size: 20px;">TOTAL: @Html.DisplayFor(modelItem => Model.Patient.SumBills).ToHtmlString() KM</span>
 
 <hr />
 <ul>
