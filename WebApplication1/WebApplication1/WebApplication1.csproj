@@ -201,33 +201,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IModificationHistory.cs" />
-    <Compile Include="Migrations\201612071022540_InitialMigration.cs" />
-    <Compile Include="Migrations\201612071022540_InitialMigration.Designer.cs">
-      <DependentUpon>201612071022540_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612292027268_migracija.cs" />
-    <Compile Include="Migrations\201612292027268_migracija.Designer.cs">
-      <DependentUpon>201612292027268_migracija.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612301814578_migracija2.cs" />
-    <Compile Include="Migrations\201612301814578_migracija2.Designer.cs">
-      <DependentUpon>201612301814578_migracija2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612301823324_migracija3.cs" />
-    <Compile Include="Migrations\201612301823324_migracija3.Designer.cs">
-      <DependentUpon>201612301823324_migracija3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201612301833370_mog.cs" />
-    <Compile Include="Migrations\201612301833370_mog.Designer.cs">
-      <DependentUpon>201612301833370_mog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701011448532_Boolian added.cs" />
-    <Compile Include="Migrations\201701011448532_Boolian added.Designer.cs">
-      <DependentUpon>201701011448532_Boolian added.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201701012056113_Sum.cs" />
-    <Compile Include="Migrations\201701012056113_Sum.Designer.cs">
-      <DependentUpon>201701012056113_Sum.cs</DependentUpon>
+    <Compile Include="Migrations\201701051712105_InitialMigration.cs" />
+    <Compile Include="Migrations\201701051712105_InitialMigration.Designer.cs">
+      <DependentUpon>201701051712105_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -255,6 +231,7 @@
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
     <Compile Include="ViewModels\Dentist\DentistIndexData.cs" />
+    <Compile Include="ViewModels\Dentist\DentistIndexViewModel.cs" />
     <Compile Include="ViewModels\Dentist\DentistRegisterViewModel.cs" />
     <Compile Include="ViewModels\FactorViewModel.cs" />
     <Compile Include="ViewModels\IndexViewModel.cs" />
@@ -834,6 +811,7 @@
     <Content Include="Views\Dentist\ToothMedicalRecord.cshtml" />
     <Content Include="Views\Patient\Draft.cshtml" />
     <Content Include="Views\Patient\Notes.cshtml" />
+    <Content Include="Views\Dentist\Requests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -874,26 +852,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612071022540_InitialMigration.resx">
-      <DependentUpon>201612071022540_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612292027268_migracija.resx">
-      <DependentUpon>201612292027268_migracija.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612301814578_migracija2.resx">
-      <DependentUpon>201612301814578_migracija2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612301823324_migracija3.resx">
-      <DependentUpon>201612301823324_migracija3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201612301833370_mog.resx">
-      <DependentUpon>201612301833370_mog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701011448532_Boolian added.resx">
-      <DependentUpon>201701011448532_Boolian added.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701012056113_Sum.resx">
-      <DependentUpon>201701012056113_Sum.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701051712105_InitialMigration.resx">
+      <DependentUpon>201701051712105_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

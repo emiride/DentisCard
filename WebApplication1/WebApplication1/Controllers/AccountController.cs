@@ -199,7 +199,8 @@ namespace WebApplication1.Controllers
                     UserName = model.FirstName,
                     Email = model.Email,
                     MedicalHistory = new MedicalHistory { Teeth = teeth },
-                    DateCreated = DateTime.Now
+                    DateCreated = DateTime.Now,
+                    IsApproved = false
                 };
                 
                 var result = await UserManager.CreateAsync(user, model.Password);

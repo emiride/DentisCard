@@ -8,17 +8,20 @@
 }
 <head>
     <style>
-       table {
+        table {
             border-collapse: collapse;
             width: 100%;
         }
+
         th, td {
             text-align: left;
             padding: 8px;
         }
+
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+
         th {
             background-color: #7dbcdc;
             color: white;
@@ -26,9 +29,7 @@
     </style>
 </head>
 
-<p style="float:right; margin-top:25px">
-    @Html.ActionLink("Requests", "Requests", null, new { @class = "btn btn-primary" })
-</p>
+
 <p style="text-decoration:underline; float:right; margin-right: 20px; margin-top:25px">
     @Html.ActionLink("Create New Patient", "Create", null, new { @class = "btn btn-success" })
 </p>
@@ -36,11 +37,11 @@
 @using (@Html.BeginForm("MyPatients", "Dentist", FormMethod.Get))
 {
     @*HTML helper way of input for search
-    @Html.TextBox("searchString",null, new {id = "custom-search-input", @class = "form-control input"});*@
+        @Html.TextBox("searchString",null, new {id = "custom-search-input", @class = "form-control input"});*@
 
     <div class="container" style="padding-left:0px; padding-right:0px; margin-top: 25px">
         <div class="row">
-            <div class="col-md-3 col-lg-4 col-sm-4 col-xs-6" >
+            <div class="col-md-3 col-lg-4 col-sm-4 col-xs-6">
                 <div id="custom-search-input">
                     <div class="input-group">
                         <input type="text" id="searchString" name="searchString" class="form-control input" placeholder="Search first and last name..." />
@@ -80,10 +81,10 @@
             {
             <tr>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor( modelItem => item.FirstName).ToHtmlString(),"PatientProfile", new { id =item.Id }, new { @style = "text-transform:capitalize; " })
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString(), "PatientProfile", new { id = item.Id }, new { @style = "text-transform:capitalize; " })
                 </td>
                 <td>
-                    @Html.ActionLink(Html.DisplayFor(modelItem => item.LastName).ToHtmlString(), "PatientProfile", new { id = item.Id }, new { @style = "text-transform:capitalize;" } )
+                    @Html.ActionLink(Html.DisplayFor(modelItem => item.LastName).ToHtmlString(), "PatientProfile", new { id = item.Id }, new { @style = "text-transform:capitalize;" })
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DateOfBirth)
@@ -93,11 +94,7 @@
                 </td>
                 <td style="color:#335381; float:right">
                     @Html.ActionLink(Html.DisplayFor(modelItem => item.FirstName).ToHtmlString() + "'s Profile", "PatientProfile", new { id = item.Id }, new { @class = "btn btn-link", @style = "text-transform:capitalize;" })
-                    @Html.ActionLink("Details", "Details", null, new { id = item.Id }, new { @class = "btn btn-default" })
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
-                    @Html.ActionLink("Insert Medical Record", "MedicalRecord", new { id = item.Id }, new { @class = "btn btn-primary " })
-                    @Html.ActionLink("List Medical Records", "ListAllMedicalRecords", new { id = item.Id }, new { @class = "btn btn-primary " })
+                    <span id="Approve"> @Html.ActionLink(" ", "ApprovePatient", new { id = item.Id }, new { @class = "glyphicon glyphicon-ok" })</span>
                 </td>
 
             </tr>

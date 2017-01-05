@@ -68,6 +68,8 @@ namespace WebApplication1.Controllers
 
         public ActionResult Index()
         {
+            DentistIndexViewModel dentistIndex = new DentistIndexViewModel();
+
             var currentDentistId = User.Identity.GetUserId();
             var dentists = db.Dentists;
             var dentist = new Dentist();
@@ -78,7 +80,11 @@ namespace WebApplication1.Controllers
                     dentist = d;
                 }
             }
-            return View(dentist);
+            var patients = db.Patients.ToList().Where(m => m.DentistId == currentDentistId && m.IsApproved == true).ToList();
+
+            dentistIndex.Dentist = dentist;
+            dentistIndex.Patients = patients;
+            return View(dentistIndex);
         }
 
         // GET: Patients
@@ -86,16 +92,8 @@ namespace WebApplication1.Controllers
         public ActionResult MyPatients(string sortOrder, string searchString)
         {
             var dentistId = User.Identity.GetUserId();
-            List<Patient> patientList = new List<Patient>();
+            var patientList = db.Patients.ToList().Where(m => m.DentistId == dentistId && m.IsApproved == true).ToList();
 
-            var patients = db.Patients;
-            foreach (var patient in patients)
-            {
-                if (patient.DentistId == dentistId)
-                {
-                    patientList.Add(patient);
-                }
-            }
 
             //Sorting
             ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -219,6 +217,7 @@ namespace WebApplication1.Controllers
                 patient.PasswordHash = passwordHasher.HashPassword("P@ssw0rd");
                 patient.UserName = patient.Email;
                 patient.DentistId = dentistId;
+                patient.IsApproved = false;
 
                 //creating default values for teeth
                 var positions = Enum.GetValues(typeof(ToothPosition)).Cast<ToothPosition>().ToList();
@@ -463,6 +462,59 @@ namespace WebApplication1.Controllers
             return View(patientProfile);
         }
 
+        [Authorize(Roles = Role.Dentist)]
+        public ActionResult Requests(string sortOrder, string searchString)
+        {
+            var dentistId = User.Identity.GetUserId();
+
+            var patientRequestList = db.Patients.ToList().Where(m => m.DentistId == dentistId && m.IsApproved==false).ToList();
+           
+   
+
+            //Sorting
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LNameSortParm = string.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.BDateSortParm = sortOrder == "BDate" ? "Bdate_desc" : "BDate";
+
+            var patientOrder = from s in patientRequestList
+                               select s;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                patientOrder = patientOrder.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.FirstName);
+                    break;
+                case "LName":
+                    patientOrder = patientOrder.OrderBy(s => s.LastName);
+                    break;
+                case "LName_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    patientOrder = patientOrder.OrderBy(s => s.DateCreated);
+                    break;
+                case "date_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.DateCreated);
+                    break;
+                case "BDate":
+                    patientOrder = patientOrder.OrderBy(s => s.DateOfBirth);
+                    break;
+                case "Bdate_desc":
+                    patientOrder = patientOrder.OrderByDescending(s => s.DateOfBirth);
+                    break;
+                default:
+                    patientOrder = patientOrder.OrderBy(s => s.FirstName);
+                    break;
+            }
+
+            return View(patientOrder);
+        }
+
+
         [Authorize (Roles = Role.Dentist)]
         public ActionResult PatientProfile(string id){
 
@@ -483,12 +535,14 @@ namespace WebApplication1.Controllers
             var lastTwoRecords = medicalRecords.OrderByDescending(p => p.DateCreated).Take(2);
             var lastRecord = medicalRecords.OrderByDescending(p => p.DateCreated).Take(1);
 
+
             //sve njih, strpamo u ovaj viewmodel koji smo prethodno napravili
             patientProfile.Patient = patient;
             patientProfile.MedicalHistory = medicalHistory;
             patientProfile.MedicalRecords = lastTwoRecords;
             patientProfile.MedicalRecords1 = lastRecord;
             patientProfile.Teeth = teeth;
+            
 
 
 
@@ -661,13 +715,13 @@ namespace WebApplication1.Controllers
         {
             var CurrentUserId = id;
             var CurrentPatient = db.Patients.Find(id);
-            CurrentPatient.approve = true;
+            CurrentPatient.IsApproved = true;
             db.SaveChanges();
             if (ModelState.IsValid)
             {
-                if (CurrentPatient.approve == true)
+                if (CurrentPatient.IsApproved == true)
                 {
-                    if (CurrentPatient.approve == true)
+                    if (CurrentPatient.IsApproved == true)
                     {
                         UserManager.RemoveFromRole(CurrentUserId, Role.User);
                         db.SaveChanges();
