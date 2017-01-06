@@ -9,6 +9,7 @@ namespace WebApplication1.Controllers
     public class BaseController : Controller
     {
         public List<Appointment> Appointment;
+        public List<Patient> Patients { get; set; }
         public BaseController()
         {
             var db = new ApplicationDbContext();
@@ -16,6 +17,10 @@ namespace WebApplication1.Controllers
 
             Appointment = db.Appointments.Where(a => a.IsAccepted == false && a.ScheduleId == currentDentistId).ToList();
             ViewBag.appointmentRequests = Appointment;
+
+            Patients = db.Patients.Where(p => p.IsApproved == false && p.DentistId == currentDentistId).ToList();
+            ViewBag.patientRequests = Patients;
+
         }
         
 

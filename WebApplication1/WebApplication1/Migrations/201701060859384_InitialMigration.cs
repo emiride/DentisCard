@@ -157,6 +157,20 @@ namespace WebApplication1.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.Notes",
+                c => new
+                    {
+                        Id = c.String(nullable: false, maxLength: 128),
+                        DateCreated = c.DateTime(nullable: false),
+                        Title = c.String(),
+                        Comment = c.String(),
+                        Admin_Id = c.String(maxLength: 128),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Admin", t => t.Admin_Id)
+                .Index(t => t.Admin_Id);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -171,7 +185,6 @@ namespace WebApplication1.Migrations
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        comment = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.Id)
@@ -219,6 +232,7 @@ namespace WebApplication1.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
+            DropForeignKey("dbo.Notes", "Admin_Id", "dbo.Admin");
             DropForeignKey("dbo.MedicalRecords", "Tooth_Id", "dbo.Teeth");
             DropForeignKey("dbo.Teeth", "MedicalHistoryId", "dbo.MedicalHistories");
             DropForeignKey("dbo.MedicalHistories", "Id", "dbo.Patient");
@@ -232,6 +246,7 @@ namespace WebApplication1.Migrations
             DropIndex("dbo.Dentist", new[] { "Id" });
             DropIndex("dbo.Admin", new[] { "Id" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Notes", new[] { "Admin_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.Teeth", new[] { "MedicalHistoryId" });
@@ -248,6 +263,7 @@ namespace WebApplication1.Migrations
             DropTable("dbo.Dentist");
             DropTable("dbo.Admin");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Notes");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.Teeth");
             DropTable("dbo.MedicalRecords");

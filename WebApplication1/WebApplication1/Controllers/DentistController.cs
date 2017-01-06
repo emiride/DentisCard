@@ -713,20 +713,21 @@ namespace WebApplication1.Controllers
 
         public ActionResult ApprovePatient(string id)
         {
-            var CurrentUserId = id;
-            var CurrentPatient = db.Patients.Find(id);
-            CurrentPatient.IsApproved = true;
+            var currentUserId = id;
+            var currentPatient = db.Patients.Find(id);
+
+            currentPatient.IsApproved = true;
             db.SaveChanges();
             if (ModelState.IsValid)
             {
-                if (CurrentPatient.IsApproved == true)
+                if (currentPatient.IsApproved == true)
                 {
-                    if (CurrentPatient.IsApproved == true)
+                    if (currentPatient.IsApproved == true)
                     {
-                        UserManager.RemoveFromRole(CurrentUserId, Role.User);
+                        UserManager.RemoveFromRole(currentUserId, Role.User);
                         db.SaveChanges();
                     }
-                    UserManager.AddToRole(CurrentUserId, Role.Patient);
+                    UserManager.AddToRole(currentUserId, Role.Patient);
                     db.SaveChanges();
                     // var user = UserManager.FindById(User.Identity.GetUserId());
                     //SignInManager.SignIn(user, false, false);

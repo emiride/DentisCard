@@ -1,22 +1,15 @@
-﻿using System.Web.Mvc;
-using WebApplication1.Enumerations;
-using WebApplication1.Models;
-using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
+using System.Web.Mvc;
+using WebApplication1.Models;
 
 namespace WebApplication1.Controllers
 {
     public class HomeController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
             //last 3 comments
@@ -57,5 +50,6 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        
     }
 }
