@@ -9,10 +9,8 @@ namespace WebApplication1.Models
     [Table("Admin")]
     public class Admin : ApplicationUser
     {
-
-        public string comment { get; set; }
-        
         //Relation
+        public virtual List<Note> Notes { get; set; }
         public virtual ICollection<Dentist> Dentists { get; set; }
 
     }

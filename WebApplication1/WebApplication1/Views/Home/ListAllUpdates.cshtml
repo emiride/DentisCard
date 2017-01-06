@@ -1,0 +1,33 @@
+﻿@model IEnumerable<WebApplication1.Models.Note>
+
+@{
+    ViewBag.Title = "ListAllUpdates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div style="height: 200px; background-color: #eeeeee ; border-radius: 10px; padding: 30px" >
+    <p class="lead">All news and updates are here!</p>
+    <p>
+        @*<a href="LINK FOR ALL UPDATES" class="btn btn-primary btn-lg">See all updates &raquo;</a>*@
+        @Html.ActionLink("Go back to main page >>", "Index", null, new { @class = "btn btn-primary btn" })
+    </p>
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3" style="border: 2px solid #436bed ; margin-left: 40px; margin-top: 20px; border-radius: 10px">
+            <h2>@Html.DisplayFor(modelItem => item.Title).ToHtmlString()</h2>
+            <p style="font-size: x-small">@Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</p>
+            <div style="overflow: hidden; text-overflow: ellipsis; display: -webkit-box; line-height: 16px; max-height: 48px; -webkit-line-clamp: 6; -webkit-box-orient: vertical">
+                <p>@Html.DisplayFor(modelItem => item.Comment).ToHtmlString()...</p>
+            </div>
+            <br />
+            <a href="">Read more...</a>
+
+        </div>
+    }
+
+</div>

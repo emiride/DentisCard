@@ -205,10 +205,15 @@
     <Compile Include="Migrations\201701051712105_InitialMigration.Designer.cs">
       <DependentUpon>201701051712105_InitialMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701052347317_AdminNote.cs" />
+    <Compile Include="Migrations\201701052347317_AdminNote.Designer.cs">
+      <DependentUpon>201701052347317_AdminNote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Appointment.cs" />
     <Compile Include="Models\MedicalHistory.cs" />
+    <Compile Include="Models\Note.cs" />
     <Compile Include="Models\PatientDTO.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Schedule.cs" />
@@ -812,6 +817,7 @@
     <Content Include="Views\Patient\Draft.cshtml" />
     <Content Include="Views\Patient\Notes.cshtml" />
     <Content Include="Views\Dentist\Requests.cshtml" />
+    <Content Include="Views\Home\ListAllUpdates.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -840,7 +846,6 @@
     <Folder Include="Scripts\kendo\cultures\" />
     <Folder Include="Scripts\kendo\messages\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\PatientProfileViewModel\" />
     <Folder Include="Views\Scheduler\" />
   </ItemGroup>
   <ItemGroup>
@@ -854,6 +859,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201701051712105_InitialMigration.resx">
       <DependentUpon>201701051712105_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701052347317_AdminNote.resx">
+      <DependentUpon>201701052347317_AdminNote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

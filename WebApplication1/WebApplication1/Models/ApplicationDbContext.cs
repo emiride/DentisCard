@@ -17,6 +17,7 @@ namespace WebApplication1.Models
         public DbSet<MedicalRecord> MedicalRecords { get; set; }
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Tooth> Teeth { get; set; }
+        public DbSet<Note> Notes { get; set; }
 
         public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {

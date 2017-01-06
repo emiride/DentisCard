@@ -628,6 +628,35 @@ namespace WebApplication1.Migrations
                 }
             };
 
+            var newNote1 = new Note
+            {
+                Id = Guid.NewGuid().ToString(),
+                DateCreated = DateTime.Now,
+                Comment = "This is just some dummy text to fill in this field with the text, and this text makes no sense at all but it does not matter",
+                Title = "Great news!",
+            };
+            var newNote2 = new Note
+            {
+                Id = Guid.NewGuid().ToString(),
+                DateCreated = DateTime.Now,
+                Comment = "This is just some extra dummy text to fill in this field with the text, and this text makes no sense at all but it does not matter",
+                Title = "Great update!",
+            };
+            var newNote3 = new Note
+            {
+                Id = Guid.NewGuid().ToString(),
+                DateCreated = DateTime.Now,
+                Comment = "This is just extra extra dummy text to fill in this field with the text, and this text makes no sense at all but it does not matter. ",
+                Title = "Great feature!",
+            };
+            var newNote4 = new Note
+            {
+                Id = Guid.NewGuid().ToString(),
+                DateCreated = DateTime.Now,
+                Comment = "This is dummy dummy text to fill in this field with the text, and this text makes no sense at all but it does not matter. This is just extra extra dummy text to fill in this field with the text, and this text makes no sense at all but it does not matter. This is just extra extra dummy text to fill in this field with the text, and this text makes no sense at all but it does not matter",
+                Title = "Great info!",
+            };
+
             var admin = new Admin
             {
                 FirstName = "Admin",
@@ -644,7 +673,8 @@ namespace WebApplication1.Migrations
                 EmailConfirmed = true,
                 SecurityStamp = "fafgsddggsafwefaggb",
                 //Patients = new List<Patient>() { patient3 }
-                comment = "djesi"
+                Notes = new List<Note>() { newNote1, newNote2, newNote3, newNote4 }
+
             };
 
 
