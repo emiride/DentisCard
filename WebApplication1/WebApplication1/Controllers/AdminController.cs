@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Mvc;
 using WebApplication1.Models;
-
+using WebApplication1.Enumerations;
 
 namespace WebApplication1.Controllers
 {
@@ -255,6 +255,40 @@ namespace WebApplication1.Controllers
             }
 
             return View(patientOrder);
+        }
+
+        public ActionResult Updates()
+        {
+            return View();
+        }
+
+
+        [HttpPost, ActionName("Updates")]
+        [ValidateAntiForgeryToken]
+        public ActionResult Updates(Note model)
+        {
+
+            var adminId = User.Identity.GetUserId();
+
+            var note = new Note
+            {
+                DateCreated = DateTime.Now,
+                Title = model.Title, 
+                Comment = model.Comment,
+                
+            };
+            List<Note> j = new List<Note>();
+            j.Add(note);
+
+            if (ModelState.IsValid)
+            {
+            var admin = db.Admins.Find(adminId);
+            admin.Notes = j;   
+                db.SaveChanges();//
+                return RedirectToAction("Updates");
+
+            }
+            return View();
         }
 
 

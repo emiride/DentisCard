@@ -10,7 +10,7 @@ namespace WebApplication1.Models
     public class Admin : ApplicationUser
     {
         //Relation
-        public virtual List<Note> Notes { get; set; }
+        public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<Dentist> Dentists { get; set; }
 
     }
