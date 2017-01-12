@@ -1,0 +1,115 @@
+﻿@using WebApplication1.ViewModels.Dentist
+@model IEnumerable<PatientAppointmentViewModel>
+@{
+    ViewBag.Title = "MyAppointments";
+}
+
+<h2>MyAppointments</h2>
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #7dbcdc;
+            color: white;
+        }
+    </style>
+</head>
+
+@*TODO*@
+@*<p style="text-decoration:underline; float:right; margin-right: 20px; margin-top:25px">
+    @Html.ActionLink("Add", "Create", null, new { @class = "btn btn-success" })
+</p>*@
+
+@using (@Html.BeginForm("MyPatients", "Dentist", FormMethod.Get))
+{
+    @*HTML helper way of input for search
+        @Html.TextBox("searchString",null, new {id = "custom-search-input", @class = "form-control input"});*@
+
+    <div class="container" style="padding-left:0px; padding-right:0px; margin-top: 25px">
+        <div class="row">
+            <div class="col-md-3 col-lg-4 col-sm-4 col-xs-6">
+                <div id="custom-search-input">
+                    <div class="input-group">
+                        <input type="text" id="searchString" name="searchString" class="form-control input" placeholder="Search first and last name..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-info btn" type="button">
+                                <i class="glyphicon glyphicon-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div style="overflow-x:auto;">
+    <table class="table" style="margin-top:15px">
+        <thead class="thead-inverse">
+            <tr>
+                <th>
+                    @Html.ActionLink("First Name", "MyAppointments", new { sortOrder = ViewBag.NameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Last Name", "MyAppointments", new { sortOrder = ViewBag.LNameSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("Start", "MyAppointments", new { sortOrder = ViewBag.BDateSortParm })
+                </th>
+                <th>
+                    @Html.ActionLink("End", "MyAppointments", new {sortOrder = ViewBag.DateSortParm})
+                </th>
+                <th>
+                    @Html.ActionLink("Title", "MyAppointments")
+                </th>
+                <th>
+                    @Html.ActionLink("Description", "MyAppointments")
+                </th>
+                <th style="color:#335381"></th>
+            </tr>
+        </thead>
+
+        @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Start)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.End)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td style="color:#335381; float:right">
+                    @Html.ActionLink("Accept", "AcceptAppointment", null, new { id = item.Id }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Reject", "RejectAppointment", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

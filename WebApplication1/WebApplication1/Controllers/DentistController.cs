@@ -5,8 +5,10 @@ using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -140,10 +142,92 @@ namespace WebApplication1.Controllers
 
         public ActionResult MySchedule()
         {
-            
-            return View();
+            var appointments = db.Appointments;
+            return View(appointments);
         }
 
+        public ActionResult MyAppointments(string sortOrder, string searchString)
+        {
+            var dentistId = User.Identity.GetUserId();
+            var pavm = new List<PatientAppointmentViewModel>();
+            var query = (from appointment in db.Appointments
+                join patient in db.Patients on appointment.PatientId equals patient.Id
+                        where patient.DentistId == dentistId where appointment.IsAccepted == false
+                        orderby appointment.Start descending 
+                select new {appointment.Id, appointment.Title, appointment.Start, appointment.End, appointment.Description, patient.FirstName, patient.LastName, patient.Email}).ToList();
+            foreach (var item in query)
+            {
+                pavm.Add(new PatientAppointmentViewModel
+                {
+                    Id = item.Id,
+                    Description = item.Description,
+                    End = item.End,
+                    FirstName = item.FirstName,
+                    LastName = item.LastName,
+                    Start = item.Start,
+                    Title = item.Title,
+                    Email = item.Email
+
+                });
+            }
+            //Sorting
+            ViewBag.NameSortParm = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.LNameSortParm = string.IsNullOrEmpty(sortOrder) ? "LName_desc" : "LName";
+            ViewBag.DateSortParm = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewBag.BDateSortParm = sortOrder == "BDate" ? "Bdate_desc" : "BDate";
+
+            var appointmentOrder = from s in pavm
+                               select s;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                appointmentOrder = appointmentOrder.Where(s => s.FirstName.ToLower().Contains(searchString.ToLower()) || s.LastName.ToLower().Contains(searchString.ToLower()));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    appointmentOrder = appointmentOrder.OrderByDescending(s => s.FirstName);
+                    break;
+                case "LName":
+                    appointmentOrder = appointmentOrder.OrderBy(s => s.LastName);
+                    break;
+                case "LName_desc":
+                    appointmentOrder = appointmentOrder.OrderByDescending(s => s.LastName);
+                    break;
+                case "Date":
+                    appointmentOrder = appointmentOrder.OrderBy(s => s.Start);
+                    break;
+                case "date_desc":
+                    appointmentOrder = appointmentOrder.OrderByDescending(s => s.Start);
+                    break;
+                case "BDate":
+                    appointmentOrder = appointmentOrder.OrderBy(s => s.End);
+                    break;
+                case "Bdate_desc":
+                    appointmentOrder = appointmentOrder.OrderByDescending(s => s.End);
+                    break;
+                default:
+                    appointmentOrder = appointmentOrder.OrderBy(s => s.Start);
+                    break;
+            }
+
+            return View(pavm);
+        }
+
+        public ActionResult AcceptAppointment(string id)
+        {
+            var appointment = db.Appointments.Find(id);
+            appointment.IsAccepted = true;
+            db.SaveChanges();
+            var task = SendEmail("");
+            
+            SendEmail("bla");
+            return RedirectToAction("MyAppointments");
+        }
+        public ActionResult RejectAppointment(string id)
+        {
+
+            return View();
+        }
         public ActionResult Notes()
         {
             return View();
@@ -153,20 +237,40 @@ namespace WebApplication1.Controllers
         {
             return View();
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SendEmail(string email)
+        {
+            //var body = "<p>Email From: {0} ({1})</p><p>Message:</p><p>{2}</p>";
+            var message = new MailMessage();
+            message.To.Add(new MailAddress("emir.hodzich@gmail.com"));
+            message.From = new MailAddress("emir.hodzic@outlook.com");
+            message.Subject = "Proba";
+            message.Body = "Proba jos jednom";
+            message.IsBodyHtml = true;
 
+            using (var smtp = new SmtpClient())
+            {
+                var credential = new NetworkCredential
+                {
+                    UserName = "emir.hodzic@outlook.com",  
+                    Password = "Vrl0T@j@nP@ssw0rd"  
+                };
+                smtp.Credentials = credential;
+                smtp.Host = "smtp-mail.outlook.com";
+                smtp.Port = 587;
+                smtp.EnableSsl = true;
+                smtp.Send(message);
+                
+            }
+            return View();
+        }
         public ActionResult PatientRead([DataSourceRequest] DataSourceRequest request)
         {
             var dentistId = User.Identity.GetUserId();
-            List<Patient> patientList = new List<Patient>();
 
             var patients = db.Patients;
-            foreach (var patient in patients)
-            {
-                if (patient.DentistId == dentistId)
-                {
-                    patientList.Add(patient);
-                }
-            }
+            List<Patient> patientList = patients.Where(patient => patient.DentistId == dentistId).ToList();
 
             DataSourceResult result = patientList.ToDataSourceResult(request, p => new Patient
             {

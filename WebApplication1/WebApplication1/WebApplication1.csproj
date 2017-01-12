@@ -201,9 +201,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IModificationHistory.cs" />
-    <Compile Include="Migrations\201701062113163_InitialMigration.cs" />
-    <Compile Include="Migrations\201701062113163_InitialMigration.Designer.cs">
-      <DependentUpon>201701062113163_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201701060859384_InitialMigration.cs" />
+    <Compile Include="Migrations\201701060859384_InitialMigration.Designer.cs">
+      <DependentUpon>201701060859384_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Admin.cs" />
@@ -231,6 +231,7 @@
     <Compile Include="ViewModels\AddPhoneNumberViewModel.cs" />
     <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ConfigureTwoFactorViewModel.cs" />
+    <Compile Include="ViewModels\Dentist\PatientAppointmentViewModel.cs" />
     <Compile Include="ViewModels\Dentist\DentistIndexData.cs" />
     <Compile Include="ViewModels\Dentist\DentistIndexViewModel.cs" />
     <Compile Include="ViewModels\Dentist\DentistRegisterViewModel.cs" />
@@ -814,7 +815,7 @@
     <Content Include="Views\Patient\Notes.cshtml" />
     <Content Include="Views\Dentist\Requests.cshtml" />
     <Content Include="Views\Home\ListAllUpdates.cshtml" />
-    <Content Include="Views\Admin\Updates.cshtml" />
+    <Content Include="Views\Dentist\MyAppointments.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -854,8 +855,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701062113163_InitialMigration.resx">
-      <DependentUpon>201701062113163_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701060859384_InitialMigration.resx">
+      <DependentUpon>201701060859384_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,5 +1,7 @@
 ﻿@using Kendo.Mvc.UI
 @using WebApplication1.Models
+@model IEnumerable<Appointment>
+
 
 @{
     ViewBag.Title = "MySchedule";
@@ -18,6 +20,18 @@
           views.DayView();
           views.MonthView();
       })
+      //.EventTemplate("<h3>#=title</h3>")
+      .Resources(r => r.Add(m => m.IsAccepted)
+        .Title("Available")
+        .DataTextField("Text")
+        .DataValueField("Value")
+        .DataColorField("Color")
+        .BindTo(new []
+        {
+            new {Text = "Available", Value = true, Color = "#6eb3fa"},
+            new {Text = "Not Available", Value = false, Color = "#f58a8a"}
+        })
+      )
       .DataSource(d => d
           .Model(m =>
           {
@@ -30,6 +44,7 @@
           .Create("Create", "Scheduler")
           .Update("Update", "Scheduler")
           .Destroy("Destroy", "Scheduler")
-          
+
 
       ))
+
