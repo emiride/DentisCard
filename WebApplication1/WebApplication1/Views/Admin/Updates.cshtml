@@ -5,6 +5,14 @@
     ViewBag.Title = "Updates";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="jumbotron">
+    <h1>Hello!</h1>
+    <p class="lead">Get the latest news and updates! See all informations about our application here.</p>
+    <p>
+        @*<a href="LINK FOR ALL UPDATES" class="btn btn-primary btn-lg">See all updates &raquo;</a>*@
+        @Html.ActionLink("Edit updates >>", "EditUpdates", null , new { @class = "btn btn-primary btn-lg" })
+    </p>
+</div>
 
 <h2>Create updates and news</h2>
 

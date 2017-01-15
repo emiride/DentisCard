@@ -1,0 +1,34 @@
+﻿@model IEnumerable<WebApplication1.Models.Note>
+@{
+    ViewBag.Title = "EditUpdates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="height: 200px; background-color: #eeeeee ; border-radius: 10px; padding: 30px">
+
+        @Html.ActionLink("Go back to main page >>", "Index", null, new { @class = "btn btn-primary btn" })
+    
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model)
+    {
+        <div class="col-md-10" style="border: 2px solid #436bed ; margin-left: 40px; margin-top: 20px; border-radius: 10px">
+            <h2>@Html.DisplayFor(modelItem => item.Title).ToHtmlString()</h2>
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "DeleteUpdate2", new { id = item.Id }, new { @class = "btn btn-danger" })
+            }
+            <p style="font-size: x-small">@Html.DisplayFor(modelItem => item.DateCreated).ToHtmlString()</p>
+            <div style="overflow: hidden; text-overflow: ellipsis">
+                <p>@Html.DisplayFor(modelItem => item.Comment).ToHtmlString()</p>
+            </div>
+            <br />
+            <a href="">Read more...</a>
+            <br />
+           
+        </div>
+    }
+
+</div>

@@ -275,6 +275,7 @@ namespace WebApplication1.Controllers
                 DateCreated = DateTime.Now,
                 Title = model.Title, 
                 Comment = model.Comment,
+                Id = Guid.NewGuid().ToString()
                 
             };
             List<Note> j = new List<Note>();
@@ -282,15 +283,56 @@ namespace WebApplication1.Controllers
 
             if (ModelState.IsValid)
             {
-            var admin = db.Admins.Find(adminId);
-            admin.Notes = j;   
-                db.SaveChanges();//
+                var admin = db.Admins.Find(adminId);
+                admin.Notes = j;   
+                db.SaveChanges();
                 return RedirectToAction("Updates");
 
             }
             return View();
         }
 
+        public ActionResult DeleteUpdate(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Note note= db.Notes.Find(id);
+            if (note == null)
+            {
+                return HttpNotFound();
+            }
+            return View(note);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteUpdate2(string id)
+        {
+            Note note = db.Notes.Find(id);
+
+            db.Notes.Remove(note);
+
+            db.SaveChanges();
+
+            return RedirectToAction("ListAllUpdates");
+        }
+
+        [Authorize]
+        public ActionResult EditUpdates()
+        {
+            //all comments
+            List<Note> noteList = new List<Note>();
+            var notes = db.Notes.OrderByDescending(p => p.DateCreated);
+            foreach (var k in notes)
+            {
+                noteList.Add(k);
+            }
+
+            return View(noteList);
+
+        }
 
     }
 }

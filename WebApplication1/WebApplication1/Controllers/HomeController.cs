@@ -8,8 +8,9 @@ namespace WebApplication1.Controllers
 {
     public class HomeController : BaseController
     {
-
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        [Authorize]
         public ActionResult Index()
         {
             //last 3 comments
@@ -19,11 +20,12 @@ namespace WebApplication1.Controllers
             return View(lastComments);
         }
 
+        [Authorize]
         public ActionResult ListAllUpdates()
         {
             //all comments
             List<Note> noteList = new List<Note>();
-            var notes = db.Notes;
+            var notes = db.Notes.OrderByDescending(p => p.DateCreated);
             foreach (var k in notes)
             {
                 noteList.Add(k);
@@ -32,6 +34,7 @@ namespace WebApplication1.Controllers
             return View(noteList);
 
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<WebApplication1.Models.Note>
-
 @{
     ViewBag.Title = "ListAllUpdates";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -27,6 +26,10 @@
             <br />
             <a href="">Read more...</a>
 
+            @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+            {
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            }
         </div>
     }
 
