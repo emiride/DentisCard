@@ -1,22 +1,18 @@
 #Introduction
 
-Stomatologija is the project being developed by a group of students at department of Computer Science and Engineering at International Unviersity of Sarajevo.
+DentisCard is the project being developed by a group of students at department of Computer Science and Engineering at International Unviersity of Sarajevo.
 The project is envisioned as a management system for dentists who have their own small to medium dentist clinic. 
 
-#Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+#Roles
+Dentist can CRUD patients, edit patient's medical history, edit his teett, set an appointment and accept or reject appointment that is requested by patient. Few clever things are done here, e.g. Dentist doesn't need to edit teeth, teeth are being edited from changes in medical history.
 
-#Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+User is a role that is appointed to the patient that didn't choose a Dentist. User can see general udates about the system provided by Admin
 
-#Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+Patient is a role that can request an appointment and get an e-mail upon appointment acceptance or rejection. Patient can change basic info about himself.
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+#Technologies used
+1. <a href="https://www.asp.net/mvc/mvc5">ASP.NET MVC 5</a>
+2. <a href="https://www.asp.net/web-api">ASP.NET Web API</a>
+3. <a href="http://www.telerik.com/kendo-ui">Kendo UI</a>
+
+
